@@ -12,7 +12,7 @@ Simply unzip the `taffy` folder into your webroot. An application-specific mappi
 
 Much like a [FW/1](http://fw1.riaforge.org/) application, Taffy implements a majority of its logic in Application.cfc, as a base class that the Application.cfc of your application will extend. At a minimum, your APIs Application.cfc needs the following:
 
-```cfm
+```cfs
 component extends="taffy.core.api" {
 
 	this.name = hash(getCurrentTemplatePath());
@@ -45,7 +45,7 @@ Of course, there are a few more things you can do. The [[Index of API Methods]] 
 
 # Step 2: Implement API Resources as CFCs
 
-Each resource in your API (eg. Artists, Art) should be defined as its own CFC. In a Taffy API, *you implement Collections and Members as separate CFCs* (eg. `artistCollection.cfc` and `artistMember.cfc`). They won't be exposed by name via the framework, so you can name them whatever you like. In addition, if you like, your API CFCs may be outside the web-root, as long as they are accessible via CF mappings. Application-specific mappings are acceptable in this case.
+Each resource in your API (eg. Artists, Art) should be defined as its own CFC. In a Taffy API, **you implement Collections and Members as separate CFCs** (eg. `artistCollection.cfc` and `artistMember.cfc`). They won't be exposed by name via the framework, so you can name them whatever you like. In addition, if you like, your API CFCs may be outside the web-root, as long as they are accessible via CF mappings. Application-specific mappings are acceptable in this case.
 
 Here is an example resource implementation:
 
@@ -64,7 +64,7 @@ component extends="taffy.core.restapi" taffy_uri="/artists/{artistId}/art" {
 
 * Each CFC extends `taffy.core.restapi`.
 
-* Each CFC should implement _up to_ 4 methods: **get**, **post**, **put**, and **delete**. As you may have guessed, these map directly to the HTTP verb used by the api consumer.<br/><br/>
+* Each CFC should implement _up to_ 4 methods: **get**, **post**, **put**, and **delete**. As you may have guessed, these map directly to the HTTP verb used by the api consumer.<br/>
   * If the consumer uses the PUT verb, it runs the PUT method in the corresponding CFC. <br/><br/>
   * Since the POST, PUT, and DELETE methods are not implemented in the example above, the POST, PUT, and DELETE verbs will be refused (with HTTP status code 405 Not Allowed) for the corresponding resource.
 
