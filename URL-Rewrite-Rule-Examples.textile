@@ -1,0 +1,1 @@
+This page will give example URL Rewriting rules for the most common Rewriting engines.
