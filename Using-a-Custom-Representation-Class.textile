@@ -1,0 +1,1 @@
+This document describes how to use a custom class to serialize your return data to something other than JSON, which you will want to do if your API should support XML or other return formats beside JSON.
