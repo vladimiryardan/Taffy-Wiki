@@ -11,7 +11,7 @@ h3. addURI(string cfcPath)
 
 * cfcPath (string) - The dot-notation path to the cfc that you are notifying the framework of. (e.g. "org.fusiongrokker.api.artGallery.artistCollection")
 
-This method notifies the framework of a CFC that implements part of your API. By using it inside the RegisterURIs function, the framework can reload cached objects at the appropriate time. It is not recommended that you use *addURI* outside of *registerURIs*.
+This method notifies the framework of a CFC that implements part of your API. By using it inside the RegisterURIs function, the framework can reload cached objects at the appropriate time. It is not recommended that you use *addURI* outside of *registerURIs*. If you do not use this method at all, Taffy will not know about any resources your API exposes and thus it can not do anything.
 
 h3. applicationHook()
 
@@ -31,6 +31,8 @@ It is important to note the difference between the mime type and extension. Here
 
 @/artists.xml?city=Philadelphia@
 
+_If not implemented, the framework default mime type is JSON ("application/json")._
+
 h3. requestHook()
 
 *Use it inside:* Application.cfc
@@ -48,6 +50,8 @@ h3. registerMimeType(string extension, string mimeType)
 
 Each mime type that your API is capable of returning needs to be registered with the framework, and the *applicationHook* method is the most efficient place to do so.
 
+Because the framework implements JSON by default, the JSON ("application/json") mime type is already registered, and you do not have to re-register it. (You can if you like, though.)
+
 h3. registerURIs()
 
 *Use it inside:* Application.cfc
@@ -62,7 +66,9 @@ h3. setDebugKey(string keyName)
 
 * keyName (string) - Name of the url parameter that enables CF Debug Output. (e.g. "debug")
 
-Sometimes it's useful to see ColdFusion's debug output in the results of your API requests during testing. For that reason, you can include this query string parameter to enable debugging on a per-request basis.
+Sometimes it's useful to see ColdFusion's debug output in the results of your API requests during testing. For that reason, you can include this query string parameter to enable debugging on a per-request basis. 
+
+_If you do not change it, the default value is, "debug"._
 
 h3. setReloadKey(string keyName)
 
@@ -73,6 +79,8 @@ h3. setReloadKey(string keyName)
 
 Used in combination with the reload password (see: *setReloadPassword*), the framework will re-initialize itself. During re-initialization, all configuration settings are re-applied and all cached objects are cleared and reloaded. If the value of the key does not match the reload password, a reload will not be performed. This allows you to set a secret password restrict control of reloading your API to trusted parties.
 
+_If you do not change it, the default value is "reload"._
+
 h3. setReloadPassword(string Password)
 
 *Use it inside:* applicationHook
@@ -81,6 +89,8 @@ h3. setReloadPassword(string Password)
 * keyName (string) - Accepted value of the url parameter that requests the framework to be reloaded. (e.g. "true")
 
 Used in combination with the reload key (see: *setReloadKey*), the framework will re-initialize itself. During re-initialization, all configuration settings are re-applied and all cached objects are cleared and reloaded. If the value of the key does not match the reload password, a reload will not be performed. This allows you to set a secret password restrict control of reloading your API to trusted parties.
+
+_If you do not change it, the default value is, "true"._
 
 h2. API CFC Methods:
 
@@ -98,15 +108,18 @@ h3. representationOf(any data, [string customRepresentationClass])
 *Use it inside:* get, post, put, and delete methods inside your API CFCs.
 *Parameters:*
 
-* data (any) - The data to return to the consumer. Can be any type, including complex data types like queries, structures, and arrays, as long as the serializer knows how to serialize them.
+* data (any) - The data to return to the consumer.
 * customRepresentationClass (string) - Dot-notation path to a custom CFC that will serialize your results.
 
-h3. withStatus(numeric statusCode)
+Data can be of any type, including complex data types like queries, structures, and arrays, as long as the serializer knows how to serialize them. For more information on using a custom representation class, see [[Using a custom Representation Class]].
 
+h3. withStatus(numeric statusCode)
 
 *Use it inside:* get, post, put, and delete methods inside your API CFCs.
 *Parameters:*
 
 * statusCode (numeric) - the "HTTP Status Code":http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html to return to the consumer.
 
-This special method may _*only*_ be used in conjunction with *noData* or *representationOf*. It sets the HTTP Status Code of the return. If not used, Taffy will always return status code 200 (OK).
+This special method may _*only*_ be used in conjunction with *noData* or *representationOf*. It sets the HTTP Status Code of the return.
+
+_If you do not specify a return status code, Taffy will always return status code 200 (OK) by default._
