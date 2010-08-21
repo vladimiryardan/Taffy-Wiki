@@ -4,7 +4,7 @@ h2. Application.cfc Methods
 
 The following methods are available in your Application.cfc:
 
-h3(#addURI). addURI(string cfcPath)
+<h3 id="addURI"> addURI(string cfcPath)</h3>
 
 *Use it inside:* registerURIs
 *Parameters:*
@@ -13,14 +13,14 @@ h3(#addURI). addURI(string cfcPath)
 
 This method notifies the framework of a CFC that implements part of your API. By using it inside the RegisterURIs function, the framework can reload cached objects at the appropriate time. It is not recommended that you use *addURI* outside of *registerURIs*. If you do not use this method at all, Taffy will not know about any resources your API exposes and thus it can not do anything.
 
-h3(#applicationHook). applicationHook()
+<h3 id="applicationHook">applicationHook()</h3>
 
 *Use it inside:* Application.cfc
 *Parameters:* _(none)_
 
 Since the framework takes over the *onApplicationStart* event of Application.cfc, it also exposes this methdod as a way for you to add logic to be executed when the event occurs. *applicationHook* is called by *onApplicationStart* after the framework is initialized. Your Application.cfc *should NOT implement onApplicationStart*, and should instead use *applicationHook*.
 
-h3(#defaultMime). defaultMime(string DefaultMimeType)
+<h3 id="defaultMime">defaultMime(string DefaultMimeType)</h3>
 
 *Use it inside:* applicationHook
 *Parameters:*
@@ -33,14 +33,14 @@ It is important to note the difference between the mime type and extension. Here
 
 _If not implemented, the framework default mime type is JSON ("application/json")._
 
-h3(#requestHook). requestHook()
+<h3 id="requestHook">requestHook()</h3>
 
 *Use it inside:* Application.cfc
 *Parameters:* _(none)_
 
 Since the framework takes over the *onRequestStart* event of Application.cfc, it also exposes this methdod as a way for you to add logic to be executed when the event occurs. *requestHook* is called by *onRequestStart* after the framework is re-initialized (if requested). Your Application.cfc *should NOT implement onRequestStart*, and should instead use *requestHook*.
 
-h3.(#registerMimeType) registerMimeType(string extension, string mimeType)
+<h3 id="registerMimeType">registerMimeType(string extension, string mimeType)</h3>
 
 *Use it inside:* applicationHook
 *Parameters:*
@@ -52,14 +52,14 @@ Each mime type that your API is capable of returning needs to be registered with
 
 Because the framework implements JSON by default, the JSON ("application/json") mime type is already registered, and you do not have to re-register it. (You can if you like, though.)
 
-h3(#registerURIs). registerURIs()
+<h3 id="registerURIs">registerURIs()</h3>
 
 *Use it inside:* Application.cfc
 *Parameters:* _(none)_
 
 This is a special method called by the framework during initialization to check each CFC in your API and configure URI mappings. You must implement this method in your Application.cfc for the framework to work correctly.
 
-h3(#setDebugKey). setDebugKey(string keyName)
+<h3 id="setDebugKey">setDebugKey(string keyName)</h3>
 
 *Use it inside:* applicationHook
 *Parameters:*
@@ -70,7 +70,7 @@ Sometimes it's useful to see ColdFusion's debug output in the results of your AP
 
 _If you do not change it, the default value is, "debug"._
 
-h3(#setReloadKey). setReloadKey(string keyName)
+<h3 id="setReloadKey">setReloadKey(string keyName)</h3>
 
 *Use it inside:* applicationHook
 *Parameters:*
@@ -81,7 +81,7 @@ Used in combination with the reload password (see: *setReloadPassword*), the fra
 
 _If you do not change it, the default value is "reload"._
 
-h3(#setReloadPassword). setReloadPassword(string Password)
+<h3 id="setReloadPassword">setReloadPassword(string Password)</h3>
 
 *Use it inside:* applicationHook
 *Parameters:*
@@ -92,9 +92,9 @@ Used in combination with the reload key (see: *setReloadKey*), the framework wil
 
 _If you do not change it, the default value is, "true"._
 
-h2. API CFC Methods:
+<h2 id="API_CFC_Methods">API CFC Methods:</h2>
 
-h3(#noData). noData()
+<h3 id="noData">noData()</h3>
 
 *Use it inside:* get, post, put, and delete methods inside your API CFCs.
 *Parameters:* _(none)_
@@ -103,7 +103,7 @@ This method allows you to specify that there is no data to be returned for the c
 
 @<cfreturn noData().withStatus(404) />@
 
-h3(#representationOf). representationOf(any data, [string customRepresentationClass])
+<h3 id="representationOf">representationOf(any data, [string customRepresentationClass])</h3>
 
 *Use it inside:* get, post, put, and delete methods inside your API CFCs.
 *Parameters:*
@@ -113,7 +113,7 @@ h3(#representationOf). representationOf(any data, [string customRepresentationCl
 
 Data can be of any type, including complex data types like queries, structures, and arrays, as long as the serializer knows how to serialize them. For more information on using a custom representation class, see [[Using a custom Representation Class]].
 
-h3(#withStatus). withStatus(numeric statusCode)
+<h3 id="withStatus">withStatus(numeric statusCode)</h3>
 
 *Use it inside:* get, post, put, and delete methods inside your API CFCs.
 *Parameters:*
