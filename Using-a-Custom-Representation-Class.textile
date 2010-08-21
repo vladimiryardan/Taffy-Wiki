@@ -62,3 +62,7 @@ h2. A word of caution
 Representation classes are treated as Transient objects in Taffy, meaning that a new response object is instantiated for every request, which has both positive and negative side-effects.
 
 On the positive side, there is no chance that wires will get crossed and the response to request A will be sent for request B. On the other hand, it also means that your representation class should be as lightweight as possible to speed instantiation time. If you are using a library to do serialization (perhaps you're using "JSONUtil":http://jsonutil.riaforge.org/ for JSON, or "AnythingToXML":http://anythingtoxml.riaforge.org/ for XML) then you should cache the worker object in a persistent scope like Application or Server, because the library does not need to be re-instantiated on every request. Doing so will definitely help the performance of your API.
+
+<script type="text/javascript" src="http://fusiongrokker.com/assets/plugins/Prettify/assets/prettify.js"></script> 
+<script type="text/javascript">function addLoadEvent(func) {var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } } addLoadEvent(function() { prettyPrint(); });</script>
+<link rel='stylesheet' href='http://fusiongrokker.com/assets/plugins/Prettify/assets/prettify.css' type='text/css' media='screen' /> 
