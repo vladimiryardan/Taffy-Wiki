@@ -111,7 +111,7 @@ This method allows you to specify that there is no data to be returned for the c
 *Parameters:*
 
 * data (any) - The data to return to the consumer.
-* customRepresentationClass (string) - Dot-notation path to a custom CFC that will serialize your results.
+* _optional_ customRepresentationClass (string) - Dot-notation path to a custom CFC that will serialize your results. Defaults to included generic serializer which supports JSON.
 
 Data can be of any type, including complex data types like queries, structures, and arrays, as long as the serializer knows how to serialize them. For more information on using a custom representation class, see [[Using a custom Representation Class]].
 
