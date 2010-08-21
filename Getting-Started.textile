@@ -10,7 +10,7 @@ h1. Step 1: Application.cfc
 
 Much like a "FW/1":http://fw1.riaforge.org/ application, Taffy implements a majority of its logic in Application.cfc, as a base class that the Application.cfc of your application will extend. At a minimum, your APIs Application.cfc needs the following:
 
-<pre>component extends="taffy.core.api" {
+<pre class="prettyprint">component extends="taffy.core.api" {
 
 	this.name = hash(getCurrentTemplatePath());
 
@@ -47,7 +47,7 @@ Here is an example resource implementation:
 
 *artCollection.cfc:*
 
-<pre>component extends="taffy.core.restapi" taffy_uri="/artists/{artistId}/art" {
+<pre class="prettyprint">component extends="taffy.core.restapi" taffy_uri="/artists/{artistId}/art" {
 
 	public function get(string city = ""){
 		//query the database for matches, making use of optional parameter "city"
@@ -73,3 +73,7 @@ Now that you've got a working API, you and your consumers need to know how to ac
 The folder containing your API should contain, at a minimum, the *Application.cfc* from Step 1, and an empty *index.cfm*. (index.cfm's contents will be ignored, but it must exist.) To compose a complete URL, append the URI to the location of index.cfm. Assuming your API is located at @http://example.com/api/index.cfm@, and you've implemented the resource with URI @/artists@ and the GET method, then you could open up the URL: @http://example.com/api/index.cfm/artists@ in your browser and the data would be returned, serialized using the default mime type (JSON unless otherwise defined).
 
 Some people would prefer to remove the @/index.cfm@ portion of the URL. To do so, you must use URL-rewriting. *The good news is that you should only need one simple rule.* With Apache you can use "mod_rewrite":http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html, or with IIS 6 you can use "IIRF":http://iirf.codeplex.com/ (free) or "ISAPI Rewrite":http://www.isapirewrite.com/ (paid). IIS 7 has url rewriting built-in. For specific rewriting rule examples for each engine, see [[URL Rewrite Rule Examples]]. There are also Java Servlet Filters to accomplish this, should that be more to your liking.
+
+<script type="text/javascript" src="http://fusiongrokker.com/assets/plugins/Prettify/assets/prettify.js"></script> 
+<script type="text/javascript">function addLoadEvent(func) {var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } } addLoadEvent(function() { prettyPrint(); });</script>
+<link rel='stylesheet' href='http://fusiongrokker.com/assets/plugins/Prettify/assets/prettify.css' type='text/css' media='screen' /> 
