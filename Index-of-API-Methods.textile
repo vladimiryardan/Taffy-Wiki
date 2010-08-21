@@ -1,1 +1,83 @@
-This page is an alphabetical listing of all methods that Taffy exposes for you to use in your APIs. If a method is not included here, consider it un-documented, and as such it may change or be renamed at any time without notice.
+<style>h3 {background-color: #ddd; padding: 3px;}</style>This page is an alphabetical listing of all methods that Taffy exposes for you to use in your APIs. If a method is not included here, you should consider it un-documented, and as such it may change or be renamed at any time without notice. I will make a conscious effort not to break or rename any documented functions, though they may change with a major version if it is an improvement to the framework.
+
+h2. Application.cfc Methods
+
+The following methods are available in your Application.cfc:
+
+h3. addURI(string cfcPath)
+
+*Use it inside:* registerURIs
+*Parameters:*
+
+* cfcPath (string) - The dot-notation path to the cfc that you are notifying the framework of. (e.g. "org.fusiongrokker.api.artGallery.artistCollection")
+
+This method notifies the framework of a CFC that implements part of your API. By using it inside the RegisterURIs function, the framework can reload cached objects at the appropriate time. It is not recommended that you use *addURI* outside of *registerURIs*.
+
+h3. applicationHook()
+
+*Use it inside:* Application.cfc
+*Parameters:* _(none)_
+
+Since the framework takes over the *onApplicationStart* event of Application.cfc, it also exposes this methdod as a way for you to add logic to be executed when the event occurs. *applicationHook* is called by *onApplicationStart* after the framework is initialized. Your Application.cfc *should NOT implement onApplicationStart*, and should instead use *applicationHook*.
+
+h3. defaultMime(string DefaultMimeType)
+
+*Use it inside:* applicationHook
+*Parameters:*
+
+* DefaultMimeType (string) - The mime type that should be returned when none is specified by the consumer. (e.g. "json")
+
+It is important to note the difference between the mime type and extension. Here, the extension is expected because of its brevity. While the mime type to be returned is "application/json", you should pass the string "json" to the function. If, for example, you registered the mime type of "xml" as "application/xml" (using *registerMimeType*), and you wanted XML to be the default format, you would pass the string "xml" to the *defaultMime* function; and it could be specified on the url by appending ".xml" to the URI, before any query string parameters, like so:
+
+@/artists.xml?city=Philadelphia@
+
+h3. requestHook()
+
+*Use it inside:* Application.cfc
+*Parameters:* _(none)_
+
+Since the framework takes over the *onRequestStart* event of Application.cfc, it also exposes this methdod as a way for you to add logic to be executed when the event occurs. *requestHook* is called by *onRequestStart* after the framework is re-initialized (if requested). Your Application.cfc *should NOT implement onRequestStart*, and should instead use *requestHook*.
+
+h3. registerMimeType(string extension, string mimeType)
+
+*Use it inside:* applicationHook
+*Parameters:*
+
+* extension (string) - The url-extension that will invoke this mime type. (e.g. "xml" or "json")
+* mimeType (string) - The mime type that should be set into the http headers when the corresponding extension is requested.
+
+Each mime type that your API is capable of returning needs to be registered with the framework, and the *applicationHook* method is the most efficient place to do so.
+
+h3. registerURIs()
+
+*Use it inside:* Application.cfc
+*Parameters:* _(none)_
+
+This is a special method called by the framework during initialization to check each CFC in your API and configure URI mappings. You must implement this method in your Application.cfc for the framework to work correctly.
+
+h3. setDebugKey(string keyName)
+
+*Use it inside:* applicationHook
+*Parameters:*
+
+* keyName (string) - Name of the url parameter that enables CF Debug Output. (e.g. "debug")
+
+Sometimes it's useful to see ColdFusion's debug output in the results of your API requests during testing. For that reason, you can include this query string parameter to enable debugging on a per-request basis.
+
+h3. setReloadKey(string keyName)
+
+*Use it inside:* applicationHook
+*Parameters:*
+
+* keyName (string) - Name of the url parameter that requests the framework to be reloaded. (e.g. "reload")
+
+Used in combination with the reload password (see: *setReloadPassword*), the framework will re-initialize itself. During re-initialization, all configuration settings are re-applied and all cached objects are cleared and reloaded. If the value of the key does not match the reload password, a reload will not be performed. This allows you to set a secret password restrict control of reloading your API to trusted parties.
+
+h3. setReloadPassword(string Password)
+
+*Use it inside:* applicationHook
+*Parameters:*
+
+* keyName (string) - Accepted value of the url parameter that requests the framework to be reloaded. (e.g. "true")
+
+Used in combination with the reload key (see: *setReloadKey*), the framework will re-initialize itself. During re-initialization, all configuration settings are re-applied and all cached objects are cleared and reloaded. If the value of the key does not match the reload password, a reload will not be performed. This allows you to set a secret password restrict control of reloading your API to trusted parties.
