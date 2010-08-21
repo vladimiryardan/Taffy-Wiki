@@ -81,3 +81,32 @@ h3. setReloadPassword(string Password)
 * keyName (string) - Accepted value of the url parameter that requests the framework to be reloaded. (e.g. "true")
 
 Used in combination with the reload key (see: *setReloadKey*), the framework will re-initialize itself. During re-initialization, all configuration settings are re-applied and all cached objects are cleared and reloaded. If the value of the key does not match the reload password, a reload will not be performed. This allows you to set a secret password restrict control of reloading your API to trusted parties.
+
+h2. API CFC Methods:
+
+h3. noData()
+
+*Use it inside:* get, post, put, and delete methods inside your API CFCs.
+*Parameters:* _(none)_
+
+This method allows you to specify that there is no data to be returned for the current request. Generally, you would use it in conjunction with the *withStatus* method to set a specific return status for the request. For example, if the requested resource doesn't exist, you could return a 404 error like so:
+
+@<cfreturn noData().withStatus(404) />@
+
+h3. representationOf(any data, [string customRepresentationClass])
+
+*Use it inside:* get, post, put, and delete methods inside your API CFCs.
+*Parameters:*
+
+* data (any) - The data to return to the consumer. Can be any type, including complex data types like queries, structures, and arrays, as long as the serializer knows how to serialize them.
+* customRepresentationClass (string) - Dot-notation path to a custom CFC that will serialize your results.
+
+h3. withStatus(numeric statusCode)
+
+
+*Use it inside:* get, post, put, and delete methods inside your API CFCs.
+*Parameters:*
+
+* statusCode (numeric) - the "HTTP Status Code":http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html to return to the consumer.
+
+This special method may _*only*_ be used in conjunction with *noData* or *representationOf*. It sets the HTTP Status Code of the return. If not used, Taffy will always return status code 200 (OK).
