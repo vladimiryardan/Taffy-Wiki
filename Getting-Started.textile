@@ -1,4 +1,4 @@
-This page shows how to implement a REST API using Taffy. For an index of documentation, see the [[Home]] page, and for a high level explanation of Taffy, see the "project homepage":http://atuttle.github.com/Taffy/
+This page shows how to implement a REST API using Taffy. For an index of documentation, see the [[Home]] page, and for a high level explanation of Taffy, see the "project homepage":http://atuttle.github.com/Taffy/.
 
 By and large, Taffy uses convention over configuration, but there are a few configuration details that can't be pragmatically solved with conventions. In those cases, configuration is needed, but minimal.
 
