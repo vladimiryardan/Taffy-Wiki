@@ -6,7 +6,7 @@ The following methods are available in your Application.cfc:
 
 <h3 id="addURI"> addURI(string cfcPath)</h3>
 
-*Use it inside:* registerURIs
+*Use it inside:* <a href="#registerURIs">registerURIs</a>
 *Parameters:*
 
 * cfcPath (string) - The dot-notation path to the cfc that you are notifying the framework of. (e.g. "org.fusiongrokker.api.artGallery.artistCollection")
@@ -22,7 +22,7 @@ Since the framework takes over the *onApplicationStart* event of Application.cfc
 
 <h3 id="defaultMime">defaultMime(string DefaultMimeType)</h3>
 
-*Use it inside:* applicationHook
+*Use it inside:* <a href="#applicationHook">applicationHook</a>
 *Parameters:*
 
 * DefaultMimeType (string) - The mime type that should be returned when none is specified by the consumer. (e.g. "json")
@@ -42,7 +42,7 @@ Since the framework takes over the *onRequestStart* event of Application.cfc, it
 
 <h3 id="registerMimeType">registerMimeType(string extension, string mimeType)</h3>
 
-*Use it inside:* applicationHook
+*Use it inside:* <a href="#applicationHook">applicationHook</a>
 *Parameters:*
 
 * extension (string) - The url-extension that will invoke this mime type. (e.g. "xml" or "json")
@@ -61,7 +61,7 @@ This is a special method called by the framework during initialization to check 
 
 <h3 id="setDebugKey">setDebugKey(string keyName)</h3>
 
-*Use it inside:* applicationHook
+*Use it inside:* <a href="#applicationHook">applicationHook</a>
 *Parameters:*
 
 * keyName (string) - Name of the url parameter that enables CF Debug Output. (e.g. "debug")
@@ -72,7 +72,7 @@ _If you do not change it, the default value is, "debug"._
 
 <h3 id="setReloadKey">setReloadKey(string keyName)</h3>
 
-*Use it inside:* applicationHook
+*Use it inside:* <a href="#applicationHook">applicationHook</a>
 *Parameters:*
 
 * keyName (string) - Name of the url parameter that requests the framework to be reloaded. (e.g. "reload")
@@ -83,7 +83,7 @@ _If you do not change it, the default value is "reload"._
 
 <h3 id="setReloadPassword">setReloadPassword(string Password)</h3>
 
-*Use it inside:* applicationHook
+*Use it inside:* <a href="#applicationHook">applicationHook</a>
 *Parameters:*
 
 * keyName (string) - Accepted value of the url parameter that requests the framework to be reloaded. (e.g. "true")
@@ -101,7 +101,7 @@ The following methods are available inside each of your API CFCs:
 *Use it inside:* get, post, put, and delete methods inside your API CFCs.
 *Parameters:* _(none)_
 
-This method allows you to specify that there is no data to be returned for the current request. Generally, you would use it in conjunction with the *withStatus* method to set a specific return status for the request. For example, if the requested resource doesn't exist, you could return a 404 error like so:
+This method allows you to specify that there is no data to be returned for the current request. Generally, you would use it in conjunction with the *<a href="#withStatus">withStatus</a>* method to set a specific return status for the request. For example, if the requested resource doesn't exist, you could return a 404 error like so:
 
 @<cfreturn noData().withStatus(404) />@
 
@@ -122,6 +122,6 @@ Data can be of any type, including complex data types like queries, structures, 
 
 * statusCode (numeric) - the "HTTP Status Code":http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html to return to the consumer.
 
-This special method may _*only*_ be used in conjunction with *noData* or *representationOf*. It sets the HTTP Status Code of the return.
+This special method may _*only*_ be used in conjunction with *<a href="#noData">noData</a>* or *<a href="#representationOf">representationOf</a>*. It sets the HTTP Status Code of the return.
 
 _If you do not specify a return status code, Taffy will always return status code 200 (OK) by default._
