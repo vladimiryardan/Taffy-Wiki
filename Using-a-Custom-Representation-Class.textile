@@ -1,5 +1,3 @@
-h1. Using a Custom Representation Class
-
 This document describes how to use a custom class to serialize your return data. Using a custom representation class will allow you to serialize data to formats other than JSON, the default/included serializer. For example, you could write a custom representation class that allows you to serialize data to XML, YAML, RSS, plain text, HTML, or pretty much any other format you can think of; including custom or proprietary formats.
 
 h2. Requirements
