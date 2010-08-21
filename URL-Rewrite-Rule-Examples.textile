@@ -1,5 +1,3 @@
-h1. URL Rewrite Rule Examples
-
 This page gives example URL Rewriting rules for the most common Rewriting engines. All examples assume that your API exists at: @http://example.com/api/index.cfm@, and the resulting URL should resemble: @http://example.com/api/artists@ (where "/artists" is the resource being requested)
 
 h2. Apache mod_rewrite
