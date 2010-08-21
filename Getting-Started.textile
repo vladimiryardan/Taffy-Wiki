@@ -1,5 +1,7 @@
 This page shows how to implement a REST API using Taffy. For an index of documentation, see the [[Home]] page, and for a high level explanation of Taffy, see the "project homepage":http://atuttle.github.com/Taffy/
 
+By and large, Taffy uses convention over configuration, but there are a few configuration details that can't be pragmatically solved with conventions. In those cases, configuration is needed, but minimal.
+
 h1. Step 0: Installing Taffy
 
 Simply unzip the @taffy@ folder into your webroot. An application-specific mapping to a non-web-accessible folder is not sufficient; however a global mapping in your ColdFusion Administrator will work -- in which case you should map @/taffy@ to the location of your unzipped @taffy@ folder.
