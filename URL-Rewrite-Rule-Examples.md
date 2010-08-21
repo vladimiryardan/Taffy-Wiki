@@ -6,16 +6,22 @@ This page gives example URL Rewriting rules for the most common Rewriting engine
 
 See the [official documentation](http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html) for more information.
 
+```apache
     RewriteRule ^/api/(.*) http://example.com/api/index.cfm/$1
+```
 
 ## IIRF (Ionic's ISAPI Rewrite Filter)
 
 See the [official documentation](http://cheeso.members.winisp.net/Iirf21Help/frames.htm) for more information.
 
+```apache
     RewriteRule ^/api/(.*)$ /api/index.cfm/$1
+```
 
 ## ISAPI Rewrite (Helicon)
 
 See the [official documentation](http://www.isapirewrite.com/docs/) for more information.
 
+```apache
     ?
+```
