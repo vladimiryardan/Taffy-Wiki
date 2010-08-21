@@ -33,9 +33,9 @@ Much like a "FW/1":http://fw1.riaforge.org/ application, Taffy implements a majo
 
 * DO NOT implement the @onApplicationStart@, @onRequestStart@, or @onRequest@ methods; these are used by the framework. @ApplicationHook@ is called during @onApplicationStart@, and @requestHook@ is called during @onRequestStart@, if you need to add code to these event listeners.
 
-* @applicationHook@ method is used to set any application-specific variables, as well as register Mime Types that your API supports (more on this later), and set values for some special url parameters (see: "setDebugKey":http://, "setReloadKey":http://, "setReloadPassword":http://)
+* @applicationHook@ method is used to set any application-specific variables, as well as register Mime Types that your API supports (more on this later), and set values for some special url parameters (see: "setDebugKey":http://wiki.github.com/atuttle/Taffy/index-of-api-methods#setDebugKey, "setReloadKey":http://wiki.github.com/atuttle/Taffy/index-of-api-methods#setReloadKey, "setReloadPassword":http://wiki.github.com/atuttle/Taffy/index-of-api-methods#setReloadPassword)
 
-* @registerURIs@ is a special method called during framework initialization that inspects the metadata from each of your CFCs and caches some information to enable requests to be properly routed. Inside this function, use the "addURI":http:// method to notify the framework about each CFC in your API. Pass the dot-notation path of the CFC to the @addURI@ method.
+* @registerURIs@ is a special method called during framework initialization that inspects the metadata from each of your CFCs and caches some information to enable requests to be properly routed. Inside this function, use the "addURI":http://wiki.github.com/atuttle/Taffy/index-of-api-methods#addURI method to notify the framework about each CFC in your API. Pass the dot-notation path of the CFC to the @addURI@ method.
 
 Of course, there are a few more things you can do. The [[Index of API Methods]] lists all methods, what they do, and where you can use them.
 
