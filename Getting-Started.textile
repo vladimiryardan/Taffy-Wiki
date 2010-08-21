@@ -33,7 +33,7 @@ Of course, there are a few more things you can do. The [[Index of API Methods]] 
 
 h1. API Resource CFCs
 
-Each resource in your API (eg. Artists, Art) should be defined as its own CFC. *Collections and Members should be separate CFCs* (eg. @artistCollection.cfc@ and @artistMember.cfc@).
+Each resource in your API (eg. Artists, Art) should be defined as its own CFC. *Collections and Members should be separate CFCs* (eg. @artistCollection.cfc@ and @artistMember.cfc@). Don't worry too much about the file names, they won't be exposed anywhere. In addition, if you like, your API CFCs may be outside the web-root, as long as they are accessible via CF mappings (application-specific mappings are acceptable).
 
 *artCollection.cfc:*
 
