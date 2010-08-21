@@ -10,18 +10,22 @@ h1. Step 1: Application.cfc
 
 Much like a "FW/1":http://fw1.riaforge.org/ application, Taffy implements a majority of its logic in Application.cfc, as a base class that the Application.cfc of your application will extend. At a minimum, your APIs Application.cfc needs the following:
 
-pre. component extends="taffy.core.api" {
+<pre>component extends="taffy.core.api" {
+
 	this.name = hash(getCurrentTemplatePath());
+
 	void function applicationHook(){
 		registerMimeType("json", "text/json");
 	}
+
 	void function registerURIs(){
 		//let taffy know about the cfcs in your api so that it can map URIs to them
 		addURI("taffy.example.api.artistCollection");
 		addURI("taffy.example.api.artistMember");
 		//...
 	}
-}
+
+}</pre>
 
 * Application.cfc extends @taffy.core.api@
 
@@ -43,12 +47,14 @@ Here is an example resource implementation:
 
 *artCollection.cfc:*
 
-pre. component extends="taffy.core.restapi" taffy_uri="/artists/{artistId}/art" {
+<pre>component extends="taffy.core.restapi" taffy_uri="/artists/{artistId}/art" {
+
 	public function get(string city = ""){
 		//query the database for matches, making use of optional parameter "city"
 		return representationOf(queryObject).withStatus(200);
 	}
-}
+
+}</pre>
 
 * Each CFC extends @taffy.core.restapi@.
 
