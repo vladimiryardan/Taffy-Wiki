@@ -49,7 +49,7 @@ Since the framework takes over the **onRequestStart** event of Application.cfc, 
 * extension (string) - The url-extension that will invoke this mime type. (e.g. "xml" or "json")
 * mimeType (string) - The mime type that should be set into the http headers when the corresponding extension is requested. (e.g. "application/xml" or "application/json")
 
-Each mime type that your API is capable of returning needs to be registered with the framework, and the **configureTaffy** method is the most efficient place to do so.
+Each mime type that your API is capable of returning needs to be registered with the framework, and the **[configureTaffy](#configureTaffy)** method is the most efficient place to do so.
 
 Because the framework implements JSON by default, the JSON ("application/json") mime type is already registered, and you do not have to re-register it. (You can if you like, though. It won't hurt anything.)
 
@@ -80,7 +80,7 @@ _If you do not change it, the default value is, "debug"._
 
 * DefaultMimeType (string) - The mime type that should be returned when none is specified by the consumer. (e.g. "json")
 
-It is important to note the difference between the mime type and extension. Here, the extension is expected because of its brevity. While the mime type to be returned is "application/json", you should pass the string "json" to the function. If, for example, you registered the mime type of "xml" as "application/xml" (using **registerMimeType**), and you wanted XML to be the default format, you would pass the string "xml" to the **setDefaultMime** function; and it could be specified on the url by appending ".xml" to the URI, before any query string parameters, like so:
+It is important to note the difference between the mime type and extension. Here, the extension is expected because of its brevity. While the mime type to be returned is "application/json", you should pass the string "json" to the function. If, for example, you registered the mime type of "xml" as "application/xml" (using **[registerMimeType](#registerMimeType)**), and you wanted XML to be the default format, you would pass the string "xml" to the **[setDefaultMime](#setDefaultMime)** function; and it could be specified on the url by appending ".xml" to the URI, before any query string parameters, like so:
 
 `/artists.xml?city=Philadelphia`
 
@@ -93,7 +93,7 @@ _If not implemented, the framework default mime type is JSON ("application/json"
 
 * keyName (string) - Name of the url parameter that requests the framework to be reloaded. (e.g. "reload")
 
-Used in combination with the reload password (see: **setReloadPassword**), the framework will re-initialize itself. During re-initialization, all configuration settings are re-applied and all cached objects are cleared and reloaded. If the value of the key does not match the reload password, a reload will not be performed. This allows you to set a secret password to restrict control of reloading your API to trusted parties.
+Used in combination with the reload password (see: **[setReloadPassword](#setReloadPassword)**), the framework will re-initialize itself. During re-initialization, all configuration settings are re-applied and all cached objects are cleared and reloaded. If the value of the key does not match the reload password, a reload will not be performed. This allows you to set a secret password to restrict control of reloading your API to trusted parties.
 
 _If you do not change it, the default value is "reload"._
 
@@ -104,7 +104,7 @@ _If you do not change it, the default value is "reload"._
 
 * keyName (string) - Accepted value of the url parameter that requests the framework to be reloaded. (e.g. "true")
 
-Used in combination with the reload key (see: **setReloadKey**), the framework will re-initialize itself. During re-initialization, all configuration settings are re-applied and all cached objects are cleared and reloaded. If the value of the key does not match the reload password, a reload will not be performed. This allows you to set a secret password to restrict control of reloading your API to trusted parties.
+Used in combination with the reload key (see: **[setReloadKey](#setReloadKey)**), the framework will re-initialize itself. During re-initialization, all configuration settings are re-applied and all cached objects are cleared and reloaded. If the value of the key does not match the reload password, a reload will not be performed. This allows you to set a secret password to restrict control of reloading your API to trusted parties.
 
 _If you do not change it, the default value is, "true"._
 
