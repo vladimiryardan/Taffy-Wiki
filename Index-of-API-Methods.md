@@ -53,6 +53,15 @@ Each mime type that your API is capable of returning needs to be registered with
 
 Because the framework implements JSON by default, the JSON ("application/json") mime type is already registered, and you do not have to re-register it. (You can if you like, though. It won't hurt anything.)
 
+<h3 id="setDashboardKey">setDashboardKey(string keyName)</h3>
+
+**Use it inside:** [configureTaffy](#configureTaffy)
+**Parameters:**
+
+* keyName (string) - Name of the url parameter that displays the dashboard. Default value is "dashboard".
+
+The dashboard currently displays a ColdFusion dump of your current Taffy configuration, and any cached resource location information, as well as a handy link to reload the API. I intend to add more information here over time. 
+
 <h3 id="setDebugKey">setDebugKey(string keyName)</h3>
 
 **Use it inside:** [configureTaffy](#configureTaffy)
