@@ -12,6 +12,8 @@ Yes, Taffy is _just another front-controller framework_ for ColdFusion. And yes,
 
 First of all, it's designed specifically for building REST web services. It doesn't try to solve any MVC problems, because there is no styling - just input and output. Secondly, this isn't your mom's SES URL formatting. We're not just encoding `?name=foo` as `/name/foo`. Instead, you define that `/artist/{artistId}` represents a specific artist, and when the consumer requests `/artist/17`, your **artist** lookup method is passed an argument collection with: `{ artistId: 17 }`. The "artistId" portion is not visible anywhere in the URL.
 
-You _could_ do something similar with URL rewriting, but defining and maintaining those rewriting rules would be annoying. I wouldn't recommend it, but you're free to try.
+Succinctly put, Taffy solves the problem of creating _semantically correct_ REST URIs in a simple and elegant way.
+
+You _could_ do something similar with another framework and URL rewriting, but defining and maintaining those rewriting rules would be annoying. I wouldn't recommend it, but you're free to try.
 
 I think that if you give Taffy a try, you'll enjoy its simplicity.
