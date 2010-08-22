@@ -1,4 +1,4 @@
-This document describes how to use a custom class to serialize your return data. Using a custom representation class will allow you to serialize data to formats other than JSON, the default/included serializer. For example, you could write a custom representation class that allows you to serialize data to XML, YAML, RSS, plain text, HTML, or pretty much any other format you can think of; including custom or proprietary formats.
+This document describes how to use a custom class to serialize your return data. Using a custom representation class will allow you to serialize data to formats other than JSON, the default/included serializer. For example, you could write a custom representation class that allows you to serialize data to XML, WDDX, YAML, RSS, plain text, HTML, or pretty much any other format you can think of; including custom or proprietary formats.
 
 ## Requirements
 
@@ -11,7 +11,7 @@ In order to create a custom representation class, you need to know what a repres
 	<cfset variables.statusCode = 200 />
 
 	<cffunction name="setData" access="public" output="false" returnType="taffy.core.genericRepresentation">
-		<cfargument name="data" required="true"/>
+		<cfargument name="data" required="true" />
 		<cfset variables.data = arguments.data />
 		<cfreturn this />
 	</cffunction>
@@ -37,7 +37,7 @@ In order to create a custom representation class, you need to know what a repres
 </cfcomponent>
 ```
 
-These are the things that your custom representation class has to implement:
+These are the things that your custom representation class must implement:
 
 * `setData(any data)` - used to tell the class what data it has to serialize. The **data** parameter should accept any data type, and the function should return the **this** object.<br/><br/>
 * `noData()` - used to return a (more or less) empty representation object (status information with no result data). Should return the **this** object.<br/><br/>
@@ -57,7 +57,11 @@ It should be pretty obvious that a majority of the above code would be duplicate
 </cfcomponent>
 ```
 
-... of course, you need to implement the **serializeXML** function (and I'm a fan of [AnythingToXML](http://anythingtoxml.riaforge.org/) for this); but the important thing to notice here is that none of the other functions need to be duplicated. Since they would be the same, you can just inherit them from the included **genericRepresentation** class.
+... of course, it would be up to you to implement the **serializeXML** function (and I'm a fan of [AnythingToXML](http://anythingtoxml.riaforge.org/) for this); but the important thing to notice here is that none of the other functions need to be duplicated. Since they would be the same, you can just inherit them from the included **genericRepresentation** class.
+
+## Overriding the _default_ representation class
+
+Instead of supplying a custom representation class path as the 2nd argument to the **representationOf** method, you can override the global default. To do so, use the **[setDefaultRepresentationClass](http://github.com/atuttle/Taffy/wiki/Index-of-API-Methods#setDefaultRepresentationClass)** method in conjunction with **[configureTaffy](http://github.com/atuttle/Taffy/wiki/Index-of-API-Methods#configureTaffy)**.
 
 ## A word of caution
 
