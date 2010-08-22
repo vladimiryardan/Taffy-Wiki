@@ -1,7 +1,6 @@
 This page is an alphabetical listing of all methods that Taffy exposes for you to use in your APIs. If a method is not included here, you should consider it un-documented, and as such it may change or be renamed at any time without notice. I will make a conscious effort not to break or rename any documented functions, though they may change with a major version if it is an improvement to the framework.
 
 * [Application.cfc Methods](#Application_cfc_Methods)
-  * [addURI](#addURI)
   * [applicationStartEvent](#applicationStartEvent)
   * [configureTaffy](#configureTaffy)
   * [requestStartEvent](#requestStartEvent)
