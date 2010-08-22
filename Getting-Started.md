@@ -4,7 +4,9 @@ By and large, Taffy uses convention over configuration, but there are a few conf
 
 # Step 0: Installing Taffy
 
-Simply unzip the `taffy` folder into your webroot. An application-specific mapping to a non-web-accessible folder is not sufficient; however a global mapping in your ColdFusion Administrator will work -- in which case you should map `/taffy` to the location of your unzipped `taffy` folder.
+Currently, Taffy is only tested and supported on Adobe ColdFusion 9. Ultimately, I would like to support older versions of ColdFusion as well as Railo and OpenBD. For the time being, I've favored getting a release ready over testing against every possible engine.
+
+Simply unzip the **taffy** folder into your webroot. An application-specific mapping to a non-web-accessible folder is not sufficient; however a global mapping in your ColdFusion Administrator will work -- in which case you should map `/taffy` to the location of your unzipped **taffy** folder.
 
 # Step 1: Application.cfc
 
