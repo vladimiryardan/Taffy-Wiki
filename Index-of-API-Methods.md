@@ -8,6 +8,7 @@ This page is an alphabetical listing of all methods that Taffy exposes for you t
   * [setDashboardKey](#setDashboardKey)
   * [setDebugKey](#setDebugKey)
   * [setDefaultMime](#setDefaultMime)
+  * [setDefaultRepresentationClass](#setDefaultRepresentationClass)
   * [setReloadKey](#setReloadKey)
   * [setReloadPassword](#setReloadPassword)
 * [Resource CFC Methods](#Resource_CFC_Methods)
@@ -84,6 +85,15 @@ It is important to note the difference between the mime type and extension. Here
 `/artists.xml?city=Philadelphia`
 
 _If not implemented, the framework default mime type is JSON ("application/json")._
+
+<h3 id="setDefaultRepresentationClass">setDefaultRepresentationClass(string customClassDotPath)</h3>
+
+**Use it inside:** [configureTaffy](#configureTaffy)
+**Parameters:**
+
+* customClassDotPath (string) - Dot-notation path to the CFC to be used by default.
+
+When you change the default Representation Class, all responses will use your custom default class, unless you specifically override that request, using the (optional) second parameter to the **[representationOf](#representationOf)** function.
 
 <h3 id="setReloadKey">setReloadKey(string keyName)</h3>
 
