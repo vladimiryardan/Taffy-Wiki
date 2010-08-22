@@ -1,7 +1,3 @@
->*Warning:* Documentation Currently Outdated<br/><br/>As this product is pre- version 1.0, I am still making breaking changes and not going out of my way to preserve backward compatibility as I come up with better ideas for the ways things can work. The documentation is currently a little bit outdated, but will be updated as part of the 1.0 release.<br/><br/>While the documentation is out of date, the example applications will show working code of varying kinds; as these are my test cases, and I don't develop the core without updating the tests.<br/><br/>_Thanks for your patience as I improve Taffy!_
-
-# Intro
-
 Hi there. If you're looking for some high level information on Taffy, you should check out the [project homepage](http://atuttle.github.com/Taffy/)
 
 To see exactly what's required to implement a REST API with Taffy, check out the [[Getting Started]] page.
