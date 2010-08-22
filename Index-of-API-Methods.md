@@ -110,7 +110,7 @@ _If you do not change it, the default value is, "true"._
 
 <h2 id="Resource_CFC_Methods">Resource CFC Methods:</h2>
 
-The following methods are available inside each of your Resource CFCs:
+Resource CFCs extend `taffy.core.resource`.  The following methods are available inside each of your Resource CFCs:
 
 <h3 id="noData">noData()</h3>
 
