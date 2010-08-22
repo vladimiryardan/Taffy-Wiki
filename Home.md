@@ -8,7 +8,7 @@ There is also an [[Index of API Methods]] that documents what each does and how 
 
 **Isn't Taffy just a front-controller framework? Why shouldn't I just use Fusebox / Mach-ii / Model-Glue / etc and some URL rewriting?**
 
-Yes, Taffy is _just another front-controller framework_ for ColdFusion. And yes, it uses a _*similar*_ url-formatting schema to most other frameworks -- what they call "SES (Search Engine Safe) URLs." However, Taffy does have some key differences.
+Yes, Taffy is _just another front-controller framework_ for ColdFusion. And yes, it uses a _*similar*_ url-formatting schema to most other frameworks &mdash; what most of them call "SES" or Search Engine Safe URLs. However, Taffy does have some key differences.
 
 First of all, it's designed specifically for building REST web services. It doesn't try to solve any MVC problems, because there is no styling - just input and output. Secondly, this isn't your mom's SES URL formatting. We're not just encoding `?name=foo` as `/name/foo`. Instead, you define that `/artist/{artistId}` represents a specific artist, and when the consumer requests `/artist/17`, your *artist* lookup method is passed an argument collection with: `{ artistId: 17 }`. The "artistId" portion is not visible anywhere in the URL.
 
