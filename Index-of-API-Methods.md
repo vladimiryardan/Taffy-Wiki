@@ -3,6 +3,7 @@ This page is an alphabetical listing of all methods that Taffy exposes for you t
 * [Application.cfc Methods](#Application_cfc_Methods)
   * [applicationStartEvent](#applicationStartEvent)
   * [configureTaffy](#configureTaffy)
+  * [onTaffyRequest](#onTaffyRequest)
   * [requestStartEvent](#requestStartEvent)
   * [registerMimeType](#registerMimeType)
   * [setDashboardKey](#setDashboardKey)
@@ -33,6 +34,32 @@ Since the framework takes over the **onApplicationStart** event of Application.c
 **Parameters:** _(none)_
 
 This is a special method called by the framework during initialization to get your APIs configuration. You must implement this method in your Application.cfc for the framework to work correctly. All configuration methods should be used inside your implementation of **configureTaffy**, if you intend to use them.
+
+<h3 id="onTaffyRequest">onTaffyRequest(string verb, string cfc, struct requestArguments, string mimeExt)</h3>
+
+**Use it inside:** Application.cfc
+**Parameters:**
+
+* verb (string) - The HTTP request verb provided by the consumer
+* cfc (string) - The CFC name (minus ".cfc") that would handle the request. (Bean Name, if using an external bean factory.)
+* requestArguments (struct) - A structure containing all of the arguments of the request, including tokens from the URI as well as any query string parameters (defined after the ?, eg ?city=).
+* mimeExt (string) - The mime extension (e.g. "json" - NOT the full mime type, e.g. "application/json")
+
+This method is optional, and allows you to inspect and potentially abort an API request in a way that adheres to the HTTP specification. If you choose not to override it (by implementing it in your Application.cfc), it will always return true, allowing the request to continue. If you implement it, you can check for things like an API key, or whether or not the customer has paid for your service, and return something other than the data that they are requesting.
+
+If you do not return TRUE, allowing the request to continue as normal, then Taffy expects you to return a **[representation](http://github.com/atuttle/Taffy/wiki/Using-a-Custom-Representation-Class)** (either the generic class, included, or a custom one) that it should immediately return to the consumer, serialized to the appropriate format. If you simply want to return with a status code of 403 (which indicates "Not Allowed"), you could do this:
+
+```cfs
+return createObject("component", "taffy.core.genericRepresentation").noData().withStatus(403);
+```
+
+Alternately, you could indicate that they owe you money:
+
+```cfs
+return createObject("component", "taffy.core.genericRepresentation").setData({error="Your account is past due. Please email accounts payable."}).withStatus(403);
+```
+
+The options here are basically unlimited.
 
 <h3 id="requestStartEvent">requestStartEvent()</h3>
 
