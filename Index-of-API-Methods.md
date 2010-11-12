@@ -113,7 +113,7 @@ Each mime type that your API is capable of returning needs to be registered with
 
 Because the framework implements JSON by default, the JSON ("application/json") mime type is already registered, and you do not have to re-register it. (You can if you like, though. It won't hurt anything.)
 
-<h3 id="setBeanFactory">setBeanFactory(object beanFactory, \[string beanList\])</h3>
+<h3 id="setBeanFactory">setBeanFactory(object beanFactory, [string beanList])</h3>
 **Use it inside:** [configureTaffy](#configureTaffy)<br/>
 **Parameters:**
 
