@@ -1,0 +1,1 @@
+information about using the internal or an external bean factory
