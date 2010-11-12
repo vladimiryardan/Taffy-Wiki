@@ -1,6 +1,6 @@
 Hi there. If you're looking for some high level information on Taffy, you should check out the [project homepage](http://atuttle.github.com/Taffy/).
 
-To see exactly what's required to implement a REST API with Taffy, check out the [[Getting Started]] page.
+To see exactly what's required to implement a REST API with Taffy, check out the [[Getting Started]] page, or watch [my presentation]() (coming soon).
 
 There is also an [[Index of API Methods]] that documents what each does and how to work with it.
 
