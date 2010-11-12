@@ -33,9 +33,9 @@ Since the framework takes over the **onApplicationStart** event of Application.c
 **Use it inside:** Application.cfc<br/>
 **Parameters:** _(none)_
 
-This is a special method called by the framework during initialization to get your APIs configuration. You must implement this method in your Application.cfc for the framework to work correctly. All configuration methods should be used inside your implementation of **configureTaffy**, if you intend to use them.
+This is a special method called by the framework during initialization to get your APIs configuration. You must implement this method in your Application.cfc to override any framework setting defaults. All configuration methods should be used inside your implementation of **configureTaffy**, if you intend to use them.
 
-<h3 id="onTaffyRequest">onTaffyRequest(string verb, string cfc, struct requestArguments, string mimeExt)</h3>
+<h3 id="onTaffyRequest">onTaffyRequest(string verb, string cfc, struct requestArguments, string mimeExt, struct headers)</h3>
 
 **Use it inside:** Application.cfc<br/>
 **Parameters:**
@@ -44,19 +44,20 @@ This is a special method called by the framework during initialization to get yo
 * cfc (string) - The CFC name (minus ".cfc") that would handle the request. (Bean Name, if using an external bean factory.)
 * requestArguments (struct) - A structure containing all of the arguments of the request, including tokens from the URI as well as any query string parameters (defined after the ?, eg ?city=).
 * mimeExt (string) - The mime extension (e.g. "json" - NOT the full mime type, e.g. "application/json")
+* headers (struct) - A structure containing each header from the request, as sent by the consumer.
 
 This method is optional, and allows you to inspect and potentially abort an API request in a way that adheres to the HTTP specification. If you choose not to override it (by implementing it in your Application.cfc), it will always return true, allowing the request to continue. If you implement it, you can check for things like an API key, or whether or not the customer has paid for your service, and return something other than the data that they are requesting.
 
 If you do not return TRUE, allowing the request to continue as normal, then Taffy expects you to return a **[representation](http://github.com/atuttle/Taffy/wiki/Using-a-Custom-Representation-Class)** (either the generic class, included, or a custom one) that it should immediately return to the consumer, serialized to the appropriate format. If you simply want to return with a status code of 403 (which indicates "Not Allowed"), you could do this:
 
 ```cfs
-return createObject("component", "taffy.core.genericRepresentation").noData().withStatus(403);
+return createObject("component", "taffy.core.nativeJsonRepresentation").noData().withStatus(403);
 ```
 
 Alternately, you could indicate that they owe you money:
 
 ```cfs
-return createObject("component", "taffy.core.genericRepresentation").setData({error="Your account is past due. Please email accounts payable."}).withStatus(403);
+return createObject("component", "taffy.core.nativeJsonRepresentation").setData({error="Your account is past due. Please email accounts payable."}).withStatus(403);
 ```
 
 The options here are basically unlimited.
@@ -68,7 +69,9 @@ The options here are basically unlimited.
 
 Since the framework takes over the **onRequestStart** event of Application.cfc, it also exposes this methdod as a way for you to add logic to be executed when the event occurs. **requestStartEvent** is called by **onRequestStart** after the framework is re-initialized (if requested). Your Application.cfc **should NOT implement onRequestStart**, and should instead use **requestStartEvent**.
 
-<h3 id="registerMimeType">registerMimeType(string extension, string mimeType)</h3>
+<h3 id="registerMimeType"><em>registerMimeType(string extension, string mimeType)</em> (deprecated)</h3>
+
+**This method is deprecated. It will likely be removed in a future update. [Use metadata instead](/atuttle/Taffy/wiki/Configuration-via-Metadata).**
 
 **Use it inside:** [configureTaffy](#configureTaffy)<br/>
 **Parameters:**
@@ -87,7 +90,7 @@ Because the framework implements JSON by default, the JSON ("application/json") 
 
 * keyName (string) - Name of the url parameter that displays the dashboard. Default value is "dashboard".
 
-The dashboard currently displays a ColdFusion dump of your current Taffy configuration, and any cached resource location information, as well as a handy link to reload the API. I intend to add more information here over time. 
+The dashboard displays resources that your API is aware of, generates documentation about your API based on **hint** attributes, and contains a mock client to make testing your API easy.
 
 <h3 id="setDebugKey">setDebugKey(string keyName)</h3>
 
@@ -100,7 +103,9 @@ Sometimes it's useful to see ColdFusion's debug output in the results of your AP
 
 _If you do not change it, the default value is, "debug"._
 
-<h3 id="setDefaultMime">setDefaultMime(string DefaultMimeType)</h3>
+<h3 id="setDefaultMime"><em>setDefaultMime(string DefaultMimeType)</em> (deprecated)</h3>
+
+**This method is deprecated. It will likely be removed in a future update. [Use metadata instead](/atuttle/Taffy/wiki/Configuration-via-Metadata).**
 
 **Use it inside:** [configureTaffy](#configureTaffy)<br/>
 **Parameters:**
@@ -118,7 +123,7 @@ _If not implemented, the framework default mime type is JSON ("application/json"
 **Use it inside:** [configureTaffy](#configureTaffy)<br/>
 **Parameters:**
 
-* customClassDotPath (string) - Dot-notation path to the CFC to be used by default.
+* customClassDotPath (string) - Dot-notation path to the CFC to be used by default. Alternately, you can pass in a beanId and the class will be requested from the bean factory. This works with both the internal bean factory (your `/resources` folder) and if you are using an external bean factory.
 
 When you change the default Representation Class, all responses will use your custom default class, unless you specifically override that request, using the (optional) second parameter to the **[representationOf](#representationOf)** function.
 
@@ -150,7 +155,7 @@ Resource CFCs extend `taffy.core.resource`.  The following methods are available
 
 <h3 id="noData">noData()</h3>
 
-**Use it inside:** get, post, put, and delete methods inside your Resource CFCs.<br/>
+**Use it inside:** responder methods inside your Resource CFCs (e.g. get, put, post, delete - as well as head, options, etc).<br/>
 **Parameters:** _(none)_
 
 This method allows you to specify that there is no data to be returned for the current request. Generally, you would use it in conjunction with the **[withStatus](#withStatus)** method to set a specific return status for the request. For example, if the requested resource doesn't exist, you could return a 404 error like so:
@@ -161,7 +166,7 @@ return noData().withStatus(404);
 
 <h3 id="representationOf">representationOf(any data, [string customRepresentationClass])</h3>
 
-**Use it inside:** get, post, put, and delete methods inside your Resource CFCs.<br/>
+**Use it inside:** responder methods inside your Resource CFCs (e.g. get, put, post, delete - as well as head, options, etc).<br/>
 **Parameters:**
 
 * data (any) - The data to return to the consumer.
@@ -171,11 +176,11 @@ Data can be of any type, including complex data types like queries, structures, 
 
 <h3 id="withStatus">withStatus(numeric statusCode)</h3>
 
-**Use it inside:** get, post, put, and delete methods inside your Resource CFCs.<br/>
+**Use it inside:** responder methods inside your Resource CFCs (e.g. get, put, post, delete - as well as head, options, etc).<br/>
 **Parameters:**
 
 * statusCode (numeric) - the [HTTP Status Code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) to return to the consumer.
 
-This special method may _**only**_ be used in conjunction with **[noData](#noData)** or **[representationOf](#representationOf)**. It sets the HTTP Status Code of the return.
+This special method  _**requires**_ the use of either **[noData](#noData)** or **[representationOf](#representationOf)**. It sets the HTTP Status Code of the return. Additional use of **[withHeaders](#withHeaders)** optional.
 
 _If you do not specify a return status code, Taffy will always return status code 200 (OK) by default._
