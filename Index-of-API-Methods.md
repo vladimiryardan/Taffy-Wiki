@@ -15,6 +15,7 @@ This page is an alphabetical listing of all methods that Taffy exposes for you t
 * [Resource CFC Methods](#Resource_CFC_Methods)
   * [noData](#noData)
   * [representationOf](#representationOf)
+  * [withHeaders](#withHeaders)
   * [withStatus](#withStatus)
 
 <h2 id="Application_cfc_Methods">Application.cfc Methods</h2>
@@ -173,6 +174,15 @@ return noData().withStatus(404);
 * _optional_ customRepresentationClass (string) - Dot-notation path to a custom CFC that will serialize your results. Defaults to included generic serializer which supports JSON.
 
 Data can be of any type, including complex data types like queries, structures, and arrays, as long as the serializer knows how to serialize them. For more information on using a custom representation class, **see [[Using a custom Representation Class]]**.
+
+<h3 id="withHeaders">withHeaders(struct headerStruct)</h3>
+
+**Use it inside:** responder methods inside your Resource CFCs (e.g. get, put, post, delete - as well as head, options, etc).<br/>
+**Parameters:**
+
+* headerStruct (struct) - A structure whose keys are desired header names ("x-powered-by") and whose associated values are the values for the corresponding headers ("Taffy 1.1!").
+
+This special method  _**requires**_ the use of either **[noData](#noData)** or **[representationOf](#representationOf)**. It adds custom headers to the return. Additional use of **[withStatus](#withStatus)** optional.
 
 <h3 id="withStatus">withStatus(numeric statusCode)</h3>
 
