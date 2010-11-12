@@ -9,7 +9,7 @@ This page is an alphabetical listing of all methods that Taffy exposes for you t
   * [onTaffyRequest](#onTaffyRequest)
   * [requestStartEvent](#requestStartEvent)
   * [registerMimeType](#registerMimeType)
-  * [setBeanFactory](#setBeanFactory) **todo**
+  * [setBeanFactory](#setBeanFactory)
   * [setDashboardKey](#setDashboardKey)
   * [setDebugKey](#setDebugKey)
   * [setDefaultMime](#setDefaultMime)
@@ -112,6 +112,15 @@ Since the framework takes over the **onRequestStart** event of Application.cfc, 
 Each mime type that your API is capable of returning needs to be registered with the framework, and the **[configureTaffy](#configureTaffy)** method is the most efficient place to do so.
 
 Because the framework implements JSON by default, the JSON ("application/json") mime type is already registered, and you do not have to re-register it. (You can if you like, though. It won't hurt anything.)
+
+<h3 id="setBeanFactory">setBeanFactory(object beanFactory, \[string beanList\])</h3>
+**Use it inside:** [configureTaffy](#configureTaffy)<br/>
+**Parameters:**
+
+* beanFactory (object) - already instantiated and cached (e.g. in Application scope) object instance of your external bean factory.
+* beanList (string) - a comma-delimited list of bean Id's that the bean factory is aware of. Optional, and only necessary if the beanFactory does not implement `getBeanList()` _and is not ColdSpring_. Tight ColdSpring integration is baked in.
+
+While Taffy includes a very basic Bean Factory (used by default) and also has fairly tight integration with ColdSpring, other bean factories could be added. If your bean factory implements `getBeanList()`, then Taffy will use that to get a list of beans that the factory knows about. However, if it does not, then Taffy will allow you to provide the bean list as a string in the optional second argument.
 
 <h3 id="setDashboardKey">setDashboardKey(string keyName)</h3>
 
