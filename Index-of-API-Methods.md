@@ -23,21 +23,21 @@ The following methods are available in your Application.cfc:
 
 <h3 id="applicationStartEvent">applicationStartEvent()</h3>
 
-**Use it inside:** Application.cfc
+**Use it inside:** Application.cfc<br/>
 **Parameters:** _(none)_
 
 Since the framework takes over the **onApplicationStart** event of Application.cfc, it also exposes this methdod as a way for you to add logic to be executed when the event occurs. **applicationStartEvent** is called by **onApplicationStart** before the framework is initialized. Your Application.cfc **should NOT implement onApplicationStart**, and should instead use **applicationStartEvent**.
 
 <h3 id="configureTaffy">configureTaffy()</h3>
 
-**Use it inside:** Application.cfc
+**Use it inside:** Application.cfc<br/>
 **Parameters:** _(none)_
 
 This is a special method called by the framework during initialization to get your APIs configuration. You must implement this method in your Application.cfc for the framework to work correctly. All configuration methods should be used inside your implementation of **configureTaffy**, if you intend to use them.
 
 <h3 id="onTaffyRequest">onTaffyRequest(string verb, string cfc, struct requestArguments, string mimeExt)</h3>
 
-**Use it inside:** Application.cfc
+**Use it inside:** Application.cfc<br/>
 **Parameters:**
 
 * verb (string) - The HTTP request verb provided by the consumer
@@ -63,14 +63,14 @@ The options here are basically unlimited.
 
 <h3 id="requestStartEvent">requestStartEvent()</h3>
 
-**Use it inside:** Application.cfc
+**Use it inside:** Application.cfc<br/>
 **Parameters:** _(none)_
 
 Since the framework takes over the **onRequestStart** event of Application.cfc, it also exposes this methdod as a way for you to add logic to be executed when the event occurs. **requestStartEvent** is called by **onRequestStart** after the framework is re-initialized (if requested). Your Application.cfc **should NOT implement onRequestStart**, and should instead use **requestStartEvent**.
 
 <h3 id="registerMimeType">registerMimeType(string extension, string mimeType)</h3>
 
-**Use it inside:** [configureTaffy](#configureTaffy)
+**Use it inside:** [configureTaffy](#configureTaffy)<br/>
 **Parameters:**
 
 * extension (string) - The url-extension that will invoke this mime type. (e.g. "xml" or "json")
@@ -82,7 +82,7 @@ Because the framework implements JSON by default, the JSON ("application/json") 
 
 <h3 id="setDashboardKey">setDashboardKey(string keyName)</h3>
 
-**Use it inside:** [configureTaffy](#configureTaffy)
+**Use it inside:** [configureTaffy](#configureTaffy)<br/>
 **Parameters:**
 
 * keyName (string) - Name of the url parameter that displays the dashboard. Default value is "dashboard".
@@ -91,7 +91,7 @@ The dashboard currently displays a ColdFusion dump of your current Taffy configu
 
 <h3 id="setDebugKey">setDebugKey(string keyName)</h3>
 
-**Use it inside:** [configureTaffy](#configureTaffy)
+**Use it inside:** [configureTaffy](#configureTaffy)<br/>
 **Parameters:**
 
 * keyName (string) - Name of the url parameter that enables CF Debug Output. (e.g. "debug")
@@ -102,7 +102,7 @@ _If you do not change it, the default value is, "debug"._
 
 <h3 id="setDefaultMime">setDefaultMime(string DefaultMimeType)</h3>
 
-**Use it inside:** [configureTaffy](#configureTaffy)
+**Use it inside:** [configureTaffy](#configureTaffy)<br/>
 **Parameters:**
 
 * DefaultMimeType (string) - The mime type that should be returned when none is specified by the consumer. (e.g. "json")
@@ -115,7 +115,7 @@ _If not implemented, the framework default mime type is JSON ("application/json"
 
 <h3 id="setDefaultRepresentationClass">setDefaultRepresentationClass(string customClassDotPath)</h3>
 
-**Use it inside:** [configureTaffy](#configureTaffy)
+**Use it inside:** [configureTaffy](#configureTaffy)<br/>
 **Parameters:**
 
 * customClassDotPath (string) - Dot-notation path to the CFC to be used by default.
@@ -124,7 +124,7 @@ When you change the default Representation Class, all responses will use your cu
 
 <h3 id="setReloadKey">setReloadKey(string keyName)</h3>
 
-**Use it inside:** [configureTaffy](#configureTaffy)
+**Use it inside:** [configureTaffy](#configureTaffy)<br/>
 **Parameters:**
 
 * keyName (string) - Name of the url parameter that requests the framework to be reloaded. (e.g. "reload")
@@ -135,7 +135,7 @@ _If you do not change it, the default value is "reload"._
 
 <h3 id="setReloadPassword">setReloadPassword(string Password)</h3>
 
-**Use it inside:** [configureTaffy](#configureTaffy)
+**Use it inside:** [configureTaffy](#configureTaffy)<br/>
 **Parameters:**
 
 * keyName (string) - Accepted value of the url parameter that requests the framework to be reloaded. (e.g. "true")
@@ -150,7 +150,7 @@ Resource CFCs extend `taffy.core.resource`.  The following methods are available
 
 <h3 id="noData">noData()</h3>
 
-**Use it inside:** get, post, put, and delete methods inside your Resource CFCs.
+**Use it inside:** get, post, put, and delete methods inside your Resource CFCs.<br/>
 **Parameters:** _(none)_
 
 This method allows you to specify that there is no data to be returned for the current request. Generally, you would use it in conjunction with the **[withStatus](#withStatus)** method to set a specific return status for the request. For example, if the requested resource doesn't exist, you could return a 404 error like so:
@@ -161,7 +161,7 @@ return noData().withStatus(404);
 
 <h3 id="representationOf">representationOf(any data, [string customRepresentationClass])</h3>
 
-**Use it inside:** get, post, put, and delete methods inside your Resource CFCs.
+**Use it inside:** get, post, put, and delete methods inside your Resource CFCs.<br/>
 **Parameters:**
 
 * data (any) - The data to return to the consumer.
@@ -171,7 +171,7 @@ Data can be of any type, including complex data types like queries, structures, 
 
 <h3 id="withStatus">withStatus(numeric statusCode)</h3>
 
-**Use it inside:** get, post, put, and delete methods inside your Resource CFCs.
+**Use it inside:** get, post, put, and delete methods inside your Resource CFCs.<br/>
 **Parameters:**
 
 * statusCode (numeric) - the [HTTP Status Code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) to return to the consumer.
