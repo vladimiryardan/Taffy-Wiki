@@ -11,16 +11,16 @@ The **taffy:uri** property applies to the `<cfcomponent>` tag or the `component{
 
 * CFML:
 ```cfs
-<cfcomponent taffy:uri="/artist/{artistId}">
-</cfcomponent>
+	<cfcomponent taffy:uri="/artist/{artistId}">
+	</cfcomponent>
 ```
 
 * CFScript:
 ```cfs
-component 
-     taffy:uri="/artist/{artistId}"
-{
-}
+	component 
+	taffy:uri="/artist/{artistId}"
+	{
+	}
 ```
 &nbsp;
 <h4>Tokens</h4>
@@ -33,16 +33,16 @@ By convention, resources will automatically map the 4 primary HTTP REST verbs --
 
 * CFML:
 ```cfs
-<cffunction name="getUser" taffy:verb="get">
-    <cfargument name="userId" type="numeric" />
-</cffunction>
+	<cffunction name="getUser" taffy:verb="get">
+	    <cfargument name="userId" type="numeric" />
+	</cffunction>
 ```
 
 * CFScript:
 ```cfs
-function getUser( numeric userId ) taffy:verb="get"
-{
-}
+	function getUser( numeric userId ) taffy:verb="get"
+	{
+	}
 ```
 
 <h2 id="representation_metadata">In Representation Classes</h2>
@@ -55,15 +55,15 @@ By convention, the mime-types supported by your API are determined by the method
 
 * CFML:
 ```cfs
-<cffunction name="getAsJson" taffy:mime="application/json">
-</cffunction>
+	<cffunction name="getAsJson" taffy:mime="application/json">
+	</cffunction>
 ```
 
 * CFScript:
 ```cfs
-function getAsJson() taffy:mime="application/json"
-{
-}
+	function getAsJson() taffy:mime="application/json"
+	{
+	}
 ```
 
 <h3 id="taffy_default">taffy:default</h3>
@@ -72,20 +72,20 @@ When your API supports more than one data format (i.e. json and xml), you must s
 
 * CFML:
 ```cfs
-<cffunction name="getAsJson" taffy:mime="application/json" taffy:default="true">
-</cffunction>
+	<cffunction name="getAsJson" taffy:mime="application/json" taffy:default="true">
+	</cffunction>
 
-<cffunction name="getAsXml" taffy:mime="application/xml">
-</cffunction>
+	<cffunction name="getAsXml" taffy:mime="application/xml">
+	</cffunction>
 ```
 
 * CFScript:
 ```cfs
-function getAsJson() taffy:mime="application/json" taffy:default="true"
-{
-}
+	function getAsJson() taffy:mime="application/json" taffy:default="true"
+	{
+	}
 
-function getAsXml() taffy:mime="application/xml"
-{
-}
+	function getAsXml() taffy:mime="application/xml"
+	{
+	}
 ```
