@@ -3,9 +3,13 @@ This page is an alphabetical listing of all methods that Taffy exposes for you t
 * [Application.cfc Methods](#Application_cfc_Methods)
   * [applicationStartEvent](#applicationStartEvent)
   * [configureTaffy](#configureTaffy)
+  * [enableDashboard](#enableDashboard)
+  * [getPath](#getPath)
+  * [newRepresentation](#newRepresentation)
   * [onTaffyRequest](#onTaffyRequest)
   * [requestStartEvent](#requestStartEvent)
   * [registerMimeType](#registerMimeType)
+  * [setBeanFactory](#setBeanFactory) **todo**
   * [setDashboardKey](#setDashboardKey)
   * [setDebugKey](#setDebugKey)
   * [setDefaultMime](#setDefaultMime)
@@ -35,6 +39,31 @@ Since the framework takes over the **onApplicationStart** event of Application.c
 **Parameters:** _(none)_
 
 This is a special method called by the framework during initialization to get your APIs configuration. You must implement this method in your Application.cfc to override any framework setting defaults. All configuration methods should be used inside your implementation of **configureTaffy**, if you intend to use them.
+
+<h3 id="enableDashboard">enableDashboard(boolean enabled)</h3>
+
+**Use it inside:** [configureTaffy](#configureTaffy)<br/>
+**Parameters:**
+
+* enabled (boolean) - Whether or not Taffy will allow the dashboard to be displayed. If set to false, the [dashboard key](#setDashboardKey) is simply ignored.
+
+_Default value is TRUE._
+
+<h3 id="getPath">getPath()</h3>
+
+**Use it inside:** Application.cfc<br/>
+**Parameters:** _(none)_
+
+This method is provided as an extension point. On Adobe ColdFusion ("ACF") 9, installed in standard entire-server mode, no change should be necessary. However, if ACF is installed on another JEE app server (i.e. Tomcat, Glassfish, etc), or on JRun but using an EAR/WAR setup, then you may need to override this method to make Taffy work on your server. {link to additional wiki page to document each configuration here}.
+
+<h3 id="newRepresentation">newRepresentation(string class)</h3>
+
+**Use it inside:** [onTaffyRequest](#onTaffyRequest)<br/>
+**Parameters:**
+
+* class (string) - the dot-notation cfc path (or bean id if managing the class with a bean factory, including the built-in factory) for the representation class. Optional. Default value is the default representation class.
+
+Use this method inside onTaffyRequest when you want to abort the request with some specific message or data. Use the `setData` method on the returned representation class to put your data/message into it before returning it.
 
 <h3 id="onTaffyRequest">onTaffyRequest(string verb, string cfc, struct requestArguments, string mimeExt, struct headers)</h3>
 
