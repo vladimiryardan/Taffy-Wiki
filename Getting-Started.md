@@ -1,16 +1,18 @@
-This page shows how to implement a REST API using Taffy. For an index of documentation, see the [[Home]] page, and for a high level explanation of Taffy, see the [project homepage](http://atuttle.github.com/Taffy/). I have also recorded [a presentation I did for the Philadelphia ColdFusion User Group]() (coming soon), if you would like to watch that.
+>This page shows how to implement a REST API using Taffy. For an index of available documentation or for a high level explanation of Taffy, see the [[Home]] page.
 
-By and large, Taffy uses convention over configuration, but there are a few configuration details that can't be pragmatically solved with conventions. In those cases, configuration is needed, but minimal - and usually [accomplished with metadata](/atuttle/Taffy/wiki/Configuration-via-Metadata) to keep things simple and concise.
+For the most part, Taffy uses convention over configuration, but there are a few configuration details that can't be pragmatically solved with conventions. In those cases, configuration is needed, but minimal - and usually [accomplished with metadata](/atuttle/Taffy/wiki/Configuration-via-Metadata) to keep things simple and concise.
 
 # Step 0: Installing Taffy
 
-Currently, Taffy is only tested and supported on Adobe ColdFusion 9.0.1. Ultimately, I would like to support older versions of ColdFusion as well as Railo and OpenBD. For the time being, I've favored getting a release ready over testing against every possible engine.
+Currently, Taffy is only tested and supported on Adobe ColdFusion 7, 8, and 9. Ultimately, I would like to support Railo and OpenBD. However, for the time being, I've favored getting a release ready over testing against every possible engine.
 
-Simply unzip the **taffy** folder into your webroot. An application-specific mapping to a non-web-accessible folder is not sufficient; however a global mapping in your ColdFusion Administrator will work -- in which case you should map `/taffy` to the location of your unzipped **taffy** folder.
+Simply unzip the **taffy** folder into your web-root. An _application-specific mapping_ to a non-web-accessible folder is not sufficient; however a global mapping in your ColdFusion Administrator will work -- in which case you should map `/taffy` to the location of your unzipped **taffy** folder.
+
+Many of the examples below use the ColdFusion 9 script component syntax for its terseness, but this is not a requirement. If you are more comfortable with `<cf_tags>` then you are free to use them.
 
 # Step 1: Application.cfc
 
-Much like a [FW/1](http://fw1.riaforge.org/) application, Taffy implements a majority of its logic in Application.cfc, as a base class that the Application.cfc of your application will extend. At a minimum, your APIs Application.cfc needs the following:
+Much like a [FW/1](http://github.com/seancorfield/fw1/) application, Taffy implements a majority of its logic in Application.cfc, as a base class that the Application.cfc of your application will extend. At a minimum, your APIs Application.cfc needs the following:
 
 ```cfs
 component extends="taffy.core.api" {
@@ -29,7 +31,7 @@ component extends="taffy.core.api" {
 
 * Application.cfc extends `taffy.core.api`
 
-* DO NOT implement the `onApplicationStart`, `onRequestStart`, or `onRequest` methods; these are used by the framework. `applicationStartEvent` is called during `onApplicationStart`, and `requestStartEvent` is called during `onRequestStart`, if you need to add code to these event listeners.
+* DO NOT implement the `onApplicationStart`, `onRequestStart`, or `onRequest` methods; these are used by the framework. Your implementation of `applicationStartEvent` is called during `onApplicationStart`, and `requestStartEvent` is called during `onRequestStart`, if you need to add code to these event listeners.
 
 * **applicationStartEvent** method is the most appropriate place to set any application-specific variables (e.g. `Application.datasource`).
 
@@ -37,7 +39,7 @@ The [[Index of API Methods]] lists all methods, what they do, and where you can 
 
 # Step 2: Implement API Resources as CFCs
 
-Each Resource in your API (eg. Artists, Art) should be defined as its own CFC. In a Taffy API, **you implement Collections and Members as separate CFCs** (eg. `artistCollection.cfc` and `artistMember.cfc`). They won't be exposed by name via the framework, so you can name them whatever you like.
+Each Resource in your API (eg. Artists, Art) should be defined as its own CFC. In a Taffy API, **you implement Collections and Members as separate CFCs** (eg. `artistCollection.cfc` and `artistMember.cfc`). They won't be exposed by name via the framework, so you can name them whatever you like -- I just happen to like naming them foo**Collection** vs foo**Member** to make it easy to determine which CFC handles individual records (member) and which handles sets of records (collection).
 
 Here is an example resource implementation:
 
@@ -58,9 +60,9 @@ component
 
 * Each Resource CFC extends `taffy.core.resource`.
 
-* Each Resource CFC should implement _at least 1_ of 4 methods: **get**, **post**, **put**, and **delete**. As you may have guessed, these map directly to the HTTP verb used by the api consumer.<br/>
+* Each Resource CFC should implement _at least 1_ of 4 methods: **get**, **post**, **put**, and **delete**. As you may have guessed, these map directly to the HTTP verb used by the api consumer to make the request.<br/>
   * If the consumer uses the PUT verb, it runs the PUT method in the corresponding CFC. <br/><br/>
-  * Since the POST, PUT, and DELETE methods are not implemented in the example above, the POST, PUT, and DELETE verbs will be refused (with HTTP status code 405 Not Allowed) for the corresponding resource.
+  * Since the POST, PUT, and DELETE methods are not implemented in the example above, the POST, PUT, and DELETE verbs will be refused (with HTTP status code `405 Not Allowed`) for the corresponding resource.
 
 * **Tokens** from the component metadata attribute `taffy:uri`, defined as `{token_name}` (including the curly braces, see example above) will be extracted from the URI and passed by name to the requested method. In addition, all query string parameters (except those defined for framework specific things like debugging and reloading) will also be included in the argument collection sent to the method. <br/><br/>For example: `GET /artist/44/art?city=Philadelphia` will result in the GET method being called on the _ART collection_, with the arguments: `{ artistId: 44, city: "Philadelphia" }`.<br/><br/>The `artistId` parameter is defined by the `taffy:uri` attribute **(set at the component level, not the function level)**, and the `city` parameter is defined as an optional argument to the function, and was provided in the query string.
 
