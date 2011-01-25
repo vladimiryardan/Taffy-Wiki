@@ -87,7 +87,9 @@ return createObject("component", "taffy.core.nativeJsonRepresentation").noData()
 Alternately, you could indicate that they owe you money:
 
 ```cfs
-return createObject("component", "taffy.core.nativeJsonRepresentation").setData({error="Your account is past due. Please email accounts payable."}).withStatus(403);
+return createObject("component", "taffy.core.nativeJsonRepresentation")
+       .setData({error="Your account is past due. Please email accounts payable."})
+       .withStatus(403);
 ```
 
 The options here are basically unlimited.
