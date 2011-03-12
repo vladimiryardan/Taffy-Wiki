@@ -21,6 +21,7 @@
   * Support for binary results, such as image streaming, ala [PlaceKitten](http://www.placekitten.com).
   * [\#18](https://github.com/atuttle/taffy/issues/18) - Overriding the global representation class at the resource/method level can cause errors
   * Tested and supported on Railo and OpenBD
+  * Fix issues on startup if Application context is shared with another app & Taffy doesn't get properly initialized.
   * Improvements to dashboard, testing, and auto-generated documentation
 
 ## Version 1.0
