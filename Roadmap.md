@@ -13,7 +13,7 @@
     * Added three more example implementations to the examples folder
     * [\#21](https://github.com/atuttle/taffy/issues/21) - Added global custom headers 
     * [\#20](https://github.com/atuttle/taffy/issues/20) - Added setting for cross-domain resource sharing
-    * [\#28](https://github.com/atuttle/taffy/issues/28) - Bean factory throws an exception when requesting a non-existant bean - [Brian Panulla](https://github.com/bpanulla)
+    * [\#28](https://github.com/atuttle/taffy/issues/28) - Bean factory now throws an exception when requesting a non-existant bean - [Brian Panulla](https://github.com/bpanulla)
     * [\#29](https://github.com/atuttle/taffy/issues/29) - HTTP Method Tunneling  - [Brian Panulla](https://github.com/bpanulla)
   * Bugs fixed:
     * [\#19](https://github.com/atuttle/taffy/issues/19) - JSON input data not properly detected & deserialized into arguments
