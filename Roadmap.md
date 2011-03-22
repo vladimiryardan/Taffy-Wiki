@@ -16,6 +16,7 @@
   * Bugs fixed:
     * [\#19](https://github.com/atuttle/taffy/issues/19) - JSON input data not properly detected & deserialized into arguments
     * [\#23](https://github.com/atuttle/taffy/issues/24) - Various issues with ColdSpring integration - [Brian Panulla](https://github.com/bpanulla)
+    * Added example of rate limiting using onTaffyRequest
 ### Planned
   * Update documentation
   * Support for binary results, such as image streaming, ala [PlaceKitten](http://www.placekitten.com).
