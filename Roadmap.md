@@ -1,3 +1,5 @@
+This page only covers future releases. For the history of previous releases, see the [[Releases]] page.
+
 ## Version 1.1
 **Target Release Date:** May 13, 2011 (To be announced at [my cfObjective presentation](http://lanyrd.com/2011/cfobjective/scfzb/))
 
@@ -23,13 +25,16 @@
 ### Planned
 
 * Update documentation
-* Auto-generated public-facing documentation at `?docs`
 * Support for binary results, such as image streaming, ala [PlaceKitten](http://www.placekitten.com).
 * [\#18](https://github.com/atuttle/taffy/issues/18) - Overriding the global representation class at the resource/method level can cause errors
 * Update test suite to use Tags instead of script so it can be run on any CFML engine (What good are tests if you can't use them to test?)
 * Tested and supported on Railo and OpenBD
 * Fix issues on startup if Application context is shared with another app & Taffy doesn't get properly initialized.
+
+## Version 1.2
+**Target Release Date:** TBD
+
+### Planned
+* Auto-generated public-facing documentation at `?docs`
 * Improvements to dashboard, testing, and auto-generated documentation
 
-## Version 1.0
-**Released:** [August 23, 2010](http://fusiongrokker.com/post/taffy-a-restful-framework-for-coldfusion)
