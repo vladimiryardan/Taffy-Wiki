@@ -12,7 +12,7 @@ This page only covers future releases. For the history of previous releases, see
   * Moved mime-type declaration ("this api supports json,xml,etc") into representation class metadata, instead of api-level configuration.
   * Added a set of Eclipse/CFBuilder snippets to help speed Taffy development (it wasn't fast enough already?!)
   * Added ability to manage representation class with internal/external bean factory, as well as resolving dependencies using the bean factory.
-  * Added three more example implementations to the examples folder
+  * Added several more example implementations to the examples folder
   * [\#21](https://github.com/atuttle/taffy/issues/21) - Added global custom headers 
   * [\#20](https://github.com/atuttle/taffy/issues/20) - Added setting for cross-domain resource sharing
   * [\#28](https://github.com/atuttle/taffy/issues/28) - Bean factory now throws an exception when requesting a non-existant bean - [Brian Panulla](https://github.com/bpanulla)
