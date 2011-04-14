@@ -37,4 +37,4 @@ This page only covers future releases. For the history of previous releases, see
 ### Planned
 * Auto-generated public-facing documentation at `?docs`
 * Improvements to dashboard, testing, and auto-generated documentation
-
+* Pre-return hook for caching
