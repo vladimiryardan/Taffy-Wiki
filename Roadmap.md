@@ -26,15 +26,15 @@ This page only covers future releases. For the history of previous releases, see
 ### Planned
 
 * Update documentation
-* [\#18](https://github.com/atuttle/taffy/issues/18) - Overriding the global representation class at the resource/method level can cause errors
-* Update test suite to use Tags instead of script so it can be run on any CFML engine (What good are tests if you can't use them to test?)
-* Tested and supported on Railo and OpenBD
 * Fix issues on startup if Application context is shared with another app & Taffy doesn't get properly initialized.
+* Update test suite to use Tags instead of script so it can be run on any CFML engine (What good are tests if you can't use them to test?)
+ * Tested and supported on Railo and OpenBD
 
 ## Version 1.2
 **Target Release Date:** TBD
 
 ### Planned
+* [\#18](https://github.com/atuttle/taffy/issues/18) - Overriding the global representation class at the resource/method level can cause errors
 * Auto-generated public-facing documentation at `?docs`
 * Improvements to dashboard, testing, and auto-generated documentation
 * Pre-return hook for caching
