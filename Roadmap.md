@@ -22,10 +22,14 @@ This page only covers future releases. For the history of previous releases, see
 * Bugs fixed:
   * [\#19](https://github.com/atuttle/taffy/issues/19) - JSON input data not properly detected & deserialized into arguments
   * [\#23](https://github.com/atuttle/taffy/issues/24) - Various issues with ColdSpring integration - [Brian Panulla](https://github.com/bpanulla)
+  * [\#31](https://github.com/atuttle/taffy/issues/31) - Error failsafe to display general exceptions in an api-friendly manner.
+  * [\#32](https://github.com/atuttle/taffy/issues/32) - Issues with periods in token values (such as email addresses or IP addresses).
+  * [\#33](https://github.com/atuttle/taffy/issues/33) - Error when attempting to redirect from api root to dashboard on internal web server (JRun)
+  * [\#34](https://github.com/atuttle/taffy/issues/34) - Exception in error handling code for duplicate URI patterns on CF8 and earlier.
+* Updated documentation
 
 ### Planned
 
-* Update documentation
 * Fix issues on startup if Application context is shared with another app & Taffy doesn't get properly initialized.
 * Update test suite to use Tags instead of script so it can be run on any CFML engine (What good are tests if you can't use them to test?)
  * Tested and supported on Railo and OpenBD
