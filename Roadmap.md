@@ -38,3 +38,4 @@ This page only covers future releases. For the history of previous releases, see
 * Auto-generated public-facing documentation at `?docs`
 * Improvements to dashboard, testing, and auto-generated documentation
 * Pre-return hook for caching
+* Extensibility to support custom input formats (in addition to form fields, url-encoded, and json)
