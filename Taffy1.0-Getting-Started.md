@@ -1,6 +1,6 @@
 >This page shows how to implement a REST API using Taffy. For an index of available documentation or for a high level explanation of Taffy, see the [[Home]] page.
 
-For the most part, Taffy uses convention over configuration, but there are a few configuration details that can't be pragmatically solved with conventions. In those cases, configuration is needed, but minimal - and usually [accomplished with metadata](/atuttle/Taffy/wiki/Configuration-via-Metadata) to keep things simple and concise.
+For the most part, Taffy uses convention over configuration, but there are a few configuration details that can't be pragmatically solved with conventions. In those cases, configuration is needed, but minimal - and usually [accomplished with metadata](/atuttle/Taffy/wiki/Taffy1.0-Configuration-via-Metadata) to keep things simple and concise.
 
 # Step 0: Installing Taffy
 
@@ -35,7 +35,7 @@ component extends="taffy.core.api" {
 
 * **applicationStartEvent** method is the most appropriate place to set any application-specific variables (e.g. `Application.datasource`).
 
-The [[Index of API Methods]] lists all methods, what they do, and where you can use them.
+The [[Taffy1.0 Index of API Methods]] lists all methods, what they do, and where you can use them.
 
 # Step 2: Implement API Resources as CFCs
 
@@ -48,7 +48,7 @@ Here is an example resource implementation:
 ```cfs
 component 
 	extends="taffy.core.resource" 
-	taffy:uri="/artists/{artistId}/art"
+	taffy_uri="/artists/{artistId}/art"
 {
 	public function get(numeric artistId, string city = ""){
 		//query the database for matches, making use of optional parameter "city"
@@ -58,6 +58,8 @@ component
 }
 ```
 
+>Note: The namespacing of Taffy's metadata attributes, such as `taffy_uri` is supported using two formats: underscores ("taffy_uri"), and colons ("taffy:uri"). The latter is preferred, but not supported in CF9.01 script component syntax, which is why the former was added.
+
 * Each Resource CFC extends `taffy.core.resource`.
 
 * Each Resource CFC should implement _at least 1_ of 4 methods: **get**, **post**, **put**, and **delete**. As you may have guessed, these map directly to the HTTP verb used by the api consumer to make the request.<br/>
@@ -66,9 +68,9 @@ component
 
 * **Tokens** from the component metadata attribute `taffy:uri`, defined as `{token_name}` (including the curly braces, see example above) will be extracted from the URI and passed by name to the requested method. In addition, all query string parameters (except those defined for framework specific things like debugging and reloading) will also be included in the argument collection sent to the method. <br/><br/>For example: `GET /artist/44/art?city=Philadelphia` will result in the GET method being called on the _ART collection_, with the arguments: `{ artistId: 44, city: "Philadelphia" }`.<br/><br/>The `artistId` parameter is defined by the `taffy:uri` attribute **(set at the component level, not the function level)**, and the `city` parameter is defined as an optional argument to the function, and was provided in the query string.
 
-* The `representationOf` method -- a special method provided by the `taffy.core.resource` parent class -- creates a new object instance capable of serializing your data into the appropriate format. A class capable of serializing as JSON using ColdFusion's native serialization functionality is included with the framework and used by default. To use a custom representation class on a per-request basis, pass the dot-notation CFC path (or bean id; more on this in [[Bean factories]]) of your custom representation object as the (optional) 2nd argument to the `representationOf` method. You can also override the global default representation class by using [setDefaultRepresentationClass](/atuttle/Taffy/wiki/Index-of-API-Methods#setDefaultRepresentationClass). See [[Using a Custom Representation Class]] for more details on that.<br/><br/>
-  * In some cases you might not want to return any data, a status code is sufficient. For this, the [noData](/atuttle/Taffy/wiki/index-of-api-methods#noData) method is available.<br/><br/>
-  * With either **representationOf** or **noData**, you may optionally use the [withStatus](/atuttle/Taffy/wiki/index-of-api-methods#withStatus) method to set the HTTP status code. If you do not include it, a default status of 200 will be returned. You should familiarize yourself with [[Common API HTTP Status Codes]].
+* The `representationOf` method -- a special method provided by the `taffy.core.resource` parent class -- creates a new object instance capable of serializing your data into the appropriate format. A class capable of serializing as JSON using ColdFusion's native serialization functionality is included with the framework and used by default. To use a custom representation class on a per-request basis, pass the dot-notation CFC path (or bean id; more on this in [[Bean factories]]) of your custom representation object as the (optional) 2nd argument to the `representationOf` method. You can also override the global default representation class by using [setDefaultRepresentationClass](/atuttle/Taffy/wiki/Taffy1.0-Index-of-API-Methods). See [[Using a Custom Representation Class]] for more details on that.<br/><br/>
+  * In some cases you might not want to return any data, a status code is sufficient. For this, the [noData](/atuttle/Taffy/wiki/Taffy1.0-Index-of-API-Methods) method is available.<br/><br/>
+  * With either **representationOf** or **noData**, you may optionally use the [withStatus](/atuttle/Taffy/wiki/Taffy1.0-Index-of-API-Methods) method to set the HTTP status code. If you do not include it, a default status of 200 will be returned. You should familiarize yourself with [[Common API HTTP Status Codes]].
 
 # Step 3: Accessing Your API
 
