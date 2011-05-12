@@ -6,7 +6,7 @@ Implementing an API using Taffy requires only a couple of CFCs and can be done i
 
 There is also an [[Index of API Methods]] that documents everything that you can do with Taffy, and everything that Taffy does for you.
 
-## Why use Taffy instead of {another front-controller framework}?
+## Why use Taffy instead of another front-controller framework?
 
 **Isn't Taffy just a front-controller ("MVC") framework? Why shouldn't I just use Fusebox / Mach-ii / Model-Glue / etc and some URL rewriting?**
 
@@ -14,8 +14,12 @@ Yes, Taffy is _just another front-controller framework_ for ColdFusion. And yes,
 
 First of all, it's designed specifically for building REST web services. There is a subset of core HTTP functionality that is specific to REST that most MVC frameworks don't expose, but Taffy does. There is also no need for a controller because of the simplified process that Taffy takes: a URI + a Verb maps to a specific function, which gets invoked, and its return value is serialized into the requested format before being returned to the client. 
 
-Secondly, this isn't your mom's SES URL formatting. Most MVC frameworks take the simple way out and encode `?name=foo` as `/name/foo`. Instead, with Taffy, you define that `/artist/{artistId}` represents a specific artist, and when the consumer requests `/artist/17`, your **artist** lookup method is passed an argument collection with: `{ artistId: 17 }`. **Specifically:** The string "artistId" is not visible anywhere in the URL.
+Secondly, this isn't your mom's SES URL formatting. Most MVC frameworks take the simple way out and encode `?name=foo` as `/name/foo`. Instead, with Taffy, you define that `/person/{name}` represents a specific person, and when the consumer requests `/person/john-smith`, your **person** lookup method is passed the argument collection: `{ name: "john-smith" }`. **Specifically:** The string "name" is not visible anywhere in the URL.
 
 You _could_ do something similar with another framework and URL rewriting, but defining and maintaining those rewriting rules would be annoying. I wouldn't do it, but you're free to try.
 
 I think that if you give Taffy a try, you'll enjoy its simplicity.
+
+## Looking for the old docs?
+
+The current release of Taffy is **version 1.1** and unless otherwise noted, the documentation is specific to that version or general enough to apply to all versions. For documentation specific to Taffy 1.0, see the [[Taffy 1.0 Docs]] index.
