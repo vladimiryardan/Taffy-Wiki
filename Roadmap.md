@@ -7,6 +7,7 @@ This page only covers future releases. For the history of previous releases, see
 
 * New features:
   * Extensive test suite added - helpful for contributors to know they haven't broken anything
+    * Update test suite to use Tags instead of script so it can be run on any CFML engine (What good are tests if you can't use them to test?)
   * Added support for HTTP "HEAD" verb
   * Added ability to add custom headers to a response
   * Moved mime-type declaration ("this api supports json,xml,etc") into representation class metadata, instead of api-level configuration.
@@ -31,8 +32,7 @@ This page only covers future releases. For the history of previous releases, see
 ### Planned
 
 * Fix issues on startup if Application context is shared with another app & Taffy doesn't get properly initialized.
-* Update test suite to use Tags instead of script so it can be run on any CFML engine (What good are tests if you can't use them to test?)
- * Tested and supported on Railo and OpenBD
+* Tested and supported on Railo and OpenBD
 
 ## Version 1.2
 **Target Release Date:** TBD
@@ -42,3 +42,4 @@ This page only covers future releases. For the history of previous releases, see
 * Auto-generated public-facing documentation at `?docs`
 * Improvements to dashboard, testing, and auto-generated documentation
 * Pre-return hook for caching
+* Helper methods for http basic-auth

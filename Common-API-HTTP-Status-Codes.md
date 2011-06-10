@@ -18,6 +18,7 @@ HTTP Status Codes are a fundamental concept of REST and the web in general. You 
 * 401 Unauthorized -- You need to identify yourself before the request will be able to continue
 * 403 Forbidden -- You have been identified but do not have permission to access this resource or run the requested action
 * 404 Not Found -- The requested resource does not exist
+* 405 Not Allowed -- The requested verb is not allowed for this resource
 
 ## 5xx: Server Error
 

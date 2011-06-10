@@ -23,3 +23,31 @@ See the [official documentation](http://www.isapirewrite.com/docs/) for more inf
 ```apache
     ?
 ```
+
+## IIS7 web.config
+
+See the [official documentation](????????) for more information.
+
+^--- fix docs url
+
+
+
+
+
+
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <rewrite>
+            <rules>
+                <rule>
+                    <match url="^api/(.*)$" />
+                    <action type="Rewrite" url="index.cfm/{R:1}" />
+                </rule>
+            </rules>
+        </rewrite>
+    </system.webServer>
+</configuration>
+```
