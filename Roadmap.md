@@ -35,6 +35,7 @@ This page only covers future releases. For the history of previous releases, see
 
 ### Planned
 * [\#18](https://github.com/atuttle/taffy/issues/18) - Overriding the global representation class at the resource/method level can cause errors
+* [\#48](https://github.com/atuttle/taffy/issues/48) - Allow resources to be organized into subfolders
 * Auto-generated public-facing documentation at `?docs`
 * Improvements to dashboard, testing, and auto-generated documentation
 * Pre-return hook for caching
