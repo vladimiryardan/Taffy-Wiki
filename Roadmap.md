@@ -1,7 +1,7 @@
 This page only covers future releases. For the history of previous releases, see the [[Releases]] page.
 
 ## Version 1.1
-**Target Release Date:** May 13, 2011 (To be announced at [my cfObjective presentation](http://lanyrd.com/2011/cfobjective/scfzb/))
+**Target Release Date:** ?? ??, 2011
 
 ### Completed
 
