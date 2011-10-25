@@ -13,8 +13,10 @@ See the [official documentation](http://httpd.apache.org/docs/2.2/mod/mod_rewrit
 See the [official documentation](http://cheeso.members.winisp.net/Iirf21Help/frames.htm) for more information.
 
 ```apache
-    RewriteRule ^/api/(.*)$ /api/index.cfm/$1
+    RewriteRule ^/api/(.*)$ /\api/index.cfm/$1
 ```
+
+>*Note:* As far as I can tell, the backslash in the 2nd half of the rule ("\api") SHOULD NOT be necessary, but I've seen more than one report that someone's rule didn't work without it, but did after adding it. I don't get it, but I'm documenting it here for your benefit!
 
 ## ISAPI Rewrite (Helicon)
 
@@ -24,6 +26,7 @@ See the [official documentation](http://www.isapirewrite.com/docs/) for more inf
     ?
 ```
 
+> *Be awesome:* Contribute to the wiki and document what this syntax should be!
 
 ## IIS7 web.config
 
