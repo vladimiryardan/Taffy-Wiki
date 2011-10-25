@@ -1,6 +1,6 @@
 # Taffy 1.0 Documentation
 
-These pages are specific to Taffy 1.0:
+These pages are specific to [Taffy 1.0](https://github.com/atuttle/Taffy/tags):
 
 * [[Taffy1.0 Bean Factories]]
 * [[Taffy1.0 Configuration via Metadata]]

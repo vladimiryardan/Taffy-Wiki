@@ -17,7 +17,7 @@ The **taffy:uri** property applies to the `<cfcomponent>` tag or the `component{
 * CFScript:
 ```cfs
 	component 
-	taffy_uri="/artist/{artistId}"
+	taffy\_uri="/artist/{artistId}"
 	{
 	}
 ```
@@ -45,7 +45,7 @@ By convention, resources will automatically map the 4 primary HTTP REST verbs --
 
 * CFScript:
 ```cfs
-	function getUser( numeric userId ) taffy_verb="get"
+	function getUser( numeric userId ) taffy\_verb="get"
 	{
 	}
 ```
@@ -66,7 +66,7 @@ By convention, the mime-types supported by your API are determined by the method
 
 * CFScript:
 ```cfs
-	function getAsJson() taffy_mime="application/json"
+	function getAsJson() taffy\_mime="application/json"
 	{
 	}
 ```

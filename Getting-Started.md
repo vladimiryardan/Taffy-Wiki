@@ -1,20 +1,20 @@
->This page gives a brief overview of implementing a REST API using Taffy. For an index of available documentation or for a high level explanation of Taffy, see the [[Home]] page. For in-depth documentation on all available methods, see the [[Index of API Methods]].
+> This page gives a brief overview of implementing a REST API using Taffy. For an index of available documentation or for a high level explanation of Taffy, see the [[Home]] page. For in-depth documentation on all available methods, see the [[Index of API Methods]].
 
 **Like videos more than reading?** I presented about REST and Taffy, covering the basics of Taffy and a few more advanced examples at the 2011 [cfObjective](http://www.cfobjective.com) conference. [Watch the recording and get my slides here](http://fusiongrokker.com/post/my-cfobjective-2011-slides-notes).
 
-For the most part, Taffy uses convention over configuration, but there are a few configuration details that can't be pragmatically solved with conventions. In those cases, configuration kept to a minimum [using metadata](/atuttle/Taffy/wiki/Configuration-via-Metadata) where possible.
+For the most part, Taffy uses convention over configuration, but there are a few configuration details that can't be pragmatically solved with conventions. In those cases, configuration kept to a minimum [using metadata](/atuttle/Taffy/wiki/Configuration-via-Metadata) wherever possible.
 
 # Step 0: Installing Taffy
 
-Taffy is tested and supported on Adobe ColdFusion 7, 8, and 9, Railo 3.1, and OpenBD x.x.
+Taffy is tested and supported on Adobe ColdFusion 7, 8, and 9. Hopefully, Railo 3.3 support will be added soon.
 
-Simply unzip the **taffy** folder into your web-root. An _application-specific mapping_ to a non-web-accessible folder is _**not sufficient**_; however a global mapping in your ColdFusion (Railo/OpenBD) Administrator will work -- in which case you should map `/taffy` to the location of your unzipped **taffy** folder.
+Simply unzip the **taffy** folder into your web-root. An _application-specific mapping_ to a non-web-accessible folder is _**not sufficient**_; however a global mapping in your ColdFusion Administrator will work -- in which case you should map `/taffy` to the location of your unzipped **taffy** folder.
 
-The code examples below use the ColdFusion 9 script component syntax for its terseness, but this is not a requirement. If you are more comfortable with `<cfml tags>` then you are free to use them.
+The code examples below use the ColdFusion 9 script component syntax for its terseness, but this is not a requirement. If you are more comfortable with `<cfml tags>` then you are free to use them instead.
 
 # Step 1: Application.cfc
 
-Much like a [FW/1](http://github.com/seancorfield/fw1/) application, Taffy implements a majority of its logic in Application.cfc, as a base class that the Application.cfc of your application will extend. At a minimum, your API's Application.cfc needs the following:
+Much like a [FW/1](http://github.com/seancorfield/fw1/) application, Taffy implements a majority of its logic in Application.cfc, as a base class that the Application.cfc of your API will extend. At a minimum, your API's Application.cfc needs the following:
 
 ```cfs
 component 
@@ -37,7 +37,9 @@ extends="taffy.core.api"
 }
 ```
 
-* Application.cfc extends `taffy.core.api` -- this is the core functionality of the framework.
+**What's going on here?**
+
+* Application.cfc extends `taffy.core.api` -- this is most of what makes Taffy work.
 
 * It is _strongly recommended that you **DO NOT**_ implement the `onApplicationStart`, `onRequestStart`, `onRequest`, or `onError` methods; these are used by the framework. If you choose to do so, you should carefully consider the placement of `super.onApplicationStart()`/`super.onRequestStart()`/`super.onRequest()` in your overridden version. Alternatively, Taffy will call `applicationStartEvent` during `onApplicationStart`, and `requestStartEvent` during `onRequestStart`, if you need to add code to these event listeners. The same is true for `onError`, except that there is no pre-determined method to override - you should override `onError` and if necessary, call `super.onError()`.
 
@@ -54,17 +56,36 @@ Here is an example resource implementation:
 ```cfs
 component 
 extends="taffy.core.resource" 
-taffy_uri="/product/{productId}/comments"
+taffy_uri="/people"
 {
-	public function get(numeric productId, string color = ""){
-		//query the database for matches, making use of optional parameter "color"
+	public function get(string eyeColor = ""){
+		//query the database for matches, making use of optional parameter "eyeColor" if provided
 		//then...
-		return representationOf(queryObject).withStatus(200);
+		return representationOf(someCollectionObject).withStatus(200); //collection might be query, array, etc
 	}
 }
 ```
 
->Note: The namespacing of Taffy's metadata attributes, such as `taffy_uri` is supported using two formats: underscores ("taffy_uri"), and colons ("taffy:uri"). The latter is my preferred style, but not supported in CF9.01 script component syntax \([ColdFusion Bug #86749](http://cfbugs.adobe.com/cfbugreport/flexbugui/cfbugtracker/main.html#bugId=86749)\), which is why the former was added. However, if you're writing your components with tags, the colon-syntax is supported.
+This resource will respond for `http://example.com/api/people`, as well as `http://example.com/api/people?eyeColor=green`. When the query string parameters are provided, they will be passed to the function by name.
+
+And here's a similar implementation of a member for the same data type (person):
+
+**personMember.cfc:**
+
+```cfs
+component 
+extends="taffy.core.resource" 
+taffy_uri="/people/{personName}"
+{
+	public function get(string personName){
+		//find the requested person, by name
+		//then...
+		return representationOf(someMemberObject).withStatus(200); //member might be a structure, ORM entity, etc
+	}
+}
+```
+
+This resource will respond for `http://example.com/api/people/john-smith`. For a member GET, the identifying information --name, in this case-- is usually unique (enforced by your database indexes and app logic), so there is rarely a reason to include query string parameters as optional arguments. That said, it is supported.
 
 * Every Resource CFC -- both member and collection types -- extend `taffy.core.resource`.
 
@@ -80,8 +101,12 @@ As you may have guessed, these map directly to the HTTP verb used by the API con
 * **Tokens** from the component metadata attribute `taffy:uri` (or `taffy_uri`), defined as `{token_name}` (including the curly braces, see example above) will be extracted from the URI and passed by name to the requested method. In addition, all query string parameters (except those defined for framework specific things like debugging and reloading) will also be included in the argument collection sent to the method. <br/><br/>For example: `GET /product/44?color=Blue` will result in the GET method being called on the _**Product** collection_, with the arguments: `{ productId: 44, color: "Blue" }`.<br/><br/>The `productId` parameter is defined by the `taffy:uri` attribute **(set at the component level, not the function level)**, and the `color` parameter is defined as an optional argument to the function, and was provided in the query string. It is not possible to put optional parameters in the URI -- they need to be in the query string.
 
 * The `representationOf` method -- a special method provided by the `taffy.core.resource` parent class -- creates a new object instance capable of serializing your data into the appropriate format. A class capable of serializing as JSON using ColdFusion's native serialization functionality is included with the framework and used by default. To use a custom representation class on a per-request basis, pass the dot-notation CFC path (or bean id; more on this in [[Bean Factories]]) of your custom representation object as the (optional) 2nd argument to the `representationOf` method. You can also override the global default representation class by using [setDefaultRepresentationClass](/atuttle/Taffy/wiki/Index-of-API-Methods). See [[Using a Custom Representation Class]] for more details on that.<br/><br/>
-  * In some cases, you might not want to return any data and a status code is sufficient (for example, indicating a successful delete). For this, the [noData](/atuttle/Taffy/wiki/Index-of-API-Methods) method is available.<br/><br/>
+  * In some cases, you might not want to return any data and a status code is sufficient (for example, indicating a successful delete). In this case, use [noData\(\)](/atuttle/Taffy/wiki/Index-of-API-Methods) instead of `representationOf()`.<br/><br/>
   * With either **representationOf** or **noData**, you may optionally use the [withStatus](/atuttle/Taffy/wiki/Index-of-API-Methods) method to set the HTTP status code, and/or the [withHeaders](/atuttle/Taffy/wiki/Index-of-API-Methods) method to add additional headers to the response. If you do not include `withStatus(...)`, a default status of 200 will be returned. You should familiarize yourself with [[Common API HTTP Status Codes]].
+
+## A quick Aside
+
+**Note:** The namespacing of Taffy's metadata attributes, such as `taffy_uri` is supported using two formats: underscores ("taffy_uri"), and colons ("taffy:uri"). The latter is my preferred style, but not supported in CF9.01 script component syntax \([ColdFusion Bug #86749](http://cfbugs.adobe.com/cfbugreport/flexbugui/cfbugtracker/main.html#bugId=86749)\), which is why the former was added. However, if you're writing your components with tags, the colon-syntax is supported.
 
 # Step 3: Accessing Your API
 

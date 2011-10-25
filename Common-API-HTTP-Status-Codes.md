@@ -2,7 +2,7 @@
 
 HTTP Status Codes are a fundamental concept of REST and the web in general. You should familiarize yourself with [all of them](http://en.wikipedia.org/wiki/List_of_HTTP_Status_Codes), but those listed here are every-day codes that you should probably commit to memory.
 
-## 2xx:Success
+## 2xx: Success
 
 * 200 OK -- Everything is fine, I'm returning what you asked for.
 * 201 Created -- I've created the resource you submitted
