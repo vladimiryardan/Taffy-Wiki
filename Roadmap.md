@@ -32,12 +32,11 @@ This page only covers future releases. For the history of previous releases, see
 * Updated documentation
 
 ### Planned
-
 * Fix issues on startup if Application context is shared with another app & Taffy doesn't get properly initialized.
-* Tested and supported on Railo and OpenBD
 
 ## Version 1.2
 **Target Release Date:** TBD
+* Tested and supported on Railo and OpenBD
 
 ### Planned
 * [\#18](https://github.com/atuttle/taffy/issues/18) - Overriding the global representation class at the resource/method level can cause errors
