@@ -24,17 +24,10 @@ See the [official documentation](http://www.isapirewrite.com/docs/) for more inf
     ?
 ```
 
+
 ## IIS7 web.config
 
-See the [official documentation](????????) for more information.
-
-^--- fix docs url
-
-
-
-
-
-
+See the [official documentation](http://www.iis.net/download/urlrewrite) for more information.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

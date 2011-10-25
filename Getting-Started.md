@@ -1,12 +1,6 @@
 >This page gives a brief overview of implementing a REST API using Taffy. For an index of available documentation or for a high level explanation of Taffy, see the [[Home]] page. For in-depth documentation on all available methods, see the [[Index of API Methods]].
 
-**Like videos more than reading?** I presented about REST and Taffy, covering the basics of Taffy and a few more advanced examples at the 2011 [cfObjective](http://www.cfobjective.com) conference. [Watch the recording and get my slides here](???????).
-
-^------ fix link
-
-
-
-
+**Like videos more than reading?** I presented about REST and Taffy, covering the basics of Taffy and a few more advanced examples at the 2011 [cfObjective](http://www.cfobjective.com) conference. [Watch the recording and get my slides here](http://fusiongrokker.com/post/my-cfobjective-2011-slides-notes).
 
 For the most part, Taffy uses convention over configuration, but there are a few configuration details that can't be pragmatically solved with conventions. In those cases, configuration kept to a minimum [using metadata](/atuttle/Taffy/wiki/Configuration-via-Metadata) where possible.
 
@@ -70,15 +64,7 @@ taffy_uri="/product/{productId}/comments"
 }
 ```
 
->Note: The namespacing of Taffy's metadata attributes, such as `taffy_uri` is supported using two formats: underscores ("taffy_uri"), and colons ("taffy:uri"). The latter is preferred, but not supported in CF9.01 script component syntax \([ColdFusion Bug #9999]()\), which is why the former was added.
-
-^---- add link to cf bug
-
-
-
-
-
-
+>Note: The namespacing of Taffy's metadata attributes, such as `taffy_uri` is supported using two formats: underscores ("taffy_uri"), and colons ("taffy:uri"). The latter is my preferred style, but not supported in CF9.01 script component syntax \([ColdFusion Bug #86749](http://cfbugs.adobe.com/cfbugreport/flexbugui/cfbugtracker/main.html#bugId=86749)\), which is why the former was added. However, if you're writing your components with tags, the colon-syntax is supported.
 
 * Every Resource CFC -- both member and collection types -- extend `taffy.core.resource`.
 
