@@ -3,23 +3,32 @@ This page is an alphabetical listing of all methods that Taffy exposes for you t
 * Application.cfc Methods
   * applicationStartEvent
   * configureTaffy
+  * enableCrossDomainAccess
   * enableDashboard
   * getPath
+  * getBeanFactory
+  * getGlobalHeaders
   * newRepresentation
   * onTaffyRequest
   * requestStartEvent
-  * registerMimeType
+  * <em>registerMimeType</em> (deprecated as of 1.1)
   * setBeanFactory
   * setDashboardKey
   * setDebugKey
-  * setDefaultMime
+  * <em>setDefaultMime</em> (deprecated as of 1.1)
   * setDefaultRepresentationClass
+  * setGloablHeaders
   * setReloadKey
   * setReloadPassword
+  * setUnhandledPaths
 * Resource CFC Methods
   * noData
   * representationOf
+  * streamBinary
+  * streamFile
+  * streamImage
   * withHeaders
+  * withMime
   * withStatus
 * Representation Class Methods
   * ?
@@ -42,6 +51,15 @@ Since the framework takes over the **onApplicationStart** event of Application.c
 
 This is a special method called by the framework during initialization to get your APIs configuration. You must implement this method in your Application.cfc to override any framework setting defaults. All configuration methods should be used inside your implementation of **configureTaffy**, if you intend to use them.
 
+### enableCrossDomainAccess(boolean enabled)
+
+**Use it inside:** configureTaffy<br/>
+**Parameters:** 
+
+* enabled (boolean) - whether or not to allow cross-domain access to your api
+
+Turning this on adds the header: `<cfheader name="Access-Control-Allow-Origin" value="*" />`, which enables access from other domains.
+
 ### enableDashboard(boolean enabled)
 
 **Use it inside:** configureTaffy<br/>
@@ -57,6 +75,20 @@ You should probably set this to FALSE in production to prevent snooping around.
 **Parameters:** _(none)_
 
 This method is provided as an extension point. On Adobe ColdFusion ("ACF") 9, installed in standard entire-server mode, no change should be necessary. However, if ACF is installed on another JEE app server (i.e. Tomcat, Glassfish, etc), or on JRun but using an EAR/WAR setup, then you may need to override this method to make Taffy work on your server. See [[GetPath Setups]] for more information.
+
+### getBeanFactory()
+
+**Use it inside:** Application.cfc<br/>
+**Parameters:** _(none)_
+
+Returns whatever bean factory you may have set into Taffy, if any.
+
+### getGlobalHeaders()
+
+**Use it inside:** Application.cfc<br/>
+**Parameters:** _(none)_
+
+Returns the structure of global headers that you have set using `setGlobalHeaders()`, if any. If none, returns an empty structure.
 
 ### newRepresentation(string class)
 
@@ -80,7 +112,7 @@ Use this method inside onTaffyRequest when you want to _abort_ the request with 
 
 This method is optional, and allows you to inspect and potentially abort an API request in a way that adheres to the HTTP specification. If you choose not to override it (by implementing it in your Application.cfc), it will always return true, allowing the request to continue. If you implement it, you can check for things like an API key, or whether or not the customer has paid for your service, and return something other than the data that they are requesting.
 
-If you do not return TRUE, allowing the request to continue as normal, then Taffy expects you to return a **[representation](/atuttle/Taffy/wiki/Using-a-Custom-Representation-Class)** (either the generic class, included, or a custom one) that it should immediately return to the consumer, serialized to the appropriate format. If you simply want to return with a status code of 403 (which indicates "Not Allowed"), you could do this:
+If you do not return TRUE, allowing the request to continue as normal, then Taffy expects you to return a **[representation](/atuttle/Taffy/wiki/Using-a-Custom-Representation-Class)** (either the default class, or a custom one) that it should immediately return to the consumer, serialized to the appropriate format. If you simply want to return with a status code of 403 (which indicates "Not Allowed"), you could do this:
 
 ```cfs
 return newRepresentation().noData().withStatus(403);
@@ -170,6 +202,15 @@ _If not implemented, the framework default mime type is JSON ("application/json"
 
 When you change the default Representation Class, all responses will use your custom default class, unless you specifically override that request, using the (optional) second parameter to the **representationOf** function.
 
+### setGlobalHeaders(struct headers)
+
+**Use it inside:** configureTaffy<br/>
+**Parameters:**
+
+* headers (struct) - A structure where each key is the name of a header you want to return, such as "X-MY-HEADER" and the structure value is the header value
+
+Global headers are static. You set them on application initialization and they do not change. If you need dynamic headers, you can add them to each response at runtime using `withHeaders()`.
+
 ### setReloadKey(string keyName)
 
 **Use it inside:** configureTaffy<br/>
@@ -192,6 +233,15 @@ Used in combination with the reload key (see: **setReloadKey**), the framework w
 
 _If you do not change it, the default value is, "true"._
 
+### setUnhandledPaths(string unhandledPaths)
+
+**Use it inside:** configureTaffy<br/>
+**Parameters:**
+
+* unhandledPaths (string) - new list of unhandled paths, comma-delimited (commas may not be part of any list item)
+
+Use this method to set a list of paths (usually subfolders of the api) that you do not want Taffy to interfere with. Unless listed here, Taffy takes over the request lifecycle and does not execute the requested ColdFusion template.
+
 ## Resource CFC Methods:
 
 Resource CFCs extend `taffy.core.resource`.  The following methods are available inside each of your Resource CFCs:
@@ -207,15 +257,45 @@ This method allows you to specify that there is no data to be returned for the c
 return noData().withStatus(404);
 ```
 
-### representationOf(any data, [string customRepresentationClass])
+### representationOf(any data [, string customRepresentationClass])
 
 **Use it inside:** responder methods inside your Resource CFCs (e.g. get, put, post, delete - as well as head, options, etc).<br/>
 **Parameters:**
 
 * data (any) - The data to return to the consumer.
-* _optional_ customRepresentationClass (string) - Dot-notation path to a custom CFC that will serialize your results. Defaults to included generic serializer which supports JSON.
+* _optional_ customRepresentationClass (string) - Dot-notation path to a custom CFC, or bean name, that will serialize your results. Defaults to included generic serializer which supports JSON.
 
 Data can be of any type, including complex data types like queries, structures, and arrays, as long as the serializer knows how to serialize them. For more information on using a custom representation class, **see [[Using a custom Representation Class]]**.
+
+### streamBinary(any binaryData [, string customRepresentationClass])
+
+**Use it inside:** responder methods inside your Resource CFCs (e.g. get, put, post, delete - as well as head, options, etc).<br/>
+**Parameters:**
+
+* binaryData (any) - the binary data to be streamed back to the consumer
+* _optional_ customRepresentationClass (string) - Dot-notation path to a custom CFC, or bean name, that will serialize your results. Defaults to included generic serializer which supports JSON.
+
+Use this method in place of `representationOf()` to return a stream of binary data. Useful for streaming things like dynamically generated PDFs.
+
+### streamFile(string fileName [, string customRepresentationClass])
+
+**Use it inside:** responder methods inside your Resource CFCs (e.g. get, put, post, delete - as well as head, options, etc).<br/>
+**Parameters:**
+
+* fileName (string) - fully qualified file path (eg c:\tmp\files.zip)
+* _optional_ customRepresentationClass (string) - Dot-notation path to a custom CFC, or bean name, that will serialize your results. Defaults to included generic serializer which supports JSON.
+
+Use this method in place of `representationOf()` to stream a file from disk (or VFS).
+
+### streamImage
+
+**Use it inside:** responder methods inside your Resource CFCs (e.g. get, put, post, delete - as well as head, options, etc).<br/>
+**Parameters:**
+
+* binaryData (any) - the binary, base64 encoded data of the image, to be streamed back to the consumer
+* _optional_ customRepresentationClass (string) - Dot-notation path to a custom CFC, or bean name, that will serialize your results. Defaults to included generic serializer which supports JSON.
+
+Use this method in place of `representationOf()` to stream an image from disk (or VFS).
 
 ### withHeaders(struct headerStruct)
 
@@ -225,6 +305,19 @@ Data can be of any type, including complex data types like queries, structures, 
 * headerStruct (struct) - A structure whose keys are desired header names ("x-powered-by") and whose associated values are the values for the corresponding headers ("Taffy 1.1!").
 
 This special method  _**requires**_ the use of either **noData** or **representationOf**. It adds custom headers to the return. Additional use of **withStatus** optional.
+
+Ex: `return representationOf(myData).withHeaders({"X-POWERED-BY"="Taffy 1.1!"});`
+
+### withMime(string mime)
+
+**Use it inside:** responder methods inside your Resource CFCs (e.g. get, put, post, delete - as well as head, options, etc).<br/>
+**Parameters:**
+
+* mime (string) - mime type (eg. "application/pdf") to be returned with the streamed file data
+
+This special method _**requires**_ the use of either **streamFile** or **streamBinary**. It overrides the default mime type header for the return.
+
+Ex: `return streamFile('kittens/cuteness.pdf').withMime('application/pdf');`
 
 ### withStatus(numeric statusCode)
 
@@ -236,3 +329,5 @@ This special method  _**requires**_ the use of either **noData** or **representa
 This special method  _**requires**_ the use of either **noData** or **representationOf**. It sets the HTTP Status Code of the return. Additional use of **withHeaders** optional.
 
 _If you do not specify a return status code, Taffy will always return status code 200 (OK) by default._
+
+Ex: `return noData().withStatus(404);`
