@@ -19,6 +19,8 @@ This page only covers future releases. For the history of previous releases, see
   * [\#21](https://github.com/atuttle/taffy/issues/21) - Added global custom headers 
   * [\#28](https://github.com/atuttle/taffy/issues/28) - Bean factory now throws an exception when requesting a non-existant bean - Thanks to [Brian Panulla](https://github.com/bpanulla)
   * [\#29](https://github.com/atuttle/taffy/issues/29) - HTTP Method Tunneling  - Thanks to [Brian Panulla](https://github.com/bpanulla)
+  * [\#46](https://github.com/atuttle/Taffy/pull/46) - Added support for ColdSpring AOP on Taffy resources. - Thanks to [mgersting](https://github.com/mgersting)
+  * Added index page to examples folder for people who may not have directory indexing on, or who are running a platform without it (eg. JRun) - Thanks to [Barney Boisvert](http://www.barneyb.com/barneyblog/)
   * Added example of rate limiting using onTaffyRequest
   * Support for direct streaming of binary results, such as image streaming, ala [PlaceKitten](http://www.placekitten.com), or a generated PDF (examples included).
   * Fix issues on startup if Application context is shared with another app & Taffy doesn't get properly initialized.
