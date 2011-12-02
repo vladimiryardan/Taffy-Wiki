@@ -1,6 +1,6 @@
 # Authentication and Security
 
-Where authentication and security are concerned, my current recommendation is to use a combination of HTTP Basic Authentication and SSL. You should be able to accomplish this gracefully with `onTaffyRequest`. Currently there is no functionality in Taffy to assist with this, but it is something that we'll consider for future releases.
+If fine-grain authentication and security are required, my current recommendation is to use a combination of HTTP Basic Authentication and SSL. You should be able to accomplish this gracefully with `onTaffyRequest`. Currently there is no functionality in Taffy to assist with this, but it is something that we'll consider for future releases.
 
 > Note: HTTP Basic Auth is sent in clear-text, and as such, you should _**NEVER**_ use it in production code without SSL, because it would be trivial for someone sniffing the traffic to see the credentials. (Firesheep)
 
