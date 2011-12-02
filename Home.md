@@ -20,6 +20,6 @@ You _could_ do something similar with another framework and URL rewriting, but d
 
 I think that if you give Taffy a try, you'll enjoy its simplicity.
 
-> ## Looking for the old docs?
-> 
-> The current release of Taffy is **version 1.1** and unless otherwise noted, the documentation is specific to that version or general enough to apply to all versions. For documentation specific to Taffy 1.0, see the [[Taffy 1.0 Docs]] index.
+## Looking for the old docs?
+
+The current release of Taffy is **version 1.1 (rc1)** and unless otherwise noted, the documentation is specific to that version or general enough to apply to all versions. For documentation specific to Taffy 1.0, see the [[Taffy 1.0 Docs]] index.
