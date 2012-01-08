@@ -318,3 +318,29 @@ function onTaffyRequest(verb, cfc, requestArguments, mimeExt){
 
 This code checks for a request argument named "apiKey" (i.e. a `GET` request for `/foo?apiKey=abc123`), and if it's not found, returns a blank response body with status code 401. The `newRepresentation` method creates a new instance of your representation class, then you can either use `noData()` or if you want to have a response body, use `setData()` to pass in the data to send back to the consumer. Aside from the `newRepresentation()` and `setData()` methods, this should feel very similar to returning data in your resources. That's essentially what you're doing; just short-circuiting the request.
 
+## Rate-limit access to your API
+
+
+
+## Use JSONUtil instead of ColdFusion's native JSON serialization
+
+
+
+## Share application variables between your API and your consumer-facing application
+
+
+
+## Use a bean factory (like ColdSpring) to resolve dependencies of your resources (like configuration without breaking encapsulation)
+
+
+
+## Use a bean factory (like ColdSpring) to completely manage resources
+
+
+
+## Use ColdSpring AOP advice for your resources
+
+
+
+## Write your components using ColdFusion 9+ "script component" syntax
+
