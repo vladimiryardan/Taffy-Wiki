@@ -250,7 +250,36 @@ function configureTaffy(){
 
 Can you forgive me?
 
+## Serialize your return data to multiple formats (json, xml, ...)
 
+_This example is fully implemented in the folder `examples/api_twoFormats/` (for a few resources)._
+
+In order for your API to be able to respond with multiple formats of the same data, all that you need to have is a single representation class capable of serializing to each of the desired formats. Practically, that means that if your API should be capable of responding with both XML and JSON, you need a representation class (see the previous example for more detail on how to create a representation class) with `getAsXML` and `getAsJSON` methods:
+
+```cfm
+<cfcomponent extends="taffy.core.baseRepresentation">
+
+	<cfset variables.anythingToXml = application.anythingToXml />
+
+	<cffunction
+		name="getAsXML"
+		output="false"
+		taffy:mime="application/xml">
+			<cfreturn variables.anythingToXml.toXml(variables.data) />
+	</cffunction>
+
+	<cffunction
+		name="getAsJSON"
+		output="false"
+		taffy:default="true"
+		taffy:mime="application/json">
+			<cfreturn serializeJson(variables.data) />
+	</cffunction>
+
+</cfcomponent>
+```
+
+Something a few people have had trouble with was that they thought they had to have different representation classes for each data format. That is not the case. As in this code, your (single) representation class should be capable of serializing the data into all supported formats.
 
 
 
