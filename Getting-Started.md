@@ -117,3 +117,9 @@ The folder containing your API should contain, at a minimum, the **Application.c
 Assuming your API is located at `http://example.com/api/index.cfm`, and you've implemented the resource with URI `/products` and the GET method, then you could open up the URL: `http://example.com/api/index.cfm/products` in your browser and the data would be returned, serialized using the default mime type (JSON unless otherwise defined).
 
 Some people would prefer to remove the `/index.cfm` portion of the URL (I am one of them). To do so, you must use URL-rewriting. **The good news is that you should only need one simple rule.** With Apache you can use [mod_rewrite](http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html), or with IIS 6 you can use [IIRF](http://iirf.codeplex.com/) (free) or [ISAPI Rewrite](http://www.isapirewrite.com/) (paid). IIS 7 has url rewriting built-in. For specific rewriting rule examples for each engine, see [[URL Rewrite Rule Examples]]. There are also various Java Servlet Filters to accomplish URL Rewriting, should that be more to your liking.
+
+# Step 4: Tools and Debugging
+
+Not that you'd ever make a typo or have to make a fix to your code, but should that happen you can reinitialize Taffy by simply hitting `http://example.com/api/index.cfm?reload=true`. You can disable this and/or set a stronger password for it in your Application.cfc file. See the [API Docs](https://github.com/atuttle/Taffy/wiki/Index-of-API-Methods) for more details.
+
+Taffy also ships with an awesome(ly helpful) dashboard that contains a mock client and an instant documentation generator. To access it, simply hit `http://example.com/api/index.cfm/?dashboard`. Don't forget to shut this off in a production environment - all of the configuration options are available in the [API Docs](https://github.com/atuttle/Taffy/wiki/Index-of-API-Methods)
