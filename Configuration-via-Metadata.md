@@ -17,7 +17,7 @@ The **taffy:uri** property applies to the `<cfcomponent>` tag or the `component{
 * CFScript:
 ```
 	component 
-	taffy\_uri="/artist/{artistId}"
+	taffy_uri="/artist/{artistId}"
 	{
 	}
 ```
@@ -46,7 +46,7 @@ By convention, resources will automatically map the 4 primary HTTP REST verbs --
 
 * CFScript:
 ```
-	function getUser( numeric userId ) taffy\_verb="get"
+	function getUser( numeric userId ) taffy_verb="get"
 	{
 	}
 ```
@@ -67,7 +67,7 @@ By convention, the mime-types supported by your API are determined by the method
 
 * CFScript:
 ```
-	function getAsJson() taffy\_mime="application/json"
+	function getAsJson() taffy_mime="application/json"
 	{
 	}
 ```
@@ -87,11 +87,11 @@ When your API supports more than one data format (i.e. json and xml), you must s
 
 * CFScript:
 ```
-	function getAsJson() taffy\_mime="application/json" taffy\_default="true"
+	function getAsJson() taffy_mime="application/json" taffy_default="true"
 	{
 	}
 
-	function getAsXml() taffy\_mime="application/xml"
+	function getAsXml() taffy_mime="application/xml"
 	{
 	}
 ```
