@@ -37,6 +37,7 @@ This page only covers future releases. For the history of previous releases, see
   * [\#38](https://github.com/atuttle/Taffy/pull/38) - Fixed handling of request body for some verbs
   * [\#49](https://github.com/atuttle/Taffy/pull/49) - Fix for parsing query strings with key-value pairs missing a value (a=1&b=&c=3) - Thanks to [Greg Moser](https://github.com/gregmoser)
   * [\#50](https://github.com/atuttle/Taffy/pull/50) Added `WEB-INF` to git ignore file, for J2EE/Railo users. - Thanks to [Dave Long](https://github.com/davidlong03)
+  * [\#55](https://github.com/atuttle/Taffy/issues/55) - Support Apache request proxying by stripping the context root from the resources path if it's non-blank - Thanks to [Will Coleda](https://github.com/coke)
 * Deprecated features
   * Both `registerMimeType()` and `setDefaultMime()` are deprecated as of version 1.1; slated to be removed in 2.0. Use [[Configuration via Metadata]] instead.
 
