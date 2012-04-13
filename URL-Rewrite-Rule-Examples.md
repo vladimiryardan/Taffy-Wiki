@@ -27,7 +27,7 @@ See the [official documentation](http://www.isapirewrite.com/docs/) for more inf
     ?
 ```
 
-> **Be awesome:** Contribute to the wiki and document what this syntax should be!
+> **Be awesome:** [Contribute to the wiki](http://fusiongrokker.com/post/how-you-can-contribute-to-taffy-documentation) and document what this syntax should be!
 
 ## IIS7 web.config
 
