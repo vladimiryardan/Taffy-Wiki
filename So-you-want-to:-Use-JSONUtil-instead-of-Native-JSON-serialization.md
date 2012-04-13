@@ -5,6 +5,7 @@ Using [JSONUtil](http://jsonutil.riaforge.org) instead of the native JSON serial
 We've already discussed [the basics of creating a custom representation class](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Serialize-data-to-a-different-data-type), so here we'll focus on specifically how to use JSONUtil.
 
 **JsonUtilRepresentation.cfc:**
+
 ```cfm
 <cfcomponent extends="taffy.core.baseRepresentation">
 
