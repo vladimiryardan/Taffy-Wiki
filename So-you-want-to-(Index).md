@@ -2,11 +2,11 @@
 
 This page lists a bunch of tasks you might want to complete while coding with Taffy, and links to subpages explaining how you can accomplish each of them. It was created as part of Taffy 1.1, so directions here may not always work for Taffy 1.0.
 
-**Index:**
+## Index:
 
 1. [Create a dead-simple CRUD (Create, Read, Update, Delete) API for one resource (aka table of data)](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Create-a-dead-simple-CRUD-API)
 1. [Serialize your data to a format other than the default of JSON](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Serialize-data-to-a-different-data-type)
-1. Serialize your return data to multiple formats (json, xml, ...)
+1. [Serialize your return data to multiple formats (json, xml, ...)](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Support-returning-multiple-formats)
 1. Require an API key
 1. Rate-limit access to your API
 1. Use JSONUtil instead of ColdFusion's native JSON serialization
@@ -16,37 +16,6 @@ This page lists a bunch of tasks you might want to complete while coding with Ta
 1. Use ColdSpring AOP advice for your resources
 1. Write your components using ColdFusion 9+ "script component" syntax
 
-
-## Serialize your return data to multiple formats (json, xml, ...)
-
-_This example is fully implemented in the folder `examples/api_twoFormats/` (for a few resources)._
-
-In order for your API to be able to respond with multiple formats of the same data, all that you need to have is a single representation class capable of serializing to each of the desired formats. Practically, that means that if your API should be capable of responding with both XML and JSON, you need a representation class (see the previous example for more detail on how to create a representation class) with `getAsXML` and `getAsJSON` methods:
-
-```cfm
-<cfcomponent extends="taffy.core.baseRepresentation">
-
-	<cfset variables.anythingToXml = application.anythingToXml />
-
-	<cffunction
-		name="getAsXML"
-		output="false"
-		taffy:mime="application/xml">
-			<cfreturn variables.anythingToXml.toXml(variables.data) />
-	</cffunction>
-
-	<cffunction
-		name="getAsJSON"
-		output="false"
-		taffy:default="true"
-		taffy:mime="application/json">
-			<cfreturn serializeJson(variables.data) />
-	</cffunction>
-
-</cfcomponent>
-```
-
-Something a few people have had trouble with was that they thought they had to have different representation classes for each data format. That is not the case. As in this code, your (single) representation class should be capable of serializing the data into all supported formats.
 
 ## Require an API key
 
