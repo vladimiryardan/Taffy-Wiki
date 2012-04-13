@@ -94,7 +94,9 @@ This resource will respond for `http://example.com/api/people/john-smith`. For a
   * **post**
   * **put**
   * **delete**
-As you may have guessed, these map directly to the HTTP verb used by the API consumer in their request.<br/>
+
+As you may have guessed, these map directly to the HTTP verb used by the API consumer in their request.
+
   * If the consumer uses the POST verb, it runs the POST method in the corresponding CFC.<br/><br/>
   * Since the POST, PUT, and DELETE methods are not implemented in the example above, usage of each of the corresponding verbs against the example resource will be refused, with HTTP status code `405 Not Allowed`.
 
