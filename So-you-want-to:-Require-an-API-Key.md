@@ -19,7 +19,7 @@ If you choose not to implement `onTaffyRequest`, the default implementation alwa
 
 You can use this to require an API key. Here's one such approach to do that. Put this in your Application.cfc:
 
-```cfm
+```cfs
 function onTaffyRequest(verb, cfc, requestArguments, mimeExt){
 
 	if(not structKeyExists(arguments.requestArguments, "apiKey")){
