@@ -1,4 +1,4 @@
-# So you want to...
+# So you want to... (Index)
 
 This page lists a bunch of tasks you might want to complete while coding with Taffy, and links to subpages explaining how you can accomplish each of them. It was created as part of Taffy 1.1, so directions here may not always work for Taffy 1.0.
 
