@@ -6,7 +6,7 @@ This is the method signature that Taffy calls, in your Application.cfc: `onTaffy
 
 * **verb:** (string) the HTTP verb that the consumer used. GET, POST, PUT, DELETE, etc.
 * **cfc:** (string) the cfc that would be used to service the request.
-* **requestArguments:** (struct) the arguments that will be sent to the resource method.
+* **requestArguments:** (struct) the arguments that will be sent to the resource method. This is a combination of any tokens from the URI and any other fields either defined as query string parameters or in the request body. In the case of a name collision (token name and query string param/request body param with the same name) the query string/request body takes precedence.
 * **mimeExt:** (string) the requested "extension" of the return format, so if they want json, it's `json` (as opposed to `application/json`).
 * **headers:** (struct) the request headers.
 
