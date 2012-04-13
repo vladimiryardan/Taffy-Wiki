@@ -72,7 +72,7 @@ Absolutely nothing. Seriously. That's the _entire_ point of decoupling resources
 
 Now that you understand how to create your own custom representation class and tell Taffy to use it, I have a confession to make. If you want to do exactly what I've shown here -- that is, use AnythingToXML and make XML your default and only supported format, I've already done most of the work for you. I only used it as the example for the universal understanding that people seem to have about XML. In actuality, Taffy also comes with the class `taffy.bonus.AnythingToXMLRepresentation` which works exactly as I've coded it above. You don't need to write the representation, you only need to create the application variable `application.anythingToXML` and wire the bonus class into your API like this:
 
-```cfm
+```cfs
 function applicationStartEvent(){
 	application.anythingToXml = createObject("component", "anythingtoxml.AnythingToXML").init();
 }
