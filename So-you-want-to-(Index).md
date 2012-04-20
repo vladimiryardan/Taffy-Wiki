@@ -15,3 +15,4 @@ This page lists a bunch of tasks you might want to complete while coding with Ta
 1. [todo] Use a bean factory (like ColdSpring) to completely manage resources
 1. [todo] Use ColdSpring AOP advice for your resources
 1. [todo] Write your components using ColdFusion 9+ "script component" syntax
+1. [todo] Upload a file via your API
