@@ -26,6 +26,8 @@ If you set a bean factory like this, **and** do not put anything into the `/reso
 
 In this example, however, we're going to put a resource CFC into the `/resources` folder, with a dependency defined, so that Taffy will inject the depended-on bean from ColdSpring.
 
+### Use a setter to have the dependency injected at runtime
+
 In `/resources/artfartCollection.cfc`:
 
 ```cfm
