@@ -22,7 +22,7 @@ In `Application.cfc` create your bean factory instance, and pass it to Taffy's `
 	setBeanFactory(beanfactory);
 ```
 
-If you set a bean factory like this, **and** do not put anything into the `/resources` folder, then Taffy will use the external factory to get your resources, and will assume that all dependency injection has already been taken care of by that framework. Learn more about this in [Use an external bean factory (like ColdSpring) to completely manage resources](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-an-external-bean-factory-\(like-ColdSpring\)-to-completely-manage-resources).
+If you set a bean factory like this, **and** do not put anything into the `/resources` folder, then Taffy will use the external factory to get your resources, and will assume that all dependency injection has already been taken care of by that framework. Learn more about this in [Use an external bean factory like ColdSpring to completely manage resources](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-an-external-bean-factory-like-ColdSpring-to-completely-manage-resources).
 
 In this example, however, we're going to put a resource CFC into the `/resources` folder, with a dependency defined, so that Taffy will inject the depended-on bean from ColdSpring.
 
