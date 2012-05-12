@@ -1,12 +1,12 @@
 _This example is implemented in the folder `examples/api_twoFactories/` (included in the download)._
 
-Taffy comes with a lightweight dependency-injection class, simply referred to as its "factory". The factory creates one instance of every cfc ("bean") in your `/resources` folder, and then attempts to resolve dependencies of each of those beans with each other. Dependencies are defined by having a setter function; so if one bean has a `setConfig` method, and a bean named "config" exists (config.cfc), then that bean will be passed to the setter. Learn more about how this works in [Use Taffy's built-in Dependency Injection to resolve dependencies of your resources]().
+Taffy comes with a lightweight dependency-injection class, simply referred to as its "factory". The factory creates one instance of every cfc ("bean") in your `/resources` folder, and then attempts to resolve dependencies of each of those beans with each other. Dependencies are defined by having a setter function; so if one bean has a `setConfig` method, and a bean named "config" exists (config.cfc), then that bean will be passed to the setter. Learn more about how this works in [Use Taffy's built-in Dependency Injection to resolve dependencies of your resources](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-Taffy's-built-in-Dependency-Injection-to-resolve-dependencies-of-your-resources).
 
 In some cases, you may already be using an external DI framework ("bean factory"), like ColdSpring, and want to use beans already defined and available in that bean factory from your Taffy resources. If that's your use-case, you're in the right place.
 
 ### Sharing Application Context
 
-Chances are pretty good that if you're going down this path, you want to share Application Contexts (essentially, share the same set of Application variables), to reduce the amount of memory necessary to run both the _other_ application and your Taffy API. That is described in detail in [Share application variables between your API and your consumer-facing application]().
+Chances are pretty good that if you're going down this path, you want to share Application Contexts (essentially, share the same set of Application variables), to reduce the amount of memory necessary to run both the _other_ application and your Taffy API. That is described in detail in [Share application variables between your API and your consumer-facing application](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Share-application-variables-between-your-API-and-your-consumer-facing-application).
 
 Alternatively, you may want to use the same ColdSpring configuration but create a new bean factory instance. There are pro's and con's to each approach, but for simplicity's sake and since the former is already well described in the "sharing application variables" link, this example will assume you're using an external bean factory config, but creating a new instance.
 
@@ -22,7 +22,7 @@ In `Application.cfc` create your bean factory instance, and pass it to Taffy's `
 	setBeanFactory(beanfactory);
 ```
 
-If you set a bean factory like this, **and** do not put anything into the `/resources` folder, then Taffy will use the external factory to get your resources, and will assume that all dependency injection has already been taken care of by that framework. Learn more about this in [Use an external bean factory (like ColdSpring) to completely manage resources]().
+If you set a bean factory like this, **and** do not put anything into the `/resources` folder, then Taffy will use the external factory to get your resources, and will assume that all dependency injection has already been taken care of by that framework. Learn more about this in [Use an external bean factory (like ColdSpring) to completely manage resources](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-an-external-bean-factory-(like-ColdSpring)-to-completely-manage-resources).
 
 In this example, however, we're going to put a resource CFC into the `/resources` folder, with a dependency defined, so that Taffy will inject the depended-on bean from ColdSpring.
 
