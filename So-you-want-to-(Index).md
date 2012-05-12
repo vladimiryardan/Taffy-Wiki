@@ -11,8 +11,9 @@ This page lists a bunch of tasks you might want to complete while coding with Ta
 1. [Rate-limit access to your API][5]
 1. [Use JSONUtil instead of ColdFusion's native JSON serialization][6]
 1. [todo] Share application variables between your API and your consumer-facing application
-1. [todo] Use a bean factory (like ColdSpring) to resolve dependencies of your resources (like configuration without breaking encapsulation)
-1. [todo] Use a bean factory (like ColdSpring) to completely manage resources
+1. [todo] Use Taffy's built-in Dependency Injection to resolve dependencies of your resources
+1. [todo] Use an external bean factory (like ColdSpring) to resolve dependencies of your resources
+1. [todo] Use an external bean factory (like ColdSpring) to completely manage resources
 1. [todo] Use ColdSpring AOP advice for your resources
 1. [todo] Write your components using ColdFusion 9+ "script component" syntax
 1. [todo] Upload a file via your API
