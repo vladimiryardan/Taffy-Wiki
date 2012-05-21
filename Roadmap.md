@@ -5,6 +5,8 @@ This page only covers future releases. For the history of previous releases, see
 
 ### Completed
 
+* **New Platforms:**
+  * Now fully tested and supported on Railo 3.2+!
 * New features:
   * Extensive test suite added - helpful for contributors to know they haven't broken anything
     * Update test suite to use Tags instead of script so it can be run on any CFML engine (What good are tests if you can't use them to test?)
@@ -46,7 +48,8 @@ This page only covers future releases. For the history of previous releases, see
 
 ## Version 1.2
 **Target Release Date:** TBD
-* Tested and supported on Railo and OpenBD
+* Planned Platform Support:
+  * Tested and supported on OpenBD
 
 ### Planned
 * [\#18](https://github.com/atuttle/taffy/issues/18) - Overriding the global representation class at the resource/method level can cause errors
