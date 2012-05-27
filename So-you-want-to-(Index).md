@@ -10,7 +10,7 @@ This page lists a bunch of tasks you might want to complete while coding with Ta
 1. [Require an API key][4]
 1. [Rate-limit access to your API][5]
 1. [Use JSONUtil instead of ColdFusion's native JSON serialization][6]
-1. [todo] Share application variables between your API and your consumer-facing application
+1. [Share application variables between your API and your consumer-facing application][7]
 1. [Use Taffy's built-in Dependency Injection to resolve dependencies of your resources][8]
 1. [Use an external bean factory like ColdSpring to resolve dependencies of your resources][9]
 1. [todo] Use an external bean factory (like ColdSpring) to completely manage resources
@@ -24,6 +24,6 @@ This page lists a bunch of tasks you might want to complete while coding with Ta
 [4]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Require-an-API-Key
 [5]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Rate-Limit-access-to-your-API
 [6]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-JSONUtil-instead-of-Native-JSON-serialization
-
+[7]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Share-application-variables-with-your-consumer-facing-application
 [8]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-Taffy's-built-in-Dependency-Injection-to-resolve-dependencies-of-your-resources
 [9]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-an-external-bean-factory-like-ColdSpring-to-resolve-dependencies-of-your-resources
