@@ -83,7 +83,7 @@ For the sake of a more complicated example, let's say you've already got your ap
 
 For now, this is an exercise left to the reader. Having trouble? Head over to [the mailing list!][4]
 
-[1]: HTTP://TODO.TODO/TODO-YO!
+[1]: https://github.com/atuttle/Taffy/wiki/Taffy-minimum-requirements-for-3rd-party-Dependency-Injection-frameworks
 [2]: https://github.com/atuttle/Taffy/wiki/Getting-Started
 [3]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Share-application-variables-with-your-consumer-facing-application
 [4]: http://groups.google.com/group/taffy-users
