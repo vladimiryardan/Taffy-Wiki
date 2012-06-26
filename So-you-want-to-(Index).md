@@ -14,7 +14,7 @@ This page lists a bunch of tasks you might want to complete while coding with Ta
 1. [Use Taffy's built-in Dependency Injection to resolve dependencies of your resources][8]
 1. [Use an external bean factory like ColdSpring to resolve dependencies of your resources][9]
 1. [Use an external bean factory (like ColdSpring) to completely manage resources][10]
-1. [todo] Use ColdSpring AOP advice for your resources
+1. [Use ColdSpring AOP advice for your resources][11]
 1. [Write your components using ColdFusion 9+ "script component" syntax][12]
 1. [todo] Upload a file via your API
 
@@ -28,4 +28,5 @@ This page lists a bunch of tasks you might want to complete while coding with Ta
 [8]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-Taffy's-built-in-Dependency-Injection-to-resolve-dependencies-of-your-resources
 [9]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-an-external-bean-factory-like-ColdSpring-to-resolve-dependencies-of-your-resources
 [10]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-use-an-external-bean-factory-like-coldspring-to-completely-manage-resources
+[11]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-ColdSpring-AOP-Advice-for-your-resources
 [12]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Write-your-components-using-CF9--script-component-syntax
