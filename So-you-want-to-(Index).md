@@ -16,7 +16,7 @@ This page lists a bunch of tasks you might want to complete while coding with Ta
 1. [Use an external bean factory (like ColdSpring) to completely manage resources][10]
 1. [Use ColdSpring AOP advice for your resources][11]
 1. [Write your components using ColdFusion 9+ "script component" syntax][12]
-1. [todo] Upload a file via your API
+1. [Upload a file via your API][13]
 
 [1]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Create-a-dead-simple-CRUD-API
 [2]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Serialize-data-to-a-different-data-type
@@ -30,3 +30,4 @@ This page lists a bunch of tasks you might want to complete while coding with Ta
 [10]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-use-an-external-bean-factory-like-coldspring-to-completely-manage-resources
 [11]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-ColdSpring-AOP-Advice-for-your-resources
 [12]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Write-your-components-using-CF9--script-component-syntax
+[13]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Upload-a-file-via-your-API
