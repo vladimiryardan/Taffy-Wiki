@@ -79,6 +79,11 @@ Once you've got the above example figured out, it's really quite easy to take th
 
 For the sake of a more complicated example, let's say you've already got your application written -- including a service layer for getting at your data, using ColdSpring -- and you're adding on an API after the fact. You're going to use [the "same application name" method][3] to share that ColdSpring instance between the parent and child (API) applications, and ... that's it. So, _profit_, I guess.
 
+### Bonus Achievement: Use AOP to do permissions checks and other neat stuff
+
+For now, this is an exercise left to the reader. Having trouble? Head over to [the mailing list!][4]
+
 [1]: HTTP://TODO.TODO/TODO-YO!
 [2]: https://github.com/atuttle/Taffy/wiki/Getting-Started
-[3]:https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Share-application-variables-with-your-consumer-facing-application
+[3]: https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Share-application-variables-with-your-consumer-facing-application
+[4]: http://groups.google.com/group/taffy-users
