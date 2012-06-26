@@ -2,7 +2,7 @@ There's no real secret to this. It sounds complicated, but it isn't! (_Assuming 
 
 You'll want to start by getting ColdSpring running for your API. Don't even bother with AOP until your resources are [completely managed from within ColdSpring][1].
 
-Then you just... apply some AOP advice. _It's really that simple._ When ColdSpring returns the resource that Taffy requests from it, your resource will be wrapped in an AOP proxy, so all of the AOP magic will be built in.
+Then you just... apply some AOP advice. _It's really that simple._ When ColdSpring returns the resource that Taffy requests from it, your resource will be wrapped in an AOP proxy, so all of the AOP magic will be built in. I'm not going to go into any description of what AOP accomplishes or when or why to use it, or even how it works. [That's all been covered very well by now][2], so from here on out we're assuming you have a basic understanding of AOP!
 
 But just for fun, let's implement some!
 
