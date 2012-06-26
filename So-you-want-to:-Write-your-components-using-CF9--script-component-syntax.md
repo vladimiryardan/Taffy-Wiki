@@ -15,6 +15,9 @@ component taffy_uri="/photos/tagged/sunset" {}
 
 The exact same issue and resolution applies if any of your Resource Responder methods (for GET, POST, PUT, DELETE, etc) make use of Taffy's custom metadata. For example, if you want to name your method `listPhotos` and have it respond to the GET verb:
 
+```cfm
+<cffunction name="listPhotos" taffy:verb="GET"></cffunction>
+```
 ```cfs
 function listPhotos() taffy_verb="GET" {}
 ```
