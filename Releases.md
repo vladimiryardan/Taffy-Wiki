@@ -4,11 +4,14 @@
 * Bugs fixed:
   * [#89](https://github.com/atuttle/Taffy/issues/89) - File Uploads did not work on Railo
   * [#93](https://github.com/atuttle/Taffy/issues/93) - Tokens where the expected value could contain a period character caused issues with URL format specification.
+  * [#97](https://github.com/atuttle/Taffy/issues/97) - Method PUT was not allowed by Access-Control-Allow-Methods header.
 * New Features:
   * [#57](https://github.com/atuttle/Taffy/issues/57) - Added the ability to pass data from onTaffyRequest to resources. Add keys to the `requestArguments` argument, and they will be passed on to the resource, by name, just like URI tokens and query string parameters.
   * [#60](https://github.com/atuttle/Taffy/issues/60) - Custom Token Regular Expressions. For examples of using custom regular expressions for your tokens, see [[Custom Token Regular Expressions]].
   * [#61](https://github.com/atuttle/Taffy/issues/61) - ALLOW header is returned for every request.
   * [#90](https://github.com/atuttle/Taffy/issues/90) - Configuration via "variables.framework", ala FW/1. See also: [[List of all variables.framework settings]].
+  * [#92](https://github.com/atuttle/Taffy/issues/92) - Format via URI now takes precedence over format via header. ([[Reasoning|So-you-want-to:-Support-returning-multiple-formats]])
+  * [#94](https://github.com/atuttle/Taffy/issues/94) - A new setting was added, allowing you to reload on every request; useful in development.
   * [#106](https://github.com/atuttle/Taffy/issues/106) - Made cross-domain support more robust. Now supplies Allow-Origin, Allow-Methods, and Allow-Headers headers.
 * Deprecations:
   * It has been proposed to deprecate the use of ".format" (e.g. ".json") in the URI to specify requested return format because of the difficulty it was causing with the old URI parser. The Parser Rewrite for [#93](https://github.com/atuttle/Taffy/issues/93) resolved this issue, so any informal deprecations are no longer necessary. Use .format to your hearts content.
