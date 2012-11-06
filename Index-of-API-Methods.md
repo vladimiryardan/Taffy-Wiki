@@ -54,7 +54,7 @@ This is a special method called by the framework during initialization to get yo
 ### enableCrossDomainAccess(boolean enabled)
 
 **Use it inside:** configureTaffy<br/>
-**Parameters:** 
+**Parameters:**
 
 * enabled (boolean) - whether or not to allow cross-domain access to your api
 
@@ -128,6 +128,23 @@ return newRepresentation("taffy.core.nativeJsonRepresentation")
 
 The options here are limited only by your imagination.
 
+You can add data to the **requestArguments** structure and this will be passed on to any resource that handles the request. Simply add a key to the structure:
+
+In Application.cfc:
+
+```cfs
+function onTaffyRequest(verb, cfc, requestArguments, mimeExt, headers){
+  arguments.requestArguments.myData = "myvalue";
+}
+```
+
+In your resource:
+```cfs
+function get(myData){
+  //arguments.myData = myValue
+}
+```
+
 ### requestStartEvent()
 
 **Use it inside:** Application.cfc<br/>
@@ -174,7 +191,7 @@ The dashboard displays resources that your API is aware of, generates documentat
 
 * keyName (string) - Name of the url parameter that enables CF Debug Output. (e.g. "debug")
 
-Sometimes it's useful to see ColdFusion's debug output in the results of your API requests during testing. For that reason, you can include this query string parameter to enable debugging on a per-request basis. 
+Sometimes it's useful to see ColdFusion's debug output in the results of your API requests during testing. For that reason, you can include this query string parameter to enable debugging on a per-request basis.
 
 _If you do not change it, the default value is, "debug"._
 
