@@ -49,6 +49,8 @@ The [[Index of API Methods]] lists all methods available in Application.cfc, wha
 
 Each Resource in your API (eg. Person, Product) should be defined as its own CFC. In a Taffy API, **you implement Collections and Members as separate CFCs** (eg. `personCollection.cfc` and `personMember.cfc`, `productCollection.cfc` and `productMember.cfc`). Taffy won't expose them by name, so you can name them whatever you like -- I just happen to like naming them foo**Collection** vs foo**Member** to make it easy to determine which CFC handles individual records (member) and which handles sets of records (collection).
 
+When using the default bean factory (the default configuration), your resource CFCs are required to be in the `/resources` folder. You can use an application-specific mapping, a server-wide mapping, or the physical path. It can be in the web root, or even the same folder as your Application.cfc (if in a sub-folder of the web root), but it must be named `resources`.
+
 Here is an example resource implementation:
 
 **personCollection.cfc:**
