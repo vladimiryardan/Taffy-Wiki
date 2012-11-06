@@ -58,7 +58,14 @@ This is a special method called by the framework during initialization to get yo
 
 * enabled (boolean) - whether or not to allow cross-domain access to your api
 
-Turning this on adds the header: `<cfheader name="Access-Control-Allow-Origin" value="*" />`, which enables access from other domains.
+Turning this on adds the following headers:
+```cfm
+<cfheader name="Access-Control-Allow-Origin" value="*" />
+<cfheader name="Access-Control-Allow-Methods" value="#allowedVerbs#" />
+<cfheader name="Access-Control-Allow-Headers" value="Content-Type" />
+```
+
+The allowed verbs, of course, are the ones allowed by the requested resource, as well as OPTIONS.
 
 ### enableDashboard(boolean enabled)
 
