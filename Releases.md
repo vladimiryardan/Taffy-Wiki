@@ -15,6 +15,7 @@
   * [#106](https://github.com/atuttle/Taffy/issues/106) - Made cross-domain support more robust. Now supplies Allow-Origin, Allow-Methods, and Allow-Headers headers.
 * Deprecations:
   * It has been proposed to deprecate the use of ".format" (e.g. ".json") in the URI to specify requested return format because of the difficulty it was causing with the old URI parser. The Parser Rewrite for [#93](https://github.com/atuttle/Taffy/issues/93) resolved this issue, so any informal deprecations are no longer necessary. Use .format to your hearts content.
+  * Use of ConfigureTaffy and individual setter methods to specify configuration settings is now deprecated in favor of [[variables.framework|List-of-all-variables.framework-settings]].
 
 ## Version 1.1
 **Released:** June 27, 2012

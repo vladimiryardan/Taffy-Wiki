@@ -92,3 +92,17 @@ Global headers are static. You set them on application initialization and they d
 Type: Object Instance<br/>
 Default: ""<br/>
 Description: Already instantiated and cached (e.g. in Application scope) object instance of your external bean factory. Not required in order to use Taffy's built-in factory.
+
+## ConfigureTaffy -- Deprecated
+
+Prior to version 1.2 of Taffy (in version 1.1 and earlier) the recommended practice for setting up this configuration was through the use of a method named [[configureTaffy|Taffy1.1:-Index-of-API-Methods]] and individual setter methods for each of the settings.
+
+configureTaffy and its related setters have all been officially deprecated as of version 1.2, and is scheduled to be removed no earlier than version 2.0. Please make sure your code uses `variables.framework` instead.
+
+### Settings precedence when using variables.framework and configureTaffy()
+
+1. Default values are set into memory
+1. variables.framework is used to overwrite any default values that may be duplicated
+1. if defined, configureTaffy is run
+
+Because of this, values set by configureTaffy currently take precedence over values in variables.framework.
