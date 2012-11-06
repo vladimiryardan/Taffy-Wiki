@@ -30,3 +30,4 @@ See also: [[List of all variables.framework settings]].
 ### Enhancement: Added the ability to pass data from onTaffyRequest to resources
 
 [ER57](https://github.com/atuttle/Taffy/issues/57): In onTaffyRequest, you can now add keys to the `requestArguments` argument, and they will be passed on to the resource, by name, just like URI tokens and query string parameters.
+=======
