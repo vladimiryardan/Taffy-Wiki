@@ -2,25 +2,27 @@ This page is an alphabetical listing of all methods that Taffy exposes for you t
 
 * Application.cfc Methods
   * applicationStartEvent
-  * configureTaffy
-  * enableCrossDomainAccess
-  * enableDashboard
   * getPath
   * getBeanFactory
-  * getGlobalHeaders
   * newRepresentation
   * onTaffyRequest
   * requestStartEvent
-  * <em>registerMimeType</em> (deprecated as of 1.1)
-  * setBeanFactory
-  * setDashboardKey
-  * setDebugKey
-  * <em>setDefaultMime</em> (deprecated as of 1.1)
-  * setDefaultRepresentationClass
-  * setGloablHeaders
-  * setReloadKey
-  * setReloadPassword
-  * setUnhandledPaths
+  * Deprecated as of 1.2
+     * <em>configureTaffy</em>
+     * <em>enableCrossDomainAccess</em>
+     * <em>enableDashboard</em>
+     * <em>getGlobalHeaders</em>
+     * <em>setBeanFactory</em>
+     * <em>setDashboardKey</em>
+     * <em>setDebugKey</em>
+     * <em>setDefaultRepresentationClass</em>
+     * <em>setGloablHeaders</em>
+     * <em>setReloadKey</em>
+     * <em>setReloadPassword</em>
+     * <em>setUnhandledPaths</em>
+  * Deprecated as of 1.1
+     * <em>registerMimeType</em>
+     * <em>setDefaultMime</em>
 * Resource CFC Methods
   * noData
   * representationOf
@@ -44,14 +46,18 @@ The following methods are available in your Application.cfc:
 
 Since the framework takes over the **onApplicationStart** event of Application.cfc, it also exposes this methdod as a way for you to add logic to be executed when the event occurs. **applicationStartEvent** is called by **onApplicationStart** _before_ the framework is initialized. It is recommended that your Application.cfc **NOT implement onApplicationStart**, and should instead use **applicationStartEvent**.
 
-### configureTaffy()
+### <em>configureTaffy()</em> (deprecated)
+
+(deprecated as of 1.2; see [[variables.framework|List-of-all-variables.framework-settings]] instead)
 
 **Use it inside:** Application.cfc<br/>
 **Parameters:** _(none)_
 
 This is a special method called by the framework during initialization to get your APIs configuration. You must implement this method in your Application.cfc to override any framework setting defaults. All configuration methods should be used inside your implementation of **configureTaffy**, if you intend to use them.
 
-### enableCrossDomainAccess(boolean enabled)
+### <em>enableCrossDomainAccess(boolean enabled)</em> (deprecated)
+
+(deprecated as of 1.2; see [[variables.framework|List-of-all-variables.framework-settings]] instead)
 
 **Use it inside:** configureTaffy<br/>
 **Parameters:**
@@ -67,7 +73,9 @@ Turning this on adds the following headers:
 
 The allowed verbs, of course, are the ones allowed by the requested resource, as well as OPTIONS.
 
-### enableDashboard(boolean enabled)
+### <em>enableDashboard(boolean enabled)</em> (deprecated)
+
+(deprecated as of 1.2; see [[variables.framework|List-of-all-variables.framework-settings]] instead)
 
 **Use it inside:** configureTaffy<br/>
 **Parameters:**
@@ -90,7 +98,9 @@ This method is provided as an extension point. On Adobe ColdFusion ("ACF") 9, in
 
 Returns whatever bean factory you may have set into Taffy, if any.
 
-### getGlobalHeaders()
+### <em>getGlobalHeaders()</em> (deprecated)
+
+(deprecated as of 1.2; see [[variables.framework|List-of-all-variables.framework-settings]] instead)
 
 **Use it inside:** Application.cfc<br/>
 **Parameters:** _(none)_
@@ -173,7 +183,10 @@ Each mime type that your API is capable of returning needs to be registered with
 
 Because the framework implements JSON by default, the JSON ("application/json") mime type is already registered, and you do not have to re-register it. (You can if you like, though. It won't hurt anything.)
 
-### setBeanFactory(object beanFactory, [string beanList])
+### <em>setBeanFactory(object beanFactory, [string beanList])</em> (deprecated)
+
+(deprecated as of 1.2; see [[variables.framework|List-of-all-variables.framework-settings]] instead)
+
 **Use it inside:** configureTaffy<br/>
 **Parameters:**
 
@@ -182,7 +195,9 @@ Because the framework implements JSON by default, the JSON ("application/json") 
 
 While Taffy includes a very basic Bean Factory (used by default) and also has fairly tight integration with ColdSpring, other bean factories could be added. If your bean factory implements `getBeanList()`, then Taffy will use that to get a list of beans that the factory knows about. However, if it does not, then Taffy will allow you to provide the bean list as a string in the optional second argument.
 
-### setDashboardKey(string keyName)
+### <em>setDashboardKey(string keyName)</em> (deprecated)
+
+(deprecated as of 1.2; see [[variables.framework|List-of-all-variables.framework-settings]] instead)
 
 **Use it inside:** configureTaffy<br/>
 **Parameters:**
@@ -191,7 +206,9 @@ While Taffy includes a very basic Bean Factory (used by default) and also has fa
 
 The dashboard displays resources that your API is aware of, generates documentation about your API based on **hint** attributes, and contains a mock client to make testing your API easy.
 
-### setDebugKey(string keyName)
+### <em>setDebugKey(string keyName)</em> (deprecated)
+
+(deprecated as of 1.2; see [[variables.framework|List-of-all-variables.framework-settings]] instead)
 
 **Use it inside:** configureTaffy<br/>
 **Parameters:**
@@ -217,7 +234,9 @@ It is important to note the difference between the mime type and extension. Here
 
 _If not implemented, the framework default mime type is JSON ("application/json")._
 
-### setDefaultRepresentationClass(string customClassDotPath)
+### <em>setDefaultRepresentationClass(string customClassDotPath)</em> (deprecated)
+
+(deprecated as of 1.2; see [[variables.framework|List-of-all-variables.framework-settings]] instead)
 
 **Use it inside:** configureTaffy<br/>
 **Parameters:**
@@ -226,7 +245,9 @@ _If not implemented, the framework default mime type is JSON ("application/json"
 
 When you change the default Representation Class, all responses will use your custom default class, unless you specifically override that request, using the (optional) second parameter to the **representationOf** function.
 
-### setGlobalHeaders(struct headers)
+### <em>setGlobalHeaders(struct headers)</em> (deprecated)
+
+(deprecated as of 1.2; see [[variables.framework|List-of-all-variables.framework-settings]] instead)
 
 **Use it inside:** configureTaffy<br/>
 **Parameters:**
@@ -235,7 +256,9 @@ When you change the default Representation Class, all responses will use your cu
 
 Global headers are static. You set them on application initialization and they do not change. If you need dynamic headers, you can add them to each response at runtime using `withHeaders()`.
 
-### setReloadKey(string keyName)
+### <em>setReloadKey(string keyName)</em> (deprecated)
+
+(deprecated as of 1.2; see [[variables.framework|List-of-all-variables.framework-settings]] instead)
 
 **Use it inside:** configureTaffy<br/>
 **Parameters:**
@@ -246,7 +269,9 @@ Used in combination with the reload password (see: **setReloadPassword**), the f
 
 _If you do not change it, the default value is "reload"._
 
-### setReloadPassword(string Password)
+### <em>setReloadPassword(string Password)</em> (deprecated)
+
+(deprecated as of 1.2; see [[variables.framework|List-of-all-variables.framework-settings]] instead)
 
 **Use it inside:** configureTaffy<br/>
 **Parameters:**
@@ -257,7 +282,9 @@ Used in combination with the reload key (see: **setReloadKey**), the framework w
 
 _If you do not change it, the default value is, "true"._
 
-### setUnhandledPaths(string unhandledPaths)
+### <em>setUnhandledPaths(string unhandledPaths)</em> (deprecated)
+
+(deprecated as of 1.2; see [[variables.framework|List-of-all-variables.framework-settings]] instead)
 
 **Use it inside:** configureTaffy<br/>
 **Parameters:**
