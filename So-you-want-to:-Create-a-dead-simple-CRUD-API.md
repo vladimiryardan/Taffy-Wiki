@@ -37,7 +37,7 @@ For example, if you need to include a username and password in your `<cfquery>` 
 
 There are two types of resources: Collections and Members. You can think of Collections like ColdFusion Query objects, and Members like ColdFusion structs. A collection resource represents a collection of member-resource data. The `/students` URI represents the collection of all students, while `/students/12` URI represents a single member of the students collection. It is because of this URI distinction that we separate collections and members into different ColdFusion Components (CFCs).
 
-You can name the CFCs anything you like, but I tend to name mine `thingCollection` and `thingMember` to be consistent and clear. Put them in the `/resources` subfolder of your API.
+You can name the CFCs anything you like, but I tend to name mine `thingCollection` and `thingMember` to be consistent and clear. Put them in the `/resources` subfolder of your API. Interested in using sub-folders inside `/resources`? See [[Organizing your resources into subfolders]].
 
 **resources/studentCollection.cfc**
 
