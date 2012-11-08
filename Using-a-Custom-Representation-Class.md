@@ -38,13 +38,13 @@ Note that both methods go into the same representation class. Your representatio
 
 ## Overriding the default representation class
 
-Instead of supplying a custom representation class path as the 2nd argument to the **representationOf** method in every single responder, you can override the global default. To do so, use the **[setDefaultRepresentationClass](/atuttle/Taffy/wiki/Index-of-API-Methods)** method in conjunction with **[configureTaffy](/atuttle/Taffy/wiki/Index-of-API-Methods)**.
+You tell Taffy to use your representation class by supplying either its Bean Name or CFC Dot Notation Path in the setting `variables.framework.representationClass`. See the [[List of all variables.framework settings]] for more information.
 
 ## A word of caution
 
 Representation classes are treated as **Transient objects** in Taffy, meaning that a new response object is instantiated for every request, which has both positive and negative side-effects.
 
-On the positive side, there is no chance that wires will get crossed and the response to Request A will be sent for Request B because you forgot to var-scope something. On the other hand, it also means that your representation class should be as lightweight as possible to speed instantiation time (and your API's performance may suffer if you don't follow this advice). If you are using a library to do serialization (perhaps you're using [JSONUtil](http://jsonutil.riaforge.org/) for JSON, or [AnythingToXML](http://anythingtoxml.riaforge.org/) for XML) then you should cache the worker object in a persistent scope like Application or Server, because the library does not need to be re-instantiated on every request. Doing so will definitely help the performance of your API.
+On the positive side, there is no chance that wires will get crossed and the response to **Request A** will be sent for **Request B** because you forgot to var-scope something. On the other hand, it also means that your representation class should be as lightweight as possible to speed instantiation time (and your API's performance may suffer if you don't follow this advice). If you are using a library to do serialization (perhaps you're using [JSONUtil](http://jsonutil.riaforge.org/) for JSON, or [AnythingToXML](http://anythingtoxml.riaforge.org/) for XML) then you should cache the worker object in a persistent scope like Application or Server, because the library does not need to be re-instantiated on every request. Doing so will definitely help the performance of your API.
 
 ## Getting all advanced up in here (requirements)
 
@@ -65,7 +65,7 @@ For example, if you wanted to recreate the included class `taffy.core.nativeJson
 ```cfm
 <cfcomponent output="false" extends="taffy.core.baseRepresentation">
 
-	<cffunction name="getAsJson" access="public" output="false" taffy:mime="application/json">
+	<cffunction name="getAsJson" access="public" output="false" taffy:mime="application/json" taffy:default="true">
 		<cfreturn serializeJson(variables.data) />
 	</cffunction>
 

@@ -41,14 +41,12 @@ To instantiate the bean factory and tell Taffy about it, your **Application.cfc*
 	component extends="taffy.core.api"
 	{
 		this.name = 'myapi';
+		variables.framework = {};
 		
 		function applicationStartEvent(){
 			application.beanFactory = createObject("coldspring.beans.DefaultXmlBeanFactory").init();
 			application.beanFactory.loadBeansFromXML('/resources/coldspring.xml');
-		}
-		
-		function configureTaffy(){
-			setBeanFactory(application.beanFactory);
+			variables.framework.beanFactory = application.beanFactory;
 		}
 	}
 ```
@@ -79,15 +77,11 @@ Here is an example of the above described scenario.
 **Taffy API, Application.cfc:** (perhaps: `/api/Application.cfc`)
 
 ```cfs
-	component
-		extends="taffy.core.api"
+	component extends="taffy.core.api"
 	{
 		this.name = 'MyExampleApplication'; //NOTE: same app name as core app
-		
-		function configureTaffy()
-		{
-			setBeanFactory(application.beanFactory);
-		}
+		variables.framework = {};
+		variables.framework.beanFactory = application.beanFactory;
 	}
 ```
 

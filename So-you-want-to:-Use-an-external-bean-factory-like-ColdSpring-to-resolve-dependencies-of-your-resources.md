@@ -56,7 +56,8 @@ Resource CFC's are stored in memory, so this operation only happens on startup (
 
 The load order is:
 
-1. `configureTaffy()` is called (in `Application.cfc`), allowing you to set framework settings and supply an external bean factory if desired.
+1. Your values from `variables.framework` are inspected and overwrite any defaults that your values would conflict with.
+1. `configureTaffy()` is called (in `Application.cfc`)
 1. If `/resources` convention folder exists and contains CFC's, Taffy Factory is created and populated.
   * If an external bean factory has been specified, dependencies are further-resolved (after `/resources` resolutions) using external bean factory.
 1. If external bean factory has been set (and nothing in `/resources`) then resources classes are loaded from external bean factory under the assumption that their dependencies are already resolved.

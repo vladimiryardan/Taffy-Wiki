@@ -48,12 +48,11 @@ Now that we have a representation class capable of serializing to the desired fo
 
 		this.name = "taffy_xml_example";
 
+		variables.framework = {};
+		variables.framework.representationClass = "resources.AnythingToXmlRepresentation";
+
 		function applicationStartEvent(){
 			application.anythingToXml = createObject("component", "anythingtoxml.AnythingToXML").init();
-		}
-
-		function configureTaffy(){
-			setDefaultRepresentationClass("resources.AnythingToXmlRepresentation");
 		}
 
 	</cfscript>
@@ -62,7 +61,7 @@ Now that we have a representation class capable of serializing to the desired fo
 
 Here you can see that we've instantiated the missing variable `application.anythingToXml` from the previous section. Note that this is done inside `applicationStartEvent()` -- you should use this method to do things that you don't want repeated on every request (things you would normally put in `onApplicationStart()`). When you reload the framework, this method is called and variables here will be re-evaluated.
 
-Next, we've added the method `configureTaffy()` and called the framework method `setDefaultRepresentationClass()` inside it, passing in the path to our new custom representation class. ConfigureTaffy is similar to applicationStartEvent, it is not run on every request, but it is called after framework initialization has happened, to give you the opportunity to modify framework defaults. There are other things you can do from configureTaffy, but they are out of scope for this example.
+We've also set the value of `variables.framework.representationClass` to the CFC dot-notation path of our representation CFC.
 
 ## Changes to your resources
 
@@ -73,11 +72,10 @@ Absolutely nothing. Seriously. That's the _entire_ point of decoupling resources
 Now that you understand how to create your own custom representation class and tell Taffy to use it, I have a confession to make. If you want to do exactly what I've shown here -- that is, use AnythingToXML and make XML your default and only supported format, I've already done most of the work for you. I only used it as the example for the universal understanding that people seem to have about XML. In actuality, Taffy also comes with the class `taffy.bonus.AnythingToXMLRepresentation` which works exactly as I've coded it above. You don't need to write the representation, you only need to create the application variable `application.anythingToXML` and wire the bonus class into your API like this:
 
 ```cfs
+variables.framework.representationClass = "taffy.bonus.AnythingToXMLRepresentation";
+
 function applicationStartEvent(){
 	application.anythingToXml = createObject("component", "anythingtoxml.AnythingToXML").init();
-}
-function configureTaffy(){
-	setDefaultRepresentationClass("taffy.bonus.AnythingToXMLRepresentation");
 }
 ```
 

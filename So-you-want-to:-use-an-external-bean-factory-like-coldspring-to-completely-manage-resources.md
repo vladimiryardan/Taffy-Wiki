@@ -52,13 +52,12 @@ Lastly, of course, we need to run ColdSpring in our Taffy API and tell Taffy abo
 ```cfs
 component extends="taffy.core.api" {
 
+	variables.framework = {};
+
 	function applicationStartEvent() {
 		application.beanFactory = createObject( 'component', 'coldspring.beans.DefaultXMLBeanFactory' );
 		application.beanFactory.loadBeans( '/taffy/examples/api_coldspring/config/coldspring.xml' );
-	}
-
-	function configureTaffy(){
-		setBeanFactory( application.beanfactory );
+		variables.framework.beanFactory = application.beanFactory;
 	}
 
 }

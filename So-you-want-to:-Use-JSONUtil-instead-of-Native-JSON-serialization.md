@@ -22,16 +22,14 @@ We've already discussed [the basics of creating a custom representation class](h
 </cfcomponent>
 ```
 
-This example assumes that you've stored an instance of JSONUtil in the Application scope. As discussed in [the xml example](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Serialize-data-to-a-different-data-type), this is not the best way to write your code, and we have **an example on using dependency injection instead (todo)**, but doing so here keeps it as simple as possible to just illustrate JSONUtil usage and no other "new" concepts.
+This example assumes that you've stored an instance of JSONUtil in the Application scope. As discussed in [the xml example](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Serialize-data-to-a-different-data-type), this is not the best way to write your code, and we have [an example on using dependency injection instead](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-Taffy's-built-in-Dependency-Injection-to-resolve-dependencies-of-your-resources), but doing so here keeps it as simple as possible to just illustrate JSONUtil usage and no other "new" concepts.
 
 By setting `taffy:mime="application/json"` and naming the method `getAsJson`, Taffy knows that this class should be used to respond to requests for json data.
 
 Once you've created this custom representation class, which I've named "JsonUtilRepresentation.cfc", you need to tell your application to use it. You do so by adding this code to Application.cfc:
 
-```cfs
-function configureTaffy(){
-	setDefaultRepresentationClass("JsonUtilRepresentation");
-}
+```javascript
+variables.framework.representationClass = "JsonUtilRepresentation";
 ```
 
-Notice that I'm not providing some long fully-qualified dot-notation path for the CFC. Instead, I've saved it in my `/resources` folder, and instead we can simply use the file name minus the ".cfc".
+Notice that I'm not providing some long fully-qualified dot-notation path for the CFC. Instead, I've saved it in my `/resources` folder, and because of this we can simply use the file name minus the ".cfc", which is its Bean Name.

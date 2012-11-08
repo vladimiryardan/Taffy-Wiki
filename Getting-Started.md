@@ -89,22 +89,22 @@ taffy_uri="/people/{personName}"
 
 This resource will respond for `http://example.com/api/people/john-smith`. For a member GET, the identifying information --name, in this case-- is usually unique (enforced by your database indexes and app logic), so there is rarely a reason to include query string parameters as optional arguments. That said, it is supported.
 
-* Every Resource CFC -- both member and collection types -- extend `taffy.core.resource`.
+ * Every Resource CFC -- both member and collection types -- extend `taffy.core.resource`.
 
-* Every Resource CFC should implement _at least 1_ of 4 methods:
+ * Every Resource CFC should implement _at least 1_ of 4 methods. As you may have guessed, these map directly to the HTTP verb used by the API consumer in their request.
   * **get**
   * **post**
   * **put**
-  * **delete**
+  * **delete**<br/><br/>
 
-As you may have guessed, these map directly to the HTTP verb used by the API consumer in their request.
+ * If the consumer uses the POST verb, it runs the POST method in the corresponding CFC.
+   * Since the POST, PUT, and DELETE methods are not implemented in the example above, usage of each of the corresponding verbs against the example resource will be refused, with HTTP status code `405 Not Allowed`.<br/><br/>
 
-  * If the consumer uses the POST verb, it runs the POST method in the corresponding CFC.<br/><br/>
-  * Since the POST, PUT, and DELETE methods are not implemented in the example above, usage of each of the corresponding verbs against the example resource will be refused, with HTTP status code `405 Not Allowed`.
-    * **Tokens** from the component metadata attribute `taffy:uri` (or `taffy_uri`), defined as `{token_name}` (including the curly braces, see example above) will be extracted from the URI and passed by name to the requested method. In addition, all query string parameters (except those defined for framework specific things like debugging and reloading) will also be included in the argument collection sent to the method. <br/><br/>For example: `GET /product/44?color=Blue` will result in the GET method being called on the _**Product** collection_, with the arguments: `{ productId: 44, color: "Blue" }`.<br/><br/>The `productId` parameter is defined by the `taffy:uri` attribute **(set at the component level, not the function level)**, and the `color` parameter is defined as an optional argument to the function, and was provided in the query string. It is not possible to put optional parameters in the URI -- they need to be in the query string.
-    * The `representationOf` method -- a special method provided by the `taffy.core.resource` parent class -- creates a new object instance capable of serializing your data into the appropriate format. A class capable of serializing as JSON using ColdFusion's native serialization functionality is included with the framework and used by default. To use a custom representation class on a per-request basis, pass the dot-notation CFC path (or bean id; more on this in [[Bean Factories]]) of your custom representation object as the (optional) 2nd argument to the `representationOf` method. You can also override the global default representation class by using [setDefaultRepresentationClass](/atuttle/Taffy/wiki/Index-of-API-Methods). See [[Using a Custom Representation Class]] for more details on that.<br/><br/>
-  * In some cases, you might not want to return any data and a status code is sufficient (for example, indicating a successful delete). In this case, use [noData()](/atuttle/Taffy/wiki/Index-of-API-Methods) instead of `representationOf()`.<br/><br/>
-  * With either **representationOf** or **noData**, you may optionally use the [withStatus](/atuttle/Taffy/wiki/Index-of-API-Methods) method to set the HTTP status code, and/or the [withHeaders](/atuttle/Taffy/wiki/Index-of-API-Methods) method to add additional headers to the response. If you do not include `withStatus(...)`, a default status of 200 will be returned. You should familiarize yourself with [[Common API HTTP Status Codes]].
+ * **Tokens** from the component metadata attribute `taffy:uri` (or `taffy_uri`), defined as `{token_name}` (including the curly braces, see example above) will be extracted from the URI and passed by name to the requested method. In addition, all query string parameters (except those defined for framework specific things like debugging and reloading) will also be included in the argument collection sent to the method. <br/><br/>For example: `GET /product/44?color=Blue` will result in the GET method being called on the _**Product** collection_, with the arguments: `{ productId: 44, color: "Blue" }`.<br/><br/>The `productId` parameter is defined by the `taffy:uri` attribute **(set at the component level, not the function level)**, and the `color` parameter is defined as an optional argument to the function, and was provided in the query string. It is not possible to put optional parameters in the URI -- they need to be in the query string.
+
+ * The `representationOf` method -- a special method provided by the `taffy.core.resource` parent class -- creates a new object instance capable of serializing your data into the appropriate format. A class capable of serializing as JSON using ColdFusion's native serialization functionality is included with the framework and used by default. You can override the global default representation class by using `variables.framework.representationClass`. See [[Using a Custom Representation Class]] for more details on that.
+   * In some cases, you might not want to return any data and a status code is sufficient (for example, indicating a successful delete). In this case, use [noData()](/atuttle/Taffy/wiki/Index-of-API-Methods) instead of `representationOf()`.<br/><br/>
+   * With either **representationOf** or **noData**, you may optionally chain the [withStatus](/atuttle/Taffy/wiki/Index-of-API-Methods) method to set the HTTP status code, and/or the [withHeaders](/atuttle/Taffy/wiki/Index-of-API-Methods) method to add additional headers to the response. If you do not include `withStatus(...)`, a default status of 200 will be returned. Chaining looks like this: `return noData().withStatus(...).withHeaders(...);` You should familiarize yourself with [[Common API HTTP Status Codes]].
 
 ## A quick Aside
 
@@ -120,7 +120,7 @@ Assuming your API is located at `http://example.com/api/index.cfm`, and you've i
 
 Some people would prefer to remove the `/index.cfm` portion of the URL (I am one of them). To do so, you must use URL-rewriting. **The good news is that you should only need one simple rule.** With Apache you can use [mod_rewrite](http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html), or with IIS 6 you can use [IIRF](http://iirf.codeplex.com/) (free) or [ISAPI Rewrite](http://www.isapirewrite.com/) (paid). IIS 7 has url rewriting [sort of](http://fusiongrokker.com/post/url-rewriting-for-mango-on-iis7) built-in. For specific rewriting rule examples for each engine, see [[URL Rewrite Rule Examples]]. There are also various Java Servlet Filters to accomplish URL Rewriting, should that be more to your liking.
 
-## Step 3.1: Requirements for running on Tomcat
+## Special requirements for running on Tomcat
 
 From what I can tell, most people that use Railo run it on Tomcat. This is not a requirement for Railo compatibility, but it is a requirement for vanilla Tomcat compatibility. The version of Tomcat that ships with ColdFusion 10 has been modified to support what's called "multiple-wildcard filters", but this modification has not yet made its way back to the Tomcat project. This means that if you're using Tomcat, unless it's the version that ships with CF10, you will need to modify Web.xml to add a servlet mapping for every Taffy-powered API that you're running. (Not every resource, just one per API.) [Find more information on this topic, and directions, here](https://groups.google.com/d/msg/taffy-users/Dajw-d30ZQY/6ml-RubGFVAJ).
 

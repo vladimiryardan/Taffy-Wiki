@@ -6,7 +6,7 @@ variables.framework = {
 	reloadPassword = "true",
 	reloadOnEveryRequest = false,
 
-	defaultRepresentationClass = "taffy.core.nativeJsonRepresentation",
+	representationClass = "taffy.core.nativeJsonRepresentation",
 
 	dashboardKey = "dashboard",
 	disableDashboard = false,
@@ -47,7 +47,7 @@ variables.framework = {
 **Default:** False<br/>
 **Description:** Flag that indicates whether Taffy should reload cached values and configuration on every request. Useful in development; set to FALSE in production.
 
-### defaultRepresentationClass
+### representationClass
 
 **Type:** String<br/>
 **Default:** "taffy.core.nativeJsonRepresentation"<br/>
@@ -131,6 +131,8 @@ Prior to version 1.2 of Taffy (in version 1.1 and earlier) the recommended pract
 configureTaffy and its related setters have all been officially deprecated as of version 1.2, and is scheduled to be removed no earlier than version 2.0. Please make sure your code uses `variables.framework` instead.
 
 ### Settings precedence when using variables.framework and configureTaffy()
+
+As described above, `configureTaffy` is deprecated and will be going away in the future. For now it is still supported. Here's how precedence works if you find yourself using a mix of it and variables.framework:
 
 1. Default values are set into memory
 1. variables.framework is used to overwrite any default values that may be duplicated
