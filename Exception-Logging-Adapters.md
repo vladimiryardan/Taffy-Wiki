@@ -29,7 +29,7 @@ Hopefully the first 3 are completely self explanatory. The last one may bear a t
 ## LogToHoth
 
 Adapter Path: taffy.bonus.LogToHoth<br/>
-Configuration Options: (object) There are numerous settings for Hoth, but I recommend that you look at HothConfig.cfc in examples/api_Hoth/resources. From there it should be pretty self explanatory for anyone that's used Hoth before.
+Configuration Options: (object) There are numerous settings for Hoth, but I recommend that you look at [HothConfig.cfc](https://github.com/atuttle/Taffy/blob/develop/examples/api_Hoth/resources/HothConfig.cfc) in `examples/api_Hoth/resources`. From there it should be pretty self explanatory for anyone that's used Hoth before.
 
 A typical Application.cfc configuration to use Hoth might resemble the following:
 
@@ -39,6 +39,8 @@ variables.framework.exceptionLogAdapterConfig = "taffy.examples.api_hoth.resourc
 ```
 
 Note that the config is _also_ a CFC dot-notation path. The adapter automatically instantiates your config and provides it to Hoth as needed.
+
+There is an example provided in: `examples/api_Hoth`.
 
 ## LogToBugLogHQ
 
