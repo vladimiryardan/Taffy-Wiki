@@ -67,3 +67,5 @@ variables.framework.exceptionLogAdapterConfig.apikey = "";
 **hostname:** The hostname that should appear in the bug reporting. It should be specific to the environment, so that you can look at the report and know exactly where to find the problem code. Specify dev/staging/production/etc, as well as any other necessary identifying information.
 
 **apikey:** If your BugLogHQ instance requires an API Key to submit reports, supply it here.
+
+There is an example provided in: `examples/api_BugLogHQ`.
