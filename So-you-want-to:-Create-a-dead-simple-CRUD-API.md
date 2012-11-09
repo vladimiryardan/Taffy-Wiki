@@ -75,7 +75,11 @@ You can name the CFCs anything you like, but I tend to name mine `thingCollectio
 
 The differences between these two CFCs might be sort of subtle:
 
-**The `taffy:uri` element is different.** The collection resource uses the value `/students` and the member resource uses the value `/students/{studentId}`. These determine which CFC will be used to respond to a given URL. The part in curly braces ("{}") is called a token, and you can kind of think of it as a variable. When the CFC method is called, the value that shows up in the URL in the same position as the token (so 12 in the case of `/students/12`) is passed to the function argument that has the same name as the token ("studentId"). This way, `/students/12` and `/students/761` return two distinct records. If you want it to, a URI can contain as many tokens as you like. This is perfectly valid: `/courses/{dept}/{courseNum}/{sectionNum}/students/{studentId}`.
+**The `taffy:uri` element is different.** The collection resource uses the value `/students` and the member resource uses the value `/students/{studentId}`. These determine which CFC will be used to respond to a given URL. The part in curly braces (`{studentId}`) is called a token, and you can kind of think of it as a variable. When the CFC method is called, the value that shows up in the URL in the same position as the token (so 12 in the case of `/students/12`) is passed to the function argument that has the same name as the token ("studentId"). This way, `/students/12` and `/students/761` return two distinct records. If you want it to, a URI can contain as many tokens as you like. This is perfectly valid: `/courses/{dept}/{courseNum}/{sectionNum}/students/{studentId}`.
+
+>### A quick Aside
+>
+>**Note:** The namespacing of Taffy's metadata attributes, such as `taffy_uri` is supported using two formats: underscores ("taffy_uri"), and colons ("taffy:uri"). The latter is my preferred style, but not supported in CF9.01 script component syntax ([ColdFusion Bug #86749](http://cfbugs.adobe.com/cfbugreport/flexbugui/cfbugtracker/main.html#bugId=86749)), which is why the former was added. However, if you're writing your components with tags, the colon-syntax is supported.
 
 Aside from the query that is run and the URI differences just described, these components are basically identical.
 

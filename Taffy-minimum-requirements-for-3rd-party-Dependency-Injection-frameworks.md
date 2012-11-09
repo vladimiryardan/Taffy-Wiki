@@ -10,6 +10,6 @@ Both the Taffy Factory and ColdSpring adhere to the same (imaginary) interface:
 * `any getBean( string beanId )`
 * some method to get a list of all bean id's that the DI framework is aware of.
   * ColdSpring uses `string getBeanDefinitionList()`, and Taffy Factory uses `string getBeanList()`.
-  * The name/implementation doesn't really matter as we can code around this.The important thing is that we can get a list of all beans. Even better if we can filter that list by a parent class. E.g. get beans that (at some point in their inheritance chain) extend from `taffy.core.resource`. If filtering isn't provided, we get all beans and filter manually.
+  * The name/implementation doesn't really matter as we can code around this. The important thing is that we can get a list of all beans. Even better if we can filter that list by a parent class. E.g. get beans that (at some point in their inheritance chain) extend from `taffy.core.resource`. If filtering isn't provided, we get all beans and filter manually.
 
 That's it! If your DI framework implements that interface, it's Taffy-compatibile.
