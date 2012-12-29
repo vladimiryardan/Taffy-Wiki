@@ -96,7 +96,7 @@ This method is provided as an extension point. On Adobe ColdFusion ("ACF") 9, in
 **Use it inside:** Application.cfc<br/>
 **Parameters:** _(none)_
 
-This method returns a structure with two keys: `username`, and `password`. When the client does not provide HTTP Basic Auth credentials, the username and password keys will be blank. When the client does provide them, the values will be available in these keys.
+**Added in Taffy 1.3.** This method returns a structure with two keys: `username`, and `password`. When the client does not provide HTTP Basic Auth credentials, the username and password keys will be blank. When the client does provide them, the values will be available in these keys.
 
 This method is only available inside your Application.cfc. If, for example, you need access to the username in a resource, you can use this method inside onTaffyRequest and add the username to the requestArguments structure.
 
