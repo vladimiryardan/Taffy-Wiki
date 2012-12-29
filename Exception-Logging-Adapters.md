@@ -69,3 +69,11 @@ variables.framework.exceptionLogAdapterConfig.apikey = "";
 **apikey:** If your BugLogHQ instance requires an API Key to submit reports, supply it here.
 
 There is an example provided in: `examples/api_BugLogHQ`.
+
+# Custom Log Adapter
+
+You may write your own custom log adapter. It should implement the `taffy.bonus.ILogAdapter` interface.
+
+Note the way that configuration is passed to the logging adapter. Both the adapter path and a configuration variable are defined in Application.cfc and the adapter is only instantiated and configured (via `init()`) when needed.
+
+If you create a custom log adapter, you should clearly define the expected structure and supported values for the configuration data.
