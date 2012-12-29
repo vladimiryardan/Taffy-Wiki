@@ -16,7 +16,21 @@ Dependencies in Taffy Resources are defined by the existence of a setter method.
 	}
 ```
 
+**As of Taffy 1.3**, you may also use a property instead of a setter. Values set by/into properties are available in the `this` scope (whereas with the setter you explicitly decided whether to save the value into `this` or `variables`). Here's an example resource CFC that uses a property to inject the config object and then uses it:
+
 The argument name does not matter, and what you choose to do with the CFC instance passed to it is up to you; but the name is important. It must begin with "set", and whatever comes after "set" will be the name of the CFC (sans file extension). So in this case, "setConfig" looks for "config.cfc".
+
+```cfs
+component extends="taffy.core.resource" taffy_uri="/foo"{
+
+	property name="config";
+
+	function get(){
+		return representationOf( this.config.defaultValue );
+	}
+
+}
+```
 
 All resources and other classes in the resources folder are treated as singletons for the purpose of dependency injection. I hope this doesn't confuse you, but you can (optionally) choose to store a [Custom Representation Class](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Serialize-data-to-a-different-data-type) in the resources folder, and as long as you're not auto-wiring it into a resource CFC, it will still be treated as a transient object for the purposes of responding to requests. (If you found that confusing, just ignore it. Everything in resources is a singleton.)
 
