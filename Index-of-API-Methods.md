@@ -319,7 +319,7 @@ Data can be of any type, including complex data types like queries, structures, 
 
 ### saveLog(struct exception)
 
-**Use it inside:** anywhere inside a Resource CFC to log data using your [configured logging adapter](https://github.com/atuttle/Taffy/wiki/Exception-Logging-Adapters).
+**Use it inside:** anywhere inside a Resource CFC to log data using your [configured logging adapter](https://github.com/atuttle/Taffy/wiki/Exception-Logging-Adapters).<br/>
 **Parameters:**
 
 * exception (struct) - traditionally a CF exception object, but any struct may be passed.
