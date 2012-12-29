@@ -26,14 +26,13 @@ This page is an alphabetical listing of all methods that Taffy exposes for you t
 * Resource CFC Methods
   * noData
   * representationOf
+  * saveLog
   * streamBinary
   * streamFile
   * streamImage
   * withHeaders
   * withMime
   * withStatus
-* Representation Class Methods
-  * ?
 
 ## Application.cfc Methods
 
@@ -317,6 +316,17 @@ return noData().withStatus(404);
 * _optional_ customRepresentationClass (string) - Dot-notation path to a custom CFC, or bean name, that will serialize your results. Defaults to included generic serializer which supports JSON.
 
 Data can be of any type, including complex data types like queries, structures, and arrays, as long as the serializer knows how to serialize them. For more information on using a custom representation class, **see [[Using a custom Representation Class]]**.
+
+### saveLog(struct exception)
+
+**Use it inside:** anywhere inside a Resource CFC to log data using your [configured logging adapter](https://github.com/atuttle/Taffy/wiki/Exception-Logging-Adapters).
+**Parameters:**
+
+* exception (struct) - traditionally a CF exception object, but any struct may be passed.
+
+What you pass to this method is simply handed off to the logging adapter. You may use one of the included adapters (LogToEmail, LogToBuglogHQ, or LogToHoth), or a custom logging adapter. If you write a custom logging adapter, it should implement the `taffy.bonus.ILogAdapter` interface.
+
+If you don't configure a logging adapter, the default is LogToEmail, but the default `from` and `to` email addresses are not useful. See [Exception Log Adapters](https://github.com/atuttle/Taffy/wiki/Exception-Logging-Adapters) for more information on configuring logging adapters.
 
 ### streamBinary(any binaryData [, string customRepresentationClass])
 
