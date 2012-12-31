@@ -25,7 +25,9 @@ variables.framework = {
 		emailType = "html"
 	},
 
-	beanFactory = ""
+	beanFactory = "",
+
+	environments = {}
 };
 ```
 
@@ -123,6 +125,13 @@ Global headers are static. You set them on application initialization and they d
 **Type:** Object Instance<br/>
 **Default:** ""<br/>
 **Description:** Already instantiated and cached (e.g. in Application scope) object instance of your external bean factory. Not required in order to use Taffy's built-in factory.
+
+### environments
+
+**Type:** Structure<br/>
+**Default:** `{}`<br/>
+**Description:** Environment-specific overrides to any framework settings. Applied after general `variables.framework` settings, _and after `configureTaffy()` has been called_. See [[Environment Specific Configuration]] for more details.
+
 
 ## configureTaffy() -> (Deprecated)
 
