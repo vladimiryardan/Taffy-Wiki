@@ -128,7 +128,7 @@ Global headers are static. You set them on application initialization and they d
 
 ### environments
 
-**Included in:** Taffy 1.3+<br/>
+**Added in:** Taffy 1.3<br/>
 **Type:** Structure<br/>
 **Default:** `{}`<br/>
 **Description:** Environment-specific overrides to any framework settings. Applied after general `variables.framework` settings, _and after `configureTaffy()` has been called_. See [[Environment Specific Configuration]] for more details.
