@@ -1,4 +1,4 @@
-Variables.framework supports the following settings, and these are their default values:
+Variables.framework was added in Taffy 1.2, and supports the following settings. These are their default values:
 
 ```javascript
 variables.framework = {
