@@ -19,7 +19,3 @@ Secondly, this isn't your mom's SES URL formatting. Most MVC frameworks take the
 You _could_ do something similar with another framework and URL rewriting, but defining and maintaining those rewriting rules would be annoying. I wouldn't do it, but you're free to try.
 
 I think that if you give Taffy a try, you'll enjoy its simplicity.
-
-## Looking for the old docs?
-
-The current release of Taffy is **version 1.1 (rc1)** and unless otherwise noted, the documentation is specific to that version or general enough to apply to all versions. For documentation specific to Taffy 1.0, see the [[Taffy 1.0 Docs]] index.
