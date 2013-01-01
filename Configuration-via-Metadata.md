@@ -36,6 +36,10 @@ The following example is _invalid_, because tokens are not delimited by a slash:
 
 Tokens in URIs define the parts of the URI that are dynamic. They are identified by curly-brackets: `{tokenName}` and are passed **by name** to all functions that handle the request. The `{foo}` token's value will be passed to the `foo` argument of the associated method.
 
+#### URI Matching Order
+
+As of Taffy 1.3, URIs are processed into a sorted array on API startup, and searched in order for every request, such that `/artists/list` will match before `/artists/{id}`. You should design your API URI's accordingly. Pay special attention to placement and possible values for URI tokens. If a possible value is the same as a static URI, consider changing URI formatting. For example, if we had an artist with id "list", then having the static URI `/artists/list` would prevent the `/artists/{id}` URI from ever matching when the intention is to get the individual artist record for artist with id "list."
+
 ### taffy:verb
 
 By convention, resources will automatically map the 4 primary HTTP REST verbs -- GET, PUT, POST, DELETE -- to CFC methods with the same name. For extended verbs -- OPTIONS, HEAD -- or if you want to map one of the primary verbs to a method with a different name, you can use the `taffy:verb` metadata property on the method to specify the verb it should respond to. Examples:
