@@ -14,7 +14,7 @@ To support non-default return formats, you need to create your own representatio
 </cfcomponent>
 ```
 
-Implementing a `serializeYml()` method is left as an exercise for the user \(hint: look for an existing library, like [SnakeYaml](http://code.google.com/p/snakeyaml/)\).
+Implementing a `serializeYml()` method is left as an exercise for the user. Hint: look for an existing library, like [SnakeYaml](http://code.google.com/p/snakeyaml/).
 
 ## Supporting Multiple return formats
 
