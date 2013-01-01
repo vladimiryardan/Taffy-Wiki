@@ -32,6 +32,6 @@ component extends="taffy.core.resource" taffy_uri="/foo"{
 }
 ```
 
-All resources and other classes in the resources folder are treated as singletons for the purpose of dependency injection. I hope this doesn't confuse you, but you can (optionally) choose to store a [Custom Representation Class](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Serialize-data-to-a-different-data-type) in the resources folder, and as long as you're not auto-wiring it into a resource CFC, it will still be treated as a transient object for the purposes of responding to requests. (If you found that confusing, just ignore it. Everything in resources is a singleton.)
+All resources and other classes in the resources folder are treated as singletons for the purpose of dependency injection.
 
-Taffy's Factory will **not** look anywhere other than the resources folder, and as of this time of writing, does not do a recursive search (though it is being considered for a future version). There is no configuration for the factory -- it assumes and requires the use of the `/resources` folder.
+Taffy's Factory will **not** look anywhere other than the resources folder. It does look recursively into subfolders as well. There is no configuration for the factory -- it assumes and requires the use of a `/resources` folder or mapping.
