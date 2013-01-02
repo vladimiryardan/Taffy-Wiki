@@ -1,7 +1,7 @@
 In order to be successful in this endeavor, we're going to assume a few things:
 
 * That you already have a working knowledge of ColdSpring (or your Bean Factory of choice);
-* That it _is ColdSpring_, or at least implements [the same interface for bean discovery][1];
+* That **it is ColdSpring or DI/1**, or at least implements [the same interface for bean discovery][1];
 * That you have a working knowledge of Taffy Resource development (see: [Getting Started][2]);
 * And that you just want to learn how to mash the two together into something beautiful and terse.
 
