@@ -1,4 +1,4 @@
-In addition to fairly tight integration with ColdSpring, should you choose to use it, Taffy comes with a simple bean factory to manage the file conventions it provides.
+In addition to integrating easily with ColdSpring and (as of Taffy 1.3) DI/1, Taffy comes with its own simple bean factory to manage the file conventions it provides.
 
 TOC:
 
@@ -33,7 +33,7 @@ In addition to the two ways you can incorporate an external bean factory into yo
 
 ### I don't want to share anything with an existing application, I want my API entirely segregated.
 
-To make Taffy use a **new** external bean factory instance, you just need to instantiate it and pass it to the `setBeanFactory` method. In the case of ColdSpring, you start with a ColdSpring config XML file. You can, if you like, keep your coldspring.xml file in the `/resources` folder; I might. It doesn't really matter to Taffy where you put it, so do whatever makes sense to you.
+To make Taffy use a **new** external bean factory instance, you just need to instantiate it and set it into `variables.framework`. In the case of ColdSpring, you start with a ColdSpring config XML file. You can, if you like, keep your coldspring.xml file in the `/resources` folder; I might. It doesn't really matter to Taffy where you put it, so do whatever makes sense to you.
 
 To instantiate the bean factory and tell Taffy about it, your **Application.cfc** should look something like this:
 
@@ -89,4 +89,7 @@ Notice that I did not instantiate the bean factory in the Taffy application, but
 
 ### What bean factories are supported?
 
-ColdSpring is probably the most used bean factory that I know of, but that doesn't mean it should be the only one Taffy supports. If you want to use another Bean Factory with Taffy, [let me know](/atuttle/taffy/issues) and I'll be happy to add support for it. Or, in the spirit of open source, you could fork and add the functionality yourself, then send me a pull request. Some alternative bean factories include [Lightwire](http://lightwire.riaforge.org/) and [DI/1](http://di1.riaforge.org/). :)
+* [ColdSpring](http://www.coldspringframework.org)
+* [DI/1](https://github.com/seancorfield/di1) (as of Taffy 1.3)
+
+If you want to use another Bean Factory with Taffy, [let me know](/atuttle/taffy/issues) and I'll be happy to add support for it. Or, in the spirit of open source, you could fork and add the functionality yourself, then send me a pull request. Some alternative bean factories include [Lightwire](http://lightwire.riaforge.org/) and [WireBox](http://wiki.coldbox.org/wiki/WireBox.cfm). :)
