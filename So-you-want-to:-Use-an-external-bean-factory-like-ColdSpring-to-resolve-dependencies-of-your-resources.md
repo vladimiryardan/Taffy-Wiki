@@ -12,14 +12,18 @@ Alternatively, you may want to use the same ColdSpring configuration but create 
 
 ### Create Your Bean Factory
 
-In `Application.cfc` create your bean factory instance, and pass it to Taffy's `setBeanFactory()` method:
+> **Note:** These examples use ColdSpring, but as of Taffy 1.3, DI/1 is also supported.
+
+In `Application.cfc` ~> `applicationStartEvent()` create your bean factory instance, and set it into `variables.framework`:
 
 ```cfs
+function applicationStartEvent() {
 	var beanFactory = createObject("component", "coldspring.beans.DefaultXMLBeanFactory");
 	beanFactory.loadBeans('config/coldspring.xml');
 
 	//set bean factory into Taffy
-	setBeanFactory(beanfactory);
+	variables.framework.beanFactory = beanfactory;
+}
 ```
 
 If you set a bean factory like this, **and** do not put anything into the `/resources` folder, then Taffy will use the external factory to get your resources, and will assume that all dependency injection has already been taken care of by that framework. Learn more about this in [Use an external bean factory like ColdSpring to completely manage resources](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-an-external-bean-factory-like-ColdSpring-to-completely-manage-resources).
@@ -50,6 +54,23 @@ Here we have a method named `setFakeData`. Because it begins with the word "set"
 
 When requests are made and the resource is used to handle them, the dependency has already been set and you may reference it; as the above example does in its `get` method: `return representationOf(variables.fakeData.getData())`.
 
+### Alternative to setters: Properties
+
+Instead of writing custom setters for everything you want injected, you can simply add properties to your resource CFCs:
+
+```cfs
+component extends="taffy.core.resource" taffy_uri="/foo" {
+
+	property name="fakeData";
+
+	public function get() output="false" {
+		return representationOf( this.fakeData.getData() );
+	}
+}
+```
+
+The caveat to this approach is that properties live in the `this` scope; whereas when writing your own setters you could choose to set the value into either `this` or `variables`.
+
 ### About Caching
 
 Resource CFC's are stored in memory, so this operation only happens on startup (`onApplicationStart`) or on API reload (`index.cfm?reload=true` -- The key and password can be changed, these are the defaults). If you make a change to a dependency or a Taffy resource, it will not take effect until the next reload.
@@ -60,5 +81,5 @@ The load order is:
 1. `configureTaffy()` is called (in `Application.cfc`)
 1. If `/resources` convention folder exists and contains CFC's, Taffy Factory is created and populated.
   * If an external bean factory has been specified, dependencies are further-resolved (after `/resources` resolutions) using external bean factory.
-1. If external bean factory has been set (and nothing in `/resources`) then resources classes are loaded from external bean factory under the assumption that their dependencies are already resolved.
-1. If the `/resources` folder doesn't exist and an external bean factory hasn't been set, an exception is thrown. ("You must either set an external bean factory or use the internal factory by creating a \`/resources\` folder.")
+1. If external bean factory has been set (and nothing in `/resources`) then resource classes are loaded from external bean factory under the assumption that their dependencies are already resolved.
+1. If the `/resources` folder doesn't exist and an external bean factory hasn't been set, a getting started message is shown with links to various wiki pages.
