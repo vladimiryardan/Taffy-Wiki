@@ -40,7 +40,7 @@ See the [official documentation](http://www.iis.net/download/urlrewrite) for mor
         <rewrite>
             <rules>
                 <rule>
-                    <match url="^api/(.*)$" />
+                    <match url="^api/([.*])$" />
                     <action type="Rewrite" url="index.cfm/{R:1}" />
                 </rule>
             </rules>
