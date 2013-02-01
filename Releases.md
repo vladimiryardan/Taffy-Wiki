@@ -3,8 +3,10 @@
 
 * Bugs Fixed:
 * New Features:
-  * [#99](https://github.com/atuttle/Taffy/issues/99) - Show dashboard without the `?dashboard` query param (just browse to the root of your API).
+  * [#99](https://github.com/atuttle/Taffy/issues/99) - Show dashboard without the `?dashboard` query param (just browse to the root of your API). See deprecations, below.
   * [#122](https://github.com/atuttle/Taffy/issues/122) - Added support for [ETag based caching](https://github.com/atuttle/Taffy/wiki/List-of-all-variables.framework-settings)
+* Deprecations:
+  * Using `?dashboard` to display the dashboard is now deprecated in favor of simply browsing to the root of your API, with or without /index.cfm in the url. E.g. http://api.acme.com/ or http://api.acme.com/index.cfm instead of the old http://api.acme.com/?dashboard
 
 ## Version 1.2
 **Released:** December 27, 2012
