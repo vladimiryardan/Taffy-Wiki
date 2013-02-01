@@ -1,5 +1,13 @@
-## Version 1.2
+## Version 1.3
 **Released:** TBD
+
+* Bugs Fixed:
+* New Features:
+  * [#99](https://github.com/atuttle/Taffy/issues/99) - Show dashboard without the `?dashboard` query param (just browse to the root of your API).
+  * [#122](https://github.com/atuttle/Taffy/issues/122) - Added support for [ETag based caching](https://github.com/atuttle/Taffy/wiki/List-of-all-variables.framework-settings)
+
+## Version 1.2
+**Released:** December 27, 2012
 
 * Bugs fixed:
   * [#89](https://github.com/atuttle/Taffy/issues/89) - File Uploads did not work on Railo
