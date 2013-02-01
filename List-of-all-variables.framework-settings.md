@@ -6,6 +6,8 @@ variables.framework = {
 	reloadPassword = "true",
 	reloadOnEveryRequest = false,
 
+	endpointURLParam = "endpoint",
+
 	representationClass = "taffy.core.nativeJsonRepresentation",
 
 	dashboardKey = "dashboard",
@@ -53,6 +55,13 @@ variables.framework = {
 **Type:** Boolean<br/>
 **Default:** False<br/>
 **Description:** Flag that indicates whether Taffy should reload cached values and configuration on every request. Useful in development; set to FALSE in production.
+
+### endpointURLParam
+
+**Available in:** Taffy 1.3+<br/>
+**Type:** String<br/>
+**Default:** "endpoint"<br/>
+**Description:** The query-string parameter name that can optionally be used to specify URI. Until now, URI formatting has been required to be `index.cfm/URI`; this parameter allows you to use `index.cfm?endpoint=/URI`. This setting (`endpointURLParam`) allows you to change the default parameter name of "endpoint" to something custom.
 
 ### representationClass
 
