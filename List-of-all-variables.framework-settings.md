@@ -64,6 +64,7 @@ variables.framework = {
 ### dashboardKey
 
 **Available in:** Taffy 1.2+<br/>
+**Deprecated in:** Taffy 1.3+<br/>
 **Type:** String<br/>
 **Default:** "dashboard"<br/>
 **Description:** Name of the url parameter that displays the dashboard. The dashboard displays resources that your API is aware of, generates documentation about your API based on **hint** attributes, and contains a mock client to make testing your API easy.
