@@ -2,8 +2,16 @@
 **Released:** TBD
 
 * Bugs Fixed:
+  * [#105](https://github.com/atuttle/Taffy/issues/105) - Static URIs that would match dynamic URIs are now allowed (`/user/logout` would previously conflict with `/user/{userId}`)
+  * [#120](https://github.com/atuttle/Taffy/issues/120) - Added support for `*/*` Accept header value. _Thanks to Brian Quackenbush_.
 * New Features:
+  * [#91](https://github.com/atuttle/Taffy/issues/91) - A [message](https://www.evernote.com/shard/s240/sh/6b166322-d8a8-4209-8de1-7348abd8baca/3b4072548cd291ded70ae60f1d4d5583/res/1539c94d-d644-48cc-883a-cfb80e37c4e5/skitch.png) is now displayed if Taffy can't find any resources.
   * [#99](https://github.com/atuttle/Taffy/issues/99) - Show dashboard without the `?dashboard` query param (just browse to the root of your API). See deprecations, below.
+  * [#102](https://github.com/atuttle/Taffy/issues/102) - Added support for DI/1 bean factory. See [this example](https://github.com/atuttle/Taffy/blob/1.3-dev/examples/api_DI1/Application.cfc) for a sample implementation.
+  * [#103](https://github.com/atuttle/Taffy/issues/103) - Added [environment-based configuration](https://github.com/atuttle/Taffy/wiki/Environment-Specific-Configuration).
+  * [#108](https://github.com/atuttle/Taffy/issues/108) - Added helper method `getBasicAuthCredentials()` to api.cfc (so you can [use it in your Application.cfc](https://github.com/atuttle/Taffy/wiki/Authentication-and-Security)). It returns a structure with keys `username` and `password`, and if _NO_ basic auth credentials have been included in the request then both values will be blank.
+  * [#109](https://github.com/atuttle/Taffy/issues/109) - Added helper method `saveLog()` to resource classes, which delegates to your [configured exception logger](https://github.com/atuttle/Taffy/wiki/Exception-Logging-Adapters). You may now use: `saveLog(cfcatch)` from inside a resource.
+  * [#115](https://github.com/atuttle/Taffy/issues/115) - You can now [use properties instead of setters](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-Taffy's-built-in-Dependency-Injection-to-resolve-dependencies-of-your-resources) to have Taffy autowire dependencies. (Setters are not deprecated; this is just an additional option.)
   * [#122](https://github.com/atuttle/Taffy/issues/122) - Added support for [ETag based caching](https://github.com/atuttle/Taffy/wiki/List-of-all-variables.framework-settings)
 * Deprecations:
   * Using `?dashboard` to display the dashboard is now deprecated in favor of simply browsing to the root of your API, with or without /index.cfm in the url. E.g. http://api.acme.com/ or http://api.acme.com/index.cfm instead of the old http://api.acme.com/?dashboard
