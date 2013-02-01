@@ -17,7 +17,7 @@ The code examples below use the ColdFusion 9 script component syntax for its ter
 Much like a [FW/1](http://github.com/seancorfield/fw1/) application, Taffy implements a majority of its logic in Application.cfc, as a base class that the Application.cfc of your API will extend. At a minimum, your API's Application.cfc needs the following:
 
 ```cfs
-component 
+component
 extends="taffy.core.api"
 {
 
@@ -28,7 +28,7 @@ extends="taffy.core.api"
 	void function applicationStartEvent()
 	{
 	}
-	
+
 	//use this instead of onRequestStart
 	void function requestStartEvent()
 	{
@@ -56,8 +56,8 @@ Here is an example resource implementation:
 **personCollection.cfc:**
 
 ```cfs
-component 
-extends="taffy.core.resource" 
+component
+extends="taffy.core.resource"
 taffy_uri="/people"
 {
 	public function get(string eyeColor = ""){
@@ -75,8 +75,8 @@ And here's a similar implementation of a member for the same data type (person):
 **personMember.cfc:**
 
 ```cfs
-component 
-extends="taffy.core.resource" 
+component
+extends="taffy.core.resource"
 taffy_uri="/people/{personName}"
 {
 	public function get(string personName){
