@@ -16,6 +16,8 @@ variables.framework = {
 	globalHeaders = structNew(),
 	debugKey = "debug",
 
+	useEtags = false,
+
 	returnExceptionsAsJson = true,
 	exceptionLogAdapter = "taffy.bonus.LogToEmail",
 	exceptionLogAdapterConfig = {
@@ -33,48 +35,56 @@ variables.framework = {
 
 ### reloadKey
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** String<br/>
 **Default:** "reload"<br/>
 **Description:** Name of the url parameter that requests the framework to be reloaded. Used in combination with the reload password (see: **reloadPassword**), the framework will re-initialize itself. During re-initialization, all configuration settings are re-applied and all cached objects are cleared and reloaded. If the value of the key does not match the reload password, a reload will not be performed. This allows you to set a secret password to restrict control of reloading your API to trusted parties.
 
 ### reloadPassword
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** String<br/>
 **Default:** "true"<br/>
 **Description:** Accepted value of the url parameter that requests the framework to be reloaded. Used in combination with the reload key (see: **reloadKey**), the framework will re-initialize itself. During re-initialization, all configuration settings are re-applied and all cached objects are cleared and reloaded. If the value of the key does not match the reload password, a reload will not be performed. This allows you to set a secret password to restrict control of reloading your API to trusted parties.
 
 ### reloadOnEveryRequest
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** Boolean<br/>
 **Default:** False<br/>
 **Description:** Flag that indicates whether Taffy should reload cached values and configuration on every request. Useful in development; set to FALSE in production.
 
 ### representationClass
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** String<br/>
 **Default:** "taffy.core.nativeJsonRepresentation"<br/>
 **Description:** The CFC dot-notation path, or bean name, of the [[representation class|Using-a-Custom-Representation-Class]] that your API will use to serialize returned data for the client.
 
 ### dashboardKey
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** String<br/>
 **Default:** "dashboard"<br/>
 **Description:** Name of the url parameter that displays the dashboard. The dashboard displays resources that your API is aware of, generates documentation about your API based on **hint** attributes, and contains a mock client to make testing your API easy.
 
 ### disableDashboard
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** Boolean<br/>
 **Default:** False<br/>
 **Description:** Whether or not Taffy will allow the dashboard to be displayed. If set to true, the dashboard key is simply ignored. You may wish to disable the dashboard in production, depending on whether or not you want customers/clients to be able to see it.
 
 ### unhandledPaths
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** String (Comma-delimited list)<br/>
 **Default:** "/flex2gateway"<br/>
 **Description:** Set a list of paths (usually subfolders of the API) that you do not want Taffy to interfere with. Unless listed here, Taffy takes over the request lifecycle and does not execute the requested ColdFusion template.
 
 ### allowCrossDomain
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** Boolean<br/>
 **Default:** False<br/>
 **Description:** Whether or not to allow cross-domain access to your API.
@@ -90,6 +100,7 @@ The allowed verbs, of course, are the ones allowed by the requested resource, as
 
 ### globalHeaders
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** Structure<br/>
 **Default:** `{}`<br/>
 **Description:** A structure where each key is the name of a header you want to return, such as "X-MY-HEADER" and the structure value is the header value.
@@ -98,37 +109,51 @@ Global headers are static. You set them on application initialization and they d
 
 ### debugKey
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** String<br/>
 **Default:** "debug"<br/>
 **Description:** Name of the url parameter that enables CF Debug Output.
 
+### useEtags
+
+**Available in:** Taffy 1.3+<br/>
+**Type:** Boolean<br/>
+**Default:** False<br/>
+**Description:** Enable the use of [HTTP ETags](http://en.wikipedia.org/wiki/HTTP_ETag) for caching purposes. Taffy will automatically handle both sending the server ETag value and detecting client supplied ETags (via the `If-None-Match` header) for you; simply turn this setting on.
+
+_NOTE FOR RAILO USERS:_ While it will not cause errors, the underlying Java code used in this feature was improperly implemented prior to **Railo 4.0.?** and this could result in your result data being sent as if it were changed when it in fact has not. (I'm not sure which Railo point release will include the fix. The latest as of this writing is version 4.0.2, and does not include it.) _Adobe ColdFusion is unaffected._
+
 ### returnExceptionsAsJson
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** Boolean<br/>
 **Default:** true<br/>
 **Description:** When an error occurs that is not otherwise handled, this option tells Taffy to attempt to format the error information as JSON and return that (regardless of the requested return format).
 
 ### exceptionLogAdapter
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** String<br/>
 **Default:** "taffy.bonus.LogToEmail"<br/>
 **Description:** CFC dot-notation path to the exception logging adapter you want to use. Default adapter simply emails all exceptions. See [[Exception Logging Adapters]] for more details.
 
 ### exceptionLogAdapterConfig
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** Any<br/>
 **Default:** See values at top of this page<br/>
 **Description:** Configuration that your chosen logging adapter requires. Can be any data type. See [[Exception Logging Adapters]] for more details.
 
 ### beanFactory
 
+**Available in:** Taffy 1.2+<br/>
 **Type:** Object Instance<br/>
 **Default:** ""<br/>
 **Description:** Already instantiated and cached (e.g. in Application scope) object instance of your external bean factory. Not required in order to use Taffy's built-in factory.
 
 ### environments
 
-**Added in:** Taffy 1.3<br/>
+**Available in:** Taffy 1.3+<br/>
 **Type:** Structure<br/>
 **Default:** `{}`<br/>
 **Description:** Environment-specific overrides to any framework settings. Applied after general `variables.framework` settings, _and after `configureTaffy()` has been called_. See [[Environment Specific Configuration]] for more details.
