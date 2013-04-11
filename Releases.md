@@ -1,9 +1,12 @@
 ## Version 1.3
-**Released:** TBD
+**Released:** April 12, 2013
 
 * Bugs Fixed:
-  * [#105](https://github.com/atuttle/Taffy/issues/105) - Static URIs that would match dynamic URIs are now allowed (`/user/logout` would previously conflict with `/user/{userId}`)
-  * [#120](https://github.com/atuttle/Taffy/issues/120) - Added support for `*/*` Accept header value. _Thanks to Brian Quackenbush_.
+  * [#105](https://github.com/atuttle/Taffy/issues/105) - Static URIs that would match dynamic URIs are now allowed (`/user/logout` would previously conflict with `/user/{userId}`). Pay special attention to [URI Matching Order](https://github.com/atuttle/Taffy/wiki/Configuration-via-Metadata#uri-matching-order).
+  * [#120](https://github.com/atuttle/Taffy/issues/120) - Added support for `*/*` Accept header value. _Thanks to Brian Quackenbush_ for the patch!
+  * [#124](https://github.com/atuttle/Taffy/issues/124) - Fixed a Railo-specific bug blocking resources from being loaded when the resources folder isn't in the web root. _Thanks to Jean-Bernard van Zuylen for the initial bug report and the [pull request!](https://github.com/atuttle/Taffy/pull/133)!_
+  * [#129](https://github.com/atuttle/Taffy/issues/129) - Fixed a bug that MANY people have asked about recently: when you don't supply _any_ form of requested return format (via header or URL "extension"), the dreaded "your default mime type is not implemented" error was returned. Jean-Bernard van Zuylen provided an [epic detailed bug report](https://github.com/atuttle/Taffy/issues/129), as well as [the pull request that ultimately fixed it](https://github.com/atuttle/Taffy/pull/132). A regular open source hero!
+  * [#130](https://github.com/atuttle/Taffy/issues/130) - Fixed a regression from 1.2 in changes to the dashboard to use the new endpoint url param. _This one was also reported and fixed via pull request by Jean-Bernard van Zuylen._
 * New Features:
   * [#91](https://github.com/atuttle/Taffy/issues/91) - A [message](https://www.evernote.com/shard/s240/sh/6b166322-d8a8-4209-8de1-7348abd8baca/3b4072548cd291ded70ae60f1d4d5583/res/1539c94d-d644-48cc-883a-cfb80e37c4e5/skitch.png) is now displayed if Taffy can't find any resources.
   * [#99](https://github.com/atuttle/Taffy/issues/99) - Show dashboard without the `?dashboard` query param (just browse to the root of your API). See deprecations, below.
@@ -14,6 +17,8 @@
   * [#115](https://github.com/atuttle/Taffy/issues/115) - You can now [use properties instead of setters](https://github.com/atuttle/Taffy/wiki/So-you-want-to:-Use-Taffy's-built-in-Dependency-Injection-to-resolve-dependencies-of-your-resources) to have Taffy autowire dependencies. (Setters are not deprecated; this is just an additional option.)
   * [#117](https://github.com/atuttle/Taffy/pull/117) - Added support for [endpointURLParam](https://github.com/atuttle/Taffy/wiki/List-of-all-variables.framework-settings). _Thanks [Marco Betschart](https://github.com/marbetschar)_.
   * [#122](https://github.com/atuttle/Taffy/issues/122) - Added support for [ETag based caching](https://github.com/atuttle/Taffy/wiki/List-of-all-variables.framework-settings)
+  * [#128](https://github.com/atuttle/Taffy/issues/128) - Now support **Access-Control-Allow-Headers** to list allowable headers for Cross-Domain requests. _Thanks to [Marco Betschart](https://github.com/marbetschar) for the bug report and the patch!_
+
 * Deprecations:
   * Using `?dashboard` to display the dashboard is now deprecated in favor of simply browsing to the root of your API, with or without /index.cfm in the url. E.g. http://api.acme.com/ or http://api.acme.com/index.cfm instead of the old http://api.acme.com/?dashboard
 
