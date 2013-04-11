@@ -1,6 +1,8 @@
 ## Version 1.3
 **Released:** April 12, 2013
 
+* Meta / Project Management Changes
+  * From this point forward, the `master` branch will be used for day-to-day development, not just merging in stable releases. Stable releases will still be available for download via [the tags page](https://github.com/atuttle/Taffy/tags). Should any maintenance releases be necessary, they'll be done in branches created from the applicable release tag.
 * Bugs Fixed:
   * [#105](https://github.com/atuttle/Taffy/issues/105) - Static URIs that would match dynamic URIs are now allowed (`/user/logout` would previously conflict with `/user/{userId}`). Pay special attention to [URI Matching Order](https://github.com/atuttle/Taffy/wiki/Configuration-via-Metadata#uri-matching-order).
   * [#120](https://github.com/atuttle/Taffy/issues/120) - Added support for `*/*` Accept header value. _Thanks to Brian Quackenbush_ for the patch!
