@@ -1,6 +1,6 @@
 This page only covers future releases. For the history of previous releases, see the [[Releases]] page.
 
-## Version 1.3
+## Possible Version 1.4
 
 ### Planned
 * Nothing selected yet
@@ -11,6 +11,6 @@ This page only covers future releases. For the history of previous releases, see
 ## Version 2.0
 
 ### Planned
+* Switch from custom method names (`applicationStartEvent`, `requestStartEvent`) to more traditional overriding of `onRequestStart`, `onApplicationStart`; with requirement to call `super.on---Start()`.
 * Remove some/all previously deprecated functionality
 * Pre-return hook for caching
-* Helper methods for http basic-auth
