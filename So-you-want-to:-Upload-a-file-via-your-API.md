@@ -8,7 +8,7 @@ Right off the bat, there's something different about the form tag:
 <form method="POST" enctype="multipart/form-data" action="upload.cfm">
 ```
 
-When uploading files, we have to set the `enctype` attribute of the form to "multipart/form-data". This has several affects on the resulting POST request:
+When uploading files, we have to set the `enctype` attribute of the form to `multipart/form-data`. This has several affects on the resulting POST request:
 
 * The `Content-Length` header is included
 * The `Content-Type` header is set to `multipart/form-data; boundary=[your boundary here]`
