@@ -2,7 +2,53 @@
 
 ## applicationStartEvent and requestStartEvent were removed
 
-...
+In all 1.x versions of Taffy, we asked you to use `applicationStartEvent()` instead of `onApplicationStart()` and `requestStartEvent()` instead of `onRequestStart()`. The only benefit to this approach was not having to explain how, where, and when to use `super.onApplicationStart()` and `super.onRequestStart()`. But you're smart people, so let's just rip this band-aid off now, while the ripping is good.
+
+**There is no 100% "always do it this way" guarantee... but there is a rule of thumb.**
+
+There's a good chance you're not doing anything crazy in your Application.cfc; or at least I hope so. For the sake of explanation, let's say that in your old `applicationStartEvent()` method you defined a datasource application variable, and in your old `requestStartEvent()` method you injected some CGI variable into the request scope. (Yes, this example is contrived. Can you do better? :P)
+
+**OLD, BAD, DEPRECATED CODE:**
+
+```cfs
+component extends="taffy.core.api" {
+
+    function applicationStartEvent(){
+        application.dsn = "myDSN";
+    }
+
+    function requestStartEvent(targetPath){
+        request.https = CGI.https;
+    }
+
+}
+```
+
+How do you rewrite this old, bad, deprecated style in the new 2.x hotness format? Like this... (hold onto your butts...)
+
+```cfs
+component extends="taffy.core.api" {
+
+    function onApplicationStart(){
+        application.dsn = "myDSN";
+        super.onApplicationStart();
+    }
+
+    function onRequestStart(targetPath){
+        request.https = CGI.https;
+        super.onRequestStart(arguments.targetPath);
+    }
+
+}
+```
+
+Yes folks, it's that easy. Rename the methods, and add `super.[same-method-name]()` at the end.
+
+### YMMV: Your Mileage May Vary
+
+Just because this example shows that you should call `super.[same-method-name]()` at the end of your implementations doesn't mean you can't call it earlier. Just be aware that when you call `super.onApplicationStart()` Taffy inspects `variables.framework` to setup the framework config (so you'll need to setup your 3rd party bean factory _BEFORE_ calling super...). Similarly, when you call `super.onRequestStart(targetPath)` Taffy handles reload and dashboard requests, and a few other odds and ends.
+
+If you're not sure what's right, [ask on the mailing list](https://groups.google.com/forum/#!forum/taffy-users)!
 
 ## Deprecated features have been obsoleted
 
