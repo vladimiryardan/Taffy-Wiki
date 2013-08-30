@@ -1,20 +1,20 @@
-## Upgrading to 2.x
+# Upgrading to 2.x
 
-### `applicationStartEvent` and `requestStartEvent` (were removed)
+## applicationStartEvent and requestStartEvent were removed
 
 ...
 
-### Deprecated features have been obsoleted
+## Deprecated features have been obsoleted
 
-#### Request-level Representation Class Overrides
+### Request-level Representation Class Overrides
 
 Prior to Taffy 1.1 you could pass an additional argument to the `representationOf()` method in your resource CFC, as well as to the `newRepresentation()` method when in `onTaffyRequest()` that would use a representation class that differed from your default. This feature was deprecated in 1.1 and instead all supported mime types should be implemented by a single representation class. That class is now defined as [variables.framework.representationClass](https://github.com/atuttle/Taffy/wiki/List-of-all-variables.framework-settings#representationclass)
 
-#### registerMimeType and setDefaultMimeType
+### registerMimeType and setDefaultMimeType
 
 These methods (of Application.cfc) were deprecated in Taffy 1.1 in favor of [Configuration via Metadata](https://github.com/atuttle/Taffy/wiki/Configuration-via-Metadata).
 
-#### configureTaffy and its child setter methods
+### configureTaffy and its child setter methods
 
 These methods were deprecated in Taffy 1.2 in favor of [variables.framework](https://github.com/atuttle/Taffy/wiki/List-of-all-variables.framework-settings).
 
