@@ -24,7 +24,9 @@ component extends="taffy.core.api" {
 }
 ```
 
-How do you rewrite this old, bad, deprecated style in the new 2.x hotness format? Like this... (hold onto your butts...)
+How do you rewrite this old, bad, deprecated style in the new 2.x hotness format? Like this... (hold on to your butts...)
+
+**NEW HOTNESS:**
 
 ```cfs
 component extends="taffy.core.api" {
