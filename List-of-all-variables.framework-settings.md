@@ -86,6 +86,14 @@ variables.framework = {
 **Default:** False<br/>
 **Description:** Whether or not Taffy will allow the dashboard to be displayed. If set to true, the dashboard key is simply ignored. You may wish to disable the dashboard in production, depending on whether or not you want customers/clients to be able to see it.
 
+### disabledDashboardRedirect
+
+**Available in:** Taffy 1.3+<br/>
+**Type:** String<br/>
+**Default:** ""<br/>
+**Description:** URL to which Taffy should redirect (302) the client/browser if the dashboard is disabled. If the dashboard is disabled and this value is blank, a simple **403 Forbidden** response is sent instead.
+
+
 ### unhandledPaths
 
 **Available in:** Taffy 1.2+<br/>
