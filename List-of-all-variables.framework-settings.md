@@ -14,6 +14,8 @@ variables.framework = {
 	disableDashboard = false,
 	disabledDashboardRedirect = "",
 
+	jsonp = false,
+
 	unhandledPaths = "/flex2gateway",
 	allowCrossDomain = false,
 	globalHeaders = structNew(),
@@ -93,6 +95,12 @@ variables.framework = {
 **Default:** ""<br/>
 **Description:** URL to which Taffy should redirect (302) the client/browser if the dashboard is disabled. If the dashboard is disabled and this value is blank, a simple **403 Forbidden** response is sent instead.
 
+### jsonp
+
+**Available in:** Taffy 2.0+<br/>
+**Type:** Boolean/String<br/>
+**Default:** false<br/>
+**Description:** When false, [JSONP](http://json-p.org/) is disabled. To enable it, change the value to a string, such as "callback". The value you specify will be the query parameter in which Taffy expects to find the JSONP callback name. _Note: JSONP only works for GET requests (by design!)_
 
 ### unhandledPaths
 
