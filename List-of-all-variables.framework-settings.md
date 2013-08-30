@@ -12,6 +12,7 @@ variables.framework = {
 
 	dashboardKey = "dashboard",
 	disableDashboard = false,
+	disabledDashboardRedirect = "",
 
 	unhandledPaths = "/flex2gateway",
 	allowCrossDomain = false,
