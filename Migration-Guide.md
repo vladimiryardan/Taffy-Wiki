@@ -33,3 +33,9 @@ These methods were deprecated in Taffy 1.2 in favor of [variables.framework](htt
 * setUnhandledPaths
 * setBeanFactory
 * getBeanFactory
+
+### ?dashboard
+
+In Taffy 1.3 we deprecated using `?dashboard` as in: http://api.example.com/?dashboard in favor of displaying the dashboard when no resource is specified; e.g. http://api.example.com/ or http://example.com/api/v1/ or http://example.com/api/v1/index.cfm
+
+At the same time, a new variables.framework setting was introduced to define Taffy's behavior [if the dashboard were to be requested while disabled](https://github.com/atuttle/Taffy/wiki/List-of-all-variables.framework-settings#disableddashboardredirect).
