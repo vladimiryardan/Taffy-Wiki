@@ -1,11 +1,12 @@
 As of Taffy 1.2, additional functionality has been added to abstract logging and reporting of exceptions that occur within your Taffy APIs. This is done using adapters that provide a standardized API.
 
-Taffy now comes with three adapters:
+Taffy comes with a number of adapters:
 
-1. LogToEmail: Sends an email on each exception (default)
-1. LogToBugLogHQ: Logs exceptions to [BugLogHQ](https://github.com/oarevalo/BugLogHQ)
-1. LogToHoth: Logs exceptions to [Hoth](https://github.com/aarongreenlee/Hoth)
-
+1. taffy.bonus.LogToEmail: Sends an email on each exception (default)
+1. taffy.bonus.LogToBugLogHQ: Logs exceptions to [BugLogHQ](https://github.com/oarevalo/BugLogHQ)
+1. taffy.bonus.LogToHoth: Logs exceptions to [Hoth](https://github.com/aarongreenlee/Hoth)
+1. taffy.bonus.LogToDevNull: Doesn't log anything anywhere. Exceptions still returned as results for debugging purposes. (Included as of Taffy 2.1.0)
+1. taffy.bonus.LogToScreen: `<cfdump>`'s the exception into the response. Maybe you don't like looking at exceptions as JSON? (Included as of Taffy 2.1.0)
 You specify which adapter you want Taffy to use in `variables.framework.exceptionLogAdapter`. Each of these three adapters requires different configuration, which you provide via `variables.framework.exceptionLogAdapterConfig`.
 
 Note that Taffy's default is to use LogToEmail; but the default configuration does not have your email address. You should either specify proper values for the email configuration (see below) or switch to a different adapter.
