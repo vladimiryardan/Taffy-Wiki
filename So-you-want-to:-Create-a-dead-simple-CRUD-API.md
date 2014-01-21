@@ -14,11 +14,13 @@ All that you need in `Application.cfc` for Taffy to work is the following:
 
 The way that Taffy works is to take over the traditional request event lifecycle. That is, it operates by doing things in the `onApplicationStart()`, `onRequestStart()`, and `onRequest()` methods. This is possible because of the code: `extends="taffy.core.api"`.
 
-If you would like to run some of your own code for these events, Taffy will call a couple of methods that you can optionally define:
+If you would like to run some of your own code for these events, simply define your own copy of these functions:
 
-* Instead of `onApplicationStart()`, you should define `applicationStartEvent()`.
-* Instead of `onRequestStart()`, you should define `requestStartEvent()`.
-* You probably shouldn't use `onRequest()`. If you think you need to, you should probably [ask about it on the mailing list](https://groups.google.com/forum/#!forum/taffy-users), and we'll help you figure out if your use-case does need it and how to proceed.
+* `onApplicationStart()`
+* `onRequestStart()`
+* You probably shouldn't use `onRequest()` at all. If you think you need to, you should probably [ask about it on the mailing list](https://groups.google.com/forum/#!forum/taffy-users), and we'll help you figure out if your use-case does need it and how to proceed.
+
+**It is important to note:** If you define your own `onApplicationStart()` or `onRequestStart()` methods (_and it is a common need to do so - not at all discouraged!_), you need to be sure to call `super.onApplicationStart()` and `super.onRequestStart()` (respectively) from them; **otherwise Taffy won't work**.
 
 For example, if you need to include a username and password in your `<cfquery>` tags because they aren't stored in your datasource, you can set application variables like this:
 
@@ -26,9 +28,10 @@ For example, if you need to include a username and password in your `<cfquery>` 
 <cfcomponent extends="taffy.core.api">
 	<cfset this.name = "your_api_app_name" />
 
-	<cffunction name="applicationStartEvent">
+	<cffunction name="onApplicationStart">
 		<cfset application.dbUser = "username" />
 		<cfset application.dbPass = "password" />
+		<cfreturn super.onApplicationStart() />
 	</cffunction>
 </cfcomponent>
 ```
