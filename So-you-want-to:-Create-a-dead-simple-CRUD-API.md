@@ -82,7 +82,7 @@ The differences between these two CFCs might be sort of subtle:
 
 >### A quick Aside
 >
->**Note:** The namespacing of Taffy's metadata attributes, such as `taffy_uri` is supported using two formats: underscores ("taffy_uri"), and colons ("taffy:uri"). The latter is my preferred style, but not supported in CF9.01 script component syntax ([ColdFusion Bug #86749](http://cfbugs.adobe.com/cfbugreport/flexbugui/cfbugtracker/main.html#bugId=86749)), which is why the former was added. However, if you're writing your components with tags, the colon-syntax is supported.
+>**Note:** The namespacing of Taffy's metadata attributes, such as `taffy_uri` is supported using two formats: underscores ("taffy_uri"), and colons ("taffy:uri"). The latter is my preferred style, but not supported in CF9.01 script component syntax ([ColdFusion Bug #3043656](https://bugbase.adobe.com/index.cfm?event=bug&id=3043656)), which is why the former was added. However, if you're writing your components with tags, the colon-syntax is supported.
 
 Aside from the query that is run and the URI differences just described, these components are basically identical.
 
