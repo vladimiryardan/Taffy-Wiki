@@ -1,13 +1,13 @@
 This page is an alphabetical listing of all methods that Taffy exposes for you to use in your APIs, grouped by location that they are available. If a method is not included here, you should consider it un-documented, and as such it may change or be renamed at any time without notice. I will make a conscious effort not to break or rename any documented functions, though they may change with a major version if deemed an improvement to the framework.
 
 * Application.cfc Methods
-  * applicationStartEvent
+  * applicationStartEvent <em>(Obsoleted as of v2.0 see [[Migration-Guide|Migration-Guide#wiki-applicationstartevent-and-requeststartevent-were-removed]])</em>
   * getPath
   * getBasicAuthCredentials
   * getBeanFactory
   * newRepresentation
   * onTaffyRequest
-  * requestStartEvent
+  * requestStartEvent <em>(Obsoleted as of v2.0 see [[Migration-Guide|Migration-Guide#wiki-applicationstartevent-and-requeststartevent-were-removed]])</em>
   * Deprecated as of 1.2
      * <em>configureTaffy</em>
      * <em>enableCrossDomainAccess</em>
