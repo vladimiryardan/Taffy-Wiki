@@ -42,6 +42,8 @@ The following methods are available in your Application.cfc:
 
 ### applicationStartEvent()
 
+<em>(Obsoleted as of v2.0 see [[Migration-Guide|Migration-Guide#wiki-applicationstartevent-and-requeststartevent-were-removed]])</em>
+
 **Use it inside:** Application.cfc<br/>
 **Parameters:** _(none)_
 
@@ -173,6 +175,8 @@ function get(myData){
 ```
 
 ### requestStartEvent()
+
+<em>(Obsoleted as of v2.0 see [[Migration-Guide|Migration-Guide#wiki-applicationstartevent-and-requeststartevent-were-removed]])</em>
 
 **Use it inside:** Application.cfc<br/>
 **Parameters:** _(none)_
