@@ -26,7 +26,8 @@ This page is an alphabetical listing of all methods that Taffy exposes for you t
      * <em>setDefaultMime</em>
 * Resource CFC Methods
   * noData
-  * queryToArray
+  * [[queryToArray|Index-of-API-Methods#queryToArray]]
+  * [[queryToStruct|Index-of-API-Methods#queryToStruct]]
   * representationOf
   * saveLog
   * streamBinary
@@ -332,7 +333,20 @@ return noData().withStatus(404);
 This method transforms a ColdFusion query object into an array of structures. It was added because ColdFusion's serializeJSON functionality uses an ...eccentric... format for queries. queryToArray returns the format most people expect: a vanilla array of structures with named keys. To be fair the ACF serialization format uses less data as long as there is more than 1 row in the query, but it doesn't matter that you do a better job if nobody understands your output. _queryToArray also preserves query column name case, which serializeJSON does not._
 
 ```cfs
-return noData().withStatus(404);
+return representationOf(queryToArray(data)).withStatus(200);
+```
+
+### queryToStruct(query data)
+
+**Use it inside:** responder methods inside your Resource CFCs (e.g. get, put, post, delete - as well as head, options, etc).<br/>
+**Parameters:**
+
+* data (query) - The query object to be transformed
+
+This method transforms a ColdFusion query object with a single record into a structure. This achieves the same result as queryToArray(query data)[0]
+
+```cfs
+return representationOf(queryToStruct(data)).withStatus(200);
 ```
 
 ### representationOf(any data [, string customRepresentationClass])
