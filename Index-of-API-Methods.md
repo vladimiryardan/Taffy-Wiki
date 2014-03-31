@@ -26,8 +26,8 @@ This page is an alphabetical listing of all methods that Taffy exposes for you t
      * <em>setDefaultMime</em>
 * Resource CFC Methods
   * noData
-  * [[queryToArray|Index-of-API-Methods#queryToArray]]
-  * [[queryToStruct|Index-of-API-Methods#queryToStruct]]
+  * [[queryToArray|Index-of-API-Methods##querytoarrayquery-data]]
+  * [[queryToStruct|Index-of-API-Methods##querytostructquery-data]]
   * representationOf
   * saveLog
   * streamBinary
