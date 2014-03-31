@@ -343,7 +343,7 @@ return representationOf(queryToArray(data)).withStatus(200);
 
 * data (query) - The query object to be transformed
 
-This method transforms a ColdFusion query object with a single record into a structure. This achieves the same result as queryToArray(query data)[0]
+This method transforms a ColdFusion query object with a single record into a structure. This achieves the same result as queryToArray(query data)[0]. Passing in a query object with more than one record will cause an error to be thrown.
 
 ```cfs
 return representationOf(queryToStruct(data)).withStatus(200);
