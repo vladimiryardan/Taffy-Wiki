@@ -12,11 +12,12 @@ See the [official documentation](http://httpd.apache.org/docs/2.2/mod/mod_rewrit
 Under ColdFusion 10 because of Tomcat, you need to use
 
 ```apache
+    RewriteCond %{REQUEST_FILENAME} /webservices/rest-taffy/
     RewriteCond %{REQUEST_FILENAME} !/webservices/rest-taffy/index.cfm
+    RewriteCond %{REQUEST_FILENAME} !/webservices/rest-taffy/resources
     RewriteRule ^/webservices/rest-taffy/(.*) /webservices/rest-taffy/index.cfm?endpoint=/$1 [PT]
-
 ```
-where /webservices/rest-taffy/ is the path from your web root to where ever you installed Taffy i.e. it should have a 'resources' subfolder.
+where /webservices/rest-taffy/ is the path from your web root to where ever you installed Taffy i.e. it should have a 'resources' subfolder. You'll still need the mappings in Application.cfc in that folder to match of course.
 
 ## IIRF (Ionic's ISAPI Rewrite Filter)
 
