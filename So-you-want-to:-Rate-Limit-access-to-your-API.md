@@ -10,7 +10,8 @@ Like most other complex problems, there are a lot of ways to solve this one. Wha
 	<cfscript>
 		this.name = "rate_limiting_example";
 
-		function applicationStartEvent(){
+		function onApplicationStart(){
+			super.onApplicationStart();
 			application.accessLog = queryNew('apiKey,accessTime','varchar,time');
 			application.accessLimit = 100; //requests
 			application.accessPeriod = 60; //seconds
