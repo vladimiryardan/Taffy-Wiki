@@ -1,4 +1,13 @@
-This page gives example URL Rewriting rules for the most common Rewriting engines. All examples assume that your API exists at: `http://example.com/api/index.cfm`, and the resulting URL should resemble: `http://example.com/api/artists` (where "/artists" is the resource being requested)
+Rewriting is what enables your API URLs to look like this:
+```
+http://example.com/api/artists
+```
+Instead of like this:
+```
+http://example.com/api/index.cfm
+```
+
+This page gives example URL Rewriting rules for the most common Rewriting engines.
 
 ## Apache mod_rewrite
 
