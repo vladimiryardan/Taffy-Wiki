@@ -9,15 +9,19 @@ See the [official documentation](http://httpd.apache.org/docs/2.2/mod/mod_rewrit
     RewriteRule ^/api/(.*) /api/index.cfm/$1
 ```
 
-Under ColdFusion 10 because of Tomcat, you need to use
+If you installed Tomcat _separately_ from ColdFusion, you need to make use of [endpointUrlParam](http://docs.taffy.io/2.2.4/#endpointURLParam) **\*or\*** add Servelet Mappings for each API you create [as described here](http://docs.taffy.io/2.2.4/#404-when-your-API-is-in-a-subdirectory). 
+
+The Tomcat flavor installed by the CF installer is unaffected: If that's where you got Tomcat, you can skip this. 
+
+If you choose to use endpointUrlParam with the default config, your rewrite rules should look like this:
 
 ```apache
-    RewriteCond %{REQUEST_FILENAME} /webservices/rest-taffy/
-    RewriteCond %{REQUEST_FILENAME} !/webservices/rest-taffy/index.cfm
-    RewriteCond %{REQUEST_FILENAME} !/webservices/rest-taffy/resources
-    RewriteRule ^/webservices/rest-taffy/(.*) /webservices/rest-taffy/index.cfm?endpoint=/$1 [PT]
+    RewriteCond %{REQUEST_FILENAME} /api/
+    RewriteCond %{REQUEST_FILENAME} !/api/index.cfm
+    RewriteCond %{REQUEST_FILENAME} !/api/resources
+    RewriteRule ^/api/(.*) /api/index.cfm?endpoint=/$1 [PT]
 ```
-where /webservices/rest-taffy/ is the path from your web root to where ever you installed Taffy i.e. it should have a 'resources' subfolder. You'll still need the mappings in Application.cfc in that folder to match of course.
+where `/api/` is the path from your web root to where ever you installed Taffy i.e. it should have a `resources/` subfolder. You'll still need the mappings in Application.cfc in that folder to match, of course.
 
 ## IIRF (Ionic's ISAPI Rewrite Filter)
 
