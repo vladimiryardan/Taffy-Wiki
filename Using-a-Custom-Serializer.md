@@ -46,6 +46,8 @@ Serializers are treated as **Transient objects** in Taffy, meaning that a new re
 
 On the positive side, there is no chance that wires will get crossed and the response to **Request A** will be sent for **Request B** because you forgot to var-scope something. On the other hand, it also means that your representation class should be as lightweight as possible to speed instantiation time (and your API's performance may suffer if you don't follow this advice). If you are using a library to do serialization (perhaps you're using [JSONUtil](http://jsonutil.riaforge.org/) for JSON, or [AnythingToXML](http://anythingtoxml.riaforge.org/) for XML) then you should cache the worker object in a persistent scope like Application or Server, because the library does not need to be re-instantiated on every request. Doing so will definitely help the performance of your API.
 
+If you manage your serializer class with an external bean factory (like ColdSpring or DI/1) ensure that it is treated as a transient.
+
 ## Getting all advanced up in here (requirements)
 
 These are the things that your custom serializer must implement in order to interact with Taffy, and why:
