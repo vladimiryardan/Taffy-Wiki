@@ -2,6 +2,26 @@
 
 Please reference the [New Features](http://docs.taffy.io/3.0.0/#New-Features) and [Breaking Changes](http://docs.taffy.io/3.0.0/#Breaking-Changes) sections of the documentation.
 
+## Representation Classes are now called Serializers
+
+`taffy.core.baseRepresentation` is now `taffy.core.baseSerializer`; `taffy.core.nativeJsonRepresentation` is now `taffy.core.nativeJsonSerializer`; etc.
+
+## A single Serializer method may support multiple requested Response Mime Types
+
+Where previously you could only support one mime type per `getAsFoo()` method, you may now supply a comma-delimited list to `taffy:mime` and that method will be used if any of its list values is the requested response mime type: `taffy:mime="application/json,text/json"`
+
+## We now have Input Deserializers
+
+These allow you to accept multiple data formats as input. Just as with Serializers, the default uses ColdFusion's native JSON (de)Serialize functionality. You can extend or replace it as you see fit. [More information here](http://docs.taffy.io/3.0.0/#Custom-Deserializers).
+
+## Caching Hooks
+
+If you're using things like EHCache, you may find benefit in the new [Caching Hooks](http://docs.taffy.io/3.0.0/#Caching-Hooks).
+
+## newRepresentation() has been removed from Application.cfc
+
+When you want to abort a request from inside `onTaffyRequest()`, just use `noData()` or `representationOf()` just as you would from inside a resource.
+
 # Upgrading to 2.x
 
 ## applicationStartEvent and requestStartEvent were removed
