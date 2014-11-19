@@ -8,22 +8,22 @@ When you create a Taffy API, you have two required files: `Application.cfc` and 
 
 ### Dependency Resolution
 
-Dependencies in Taffy Resources are defined by the existence of a setter method. If you want Taffy to inject an instance of `/resources/Config.cfc`, simply create a setter method for it like so:
+Dependencies in Taffy Resources are defined by the existence of a setter method or property. If you want Taffy to inject an instance of `/resources/Config.cfc`, simply create a setter method for it like so:
 
 ```cfs
-	function setConfig(configObj){
-		variables.config = arguments.configObj;
-	}
+function setConfig(configObj){
+	variables.config = arguments.configObj;
+}
 ```
 
-The argument name does not matter, and what you choose to do with the CFC instance passed to it is up to you; but the name is important. It must begin with "set", and whatever comes after "set" will be the name of the CFC (sans file extension). So in this case, "setConfig" looks for "config.cfc".
+The setter's argument name does not matter, and what you choose to do with the CFC instance passed to it is up to you; but the setter method-name is important. It must begin with "set", and whatever comes after "set" will be the name of the CFC (sans file extension). So in this case, "setConfig" looks for "config.cfc".
 
 **As of Taffy 1.3**, you may also use a property instead of a setter. Values set by/into properties are available in the `this` scope (whereas with the setter you explicitly decided whether to save the value into `this` or `variables`). Here's an example resource CFC that uses a property to inject the config object and then uses it:
 
 ```cfs
 component extends="taffy.core.resource" taffy_uri="/foo"{
 
-	property name="config";
+	property config;
 
 	function get(){
 		return representationOf( this.config.defaultValue );
@@ -32,6 +32,10 @@ component extends="taffy.core.resource" taffy_uri="/foo"{
 }
 ```
 
-All resources and other classes in the resources folder are treated as singletons for the purpose of dependency injection.
+Except for [Serializers](http://docs.taffy.io/!/Custom-Serializers), which are treated as transients, all resources and other classes in the resources folder are treated as singletons for the purpose of dependency injection.
 
 Taffy's Factory will **not** look anywhere other than the resources folder. It does look recursively into subfolders as well. There is no configuration for the factory -- it assumes and requires the use of a `/resources` folder or mapping.
+
+## A Note on Managing Serializers with your Bean Factory
+
+If you choose to manage it with ColdSpring or another Dependency Injection framework, you need to ensure that your [Serializer](http://docs.taffy.io/!/Custom-Serializers) is configured as a transient. If you don't, you may experience thread-safety issues.
