@@ -5,7 +5,7 @@ In order to be successful in this endeavor, we're going to assume a few things:
 * That you have a working knowledge of Taffy Resource development (see: [Getting Started][2]);
 * And that you just want to learn how to mash the two together into something beautiful and terse.
 
-For the sake of simplicity, I'll simply refer to all Dependency Injection frameworks as ColdSpring in this document, but as long as they meet our [minimum bean factory requirements][1] you should be able to substitute in whatever factory you like. (Note: Only tested with ColdSpring. If there's a bug when using your favorite bean factory, [let us know!](https://github.com/atuttle/taffy/issues))
+For the sake of simplicity, I'll simply refer to all Dependency Injection frameworks as ColdSpring in this document, but as long as they meet our [minimum bean factory requirements][1] you should be able to substitute in whatever factory you like. (If there's a bug when using your favorite bean factory, [let us know!](https://github.com/atuttle/taffy/issues))
 
 ## Simple Example
 
@@ -55,7 +55,7 @@ component extends="taffy.core.api" {
 	variables.framework = {};
 
 	function onApplicationStart() {
-		application.beanFactory = createObject( 'component', 'coldspring.beans.DefaultXMLBeanFactory' );
+		application.beanFactory = createObject( 'coldspring.beans.DefaultXMLBeanFactory' );
 		application.beanFactory.loadBeans( '/taffy/examples/api_coldspring/config/coldspring.xml' );
 		variables.framework.beanFactory = application.beanFactory;
 		return super.onApplicationStart();
@@ -72,6 +72,10 @@ Just to be explicit, here's what's different:
 * In fact, your resource CFC's don't have to exist inside the API folder at all, if you don't want them to...
   * Your entire API folder could consist of nothing but: **Application.cfc**, **index.cfm**, and **coldspring.xml**.
 * You'll probably notice that your resources become extremely terse; simply putting a REST wrapper on your service CFCs.
+
+## A Note on Managing Serializers with your Bean Factory
+
+If you choose to manage it with ColdSpring or another Dependency Injection framework, you need to ensure that your [Serializer](http://docs.taffy.io/!/Custom-Serializers) is configured as a transient. If you don't, you may experience thread-safety issues.
 
 ## Up the difficulty: Let's Integrate!
 
