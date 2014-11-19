@@ -83,3 +83,7 @@ The load order is:
   * If an external bean factory has been specified, dependencies are further-resolved (after `/resources` resolutions) using external bean factory.
 1. If external bean factory has been set (and nothing in `/resources`) then resource classes are loaded from external bean factory under the assumption that their dependencies are already resolved.
 1. If the `/resources` folder doesn't exist and an external bean factory hasn't been set, a getting started message is shown with links to various wiki pages.
+
+## A Note on Managing Serializers with your Bean Factory
+
+If you choose to manage it with ColdSpring or another Dependency Injection framework, you need to ensure that your [Serializer](http://docs.taffy.io/!/Custom-Serializers) is configured as a transient. If you don't, you may experience thread-safety issues.
