@@ -62,12 +62,13 @@ See the [official documentation](http://www.iis.net/download/urlrewrite) for mor
     <system.webServer>
         <rewrite>
             <rules>
-                <rule>
-                    <match url="^api/([.*])$" />
-                    <action type="Rewrite" url="index.cfm/{R:1}" />
+                <rule name="api" stopProcessing="true">
+                    <match url="^api/(.*)$" ignoreCase="false" />
+                    <action type="Rewrite" url="api/index.cfm?endpoint=/{R:0}" appendQueryString="true" />
                 </rule>
             </rules>
         </rewrite>
+        <httpErrors existingResponse="PassThrough" />
     </system.webServer>
 </configuration>
 ```
