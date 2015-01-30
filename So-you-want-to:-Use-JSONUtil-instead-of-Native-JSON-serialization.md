@@ -29,7 +29,7 @@ By setting `taffy:mime="application/json"` and naming the method `getAsJson`, Ta
 Once you've created this custom representation class, which I've named "JsonUtilSerializer.cfc", you need to tell your application to use it. You do so by adding this code to Application.cfc:
 
 ```javascript
-variables.framework.representationClass = "JsonUtilSerializer";
+variables.framework.serializer = "JsonUtilSerializer";
 ```
 
 Notice that I'm not providing some long fully-qualified dot-notation path for the CFC. Instead, I've saved it in my `/resources` folder, and because of this we can simply use the file name minus the ".cfc", which is its Bean Name.
