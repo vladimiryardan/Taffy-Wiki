@@ -4,7 +4,7 @@ http://example.com/api/artists
 ```
 Instead of like this:
 ```
-http://example.com/api/index.cfm/artists
+http://example.com/api/index.cfm
 ```
 
 This page gives example URL Rewriting rules for the most common Rewriting engines.
