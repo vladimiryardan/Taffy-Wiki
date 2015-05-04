@@ -52,9 +52,23 @@ See the [official documentation](http://www.isapirewrite.com/docs/) for more inf
 
 > **Be awesome:** [Contribute to the wiki](http://fusiongrokker.com/post/how-you-can-contribute-to-taffy-documentation) and document what this syntax should be!
 
-## IIS7 web.config
+## IIS URL Rewrite
 
-See the [official documentation](http://www.iis.net/download/urlrewrite) for more information.
+See the [official documentation](http://www.iis.net/download/urlrewrite) for more information.  This IIS extension works with IIS versions 7.0, 7.5, 8.0 and 8.5.
+
+After installing the IIS extension, be sure to close and reopen the IIS Manager, so the extension can load.  Select the website you wish to configure and finally open the URL Rewrite extension.
+
+Alternately, you can adjust the web.config file located in the root of the website you wish to effect.
+
+### Example 1 - Folder
+
+This example demonstrates how to handle rewriting for an API located in a folder of the website.  Below is a sample URL that would be used to access your API.
+
+`https://www.domain.com/api/artists`
+
+This would be translated to:
+
+`https://www.domain.com/api/index.cfm?endpoint=/artists`
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -65,6 +79,33 @@ See the [official documentation](http://www.iis.net/download/urlrewrite) for mor
                 <rule name="api" stopProcessing="true">
                     <match url="^api/(.*)$" ignoreCase="false" />
                     <action type="Rewrite" url="api/index.cfm?endpoint=/{R:0}" appendQueryString="true" />
+                </rule>
+            </rules>
+        </rewrite>
+        <httpErrors existingResponse="PassThrough" />
+    </system.webServer>
+</configuration>
+```
+
+### Example 2 - Subdomain
+
+This example demonstrates how to handle rewriting for an API located at the root of the website.  Below is a sample URL that would be used to access your API.
+
+`https://api.domain.com/artists`
+
+This would be translated to:
+
+`https://api.domain.com/index.cfm?endpoint=/artists`
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <rewrite>
+            <rules>
+                <rule name="api" stopProcessing="true">
+                    <match url="^(?!index\.cfm)(.*)$" ignoreCase="false" />
+                    <action type="Rewrite" url="/index.cfm?endpoint=/{R:0}" appendQueryString="true" />
                 </rule>
             </rules>
         </rewrite>
