@@ -8,6 +8,7 @@ Taffy comes with a number of adapters:
 1. taffy.bonus.LogToDevNull: Doesn't log anything anywhere. Exceptions still returned as results for debugging purposes. (Included as of Taffy 2.1.0)
 1. taffy.bonus.LogToScreen: `<cfdump>`'s the exception into the response. Maybe you don't like looking at exceptions as JSON? (Included as of Taffy 2.1.0, default as of Taffy 2.2.2)
 You specify which adapter you want Taffy to use in `variables.framework.exceptionLogAdapter`. Each of these three adapters requires different configuration, which you provide via `variables.framework.exceptionLogAdapterConfig`.
+1. taffy.bonus.LogToBugsnag: Logs exceptions to [Bugsnag](https://bugsnag.com)
 
 Note that Taffy's default is to use LogToEmail; but the default configuration does not have your email address. You should either specify proper values for the email configuration (see below) or switch to a different adapter.
 
@@ -70,6 +71,25 @@ variables.framework.exceptionLogAdapterConfig.apikey = "";
 **apikey:** If your BugLogHQ instance requires an API Key to submit reports, supply it here.
 
 There is an example provided in: `examples/api_BugLogHQ`.
+
+## LogToBugsnag
+
+Adapter Path: taffy.bonus.LogToBugsnag<br/>
+Configuration Options: (structure)
+
+```javascript
+variables.framework.exceptionLogAdapterConfig = {
+	apiKey = "c9d60ae4c7e70c4b6c4ebd3e8056d2b8",
+	appVersion = "1.1.3",
+	releaseStage = "production"
+};
+```
+
+**apiKey:** The API Key associated with the project.
+
+**appVersion:** The version number of the application which generated the error.
+
+**releaseStage:** The release stage that this error occurred in (e.g "development", "staging" or "production")
 
 # Custom Log Adapter
 
