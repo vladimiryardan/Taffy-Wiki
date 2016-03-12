@@ -42,6 +42,7 @@ variables.framework.exceptionLogAdapterConfig = "taffy.examples.api_hoth.resourc
 
 Note that the config is _also_ a CFC dot-notation path. The adapter automatically instantiates your config and provides it to Hoth as needed.
 
+
 There is an example provided in: `examples/api_Hoth`.
 
 ## LogToBugLogHQ
